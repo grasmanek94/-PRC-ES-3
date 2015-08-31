@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Car.hxx"
+#include "Car.h"
 
 class Sedan :
 	public Car

@@ -1,4 +1,4 @@
-#include "Sedan.hxx"
+#include "Sedan.h"
 
 static const double PricePerKM = 0.29;
 

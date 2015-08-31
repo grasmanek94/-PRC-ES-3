@@ -3,11 +3,13 @@
 #include <map>
 #include <exception>
 
-#include "Car.hxx"
+#include "cars/Car.h"
+
+typedef std::map<std::string, Car> CarsMap;
 
 class RentalAdministration
 {
-	std::map<std::string, Car> _Cars;
+	CarsMap _Cars;
 	Car& GetCar(const std::string& licencePlate);
 public:
 	RentalAdministration();

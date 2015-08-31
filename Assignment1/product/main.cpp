@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include "Car.hxx"
-#include "Sedan.hxx"
-#include "Limousine.hxx"
-#include "RentalAdministration.hxx"
+#include "cars/Car.h"
+#include "cars/Sedan.h"
+#include "cars/Limousine.h"
+#include "RentalAdministration.h"
 
 RentalAdministration admin;
 

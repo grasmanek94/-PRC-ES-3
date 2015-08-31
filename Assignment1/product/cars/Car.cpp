@@ -1,4 +1,4 @@
-#include "Car.hxx"
+#include "Car.h"
 
 Car::Car(const std::string& manufacturer, const std::string& model,
 	int buildYear, const std::string& licencePlate, double pricePerKm)

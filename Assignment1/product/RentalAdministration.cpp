@@ -1,4 +1,4 @@
-#include "RentalAdministration.hxx"
+#include "RentalAdministration.h"
 
 RentalAdministration::RentalAdministration()
 {
@@ -38,7 +38,7 @@ double RentalAdministration::ReturnCar(const std::string& licencePlate, int kilo
 
 Car& RentalAdministration::GetCar(const std::string& licencePlate)
 {
-	auto it = _Cars.find(licencePlate);
+	CarsMap::iterator it = _Cars.find(licencePlate);
 	if (_Cars.end() == it)
 	{
 		throw std::exception("Car with such licence plate does not exist");

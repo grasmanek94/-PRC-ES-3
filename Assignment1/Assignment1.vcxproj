@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="product\cars\Car.h" />
+    <ClInclude Include="product\cars\Limousine.h" />
+    <ClInclude Include="product\cars\Sedan.h" />
+    <ClInclude Include="product\RentalAdministration.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="product\cars\Car.cpp" />
+    <ClCompile Include="product\cars\Limousine.cpp" />
+    <ClCompile Include="product\cars\Sedan.cpp" />
+    <ClCompile Include="product\main.cpp" />
+    <ClCompile Include="product\RentalAdministration.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{990DF822-39B2-465F-9EF6-F5408DA104B2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -145,19 +158,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Car.cxx" />
-    <ClCompile Include="Limousine.cxx" />
-    <ClCompile Include="main.cxx" />
-    <ClCompile Include="RentalAdministration.cxx" />
-    <ClCompile Include="Sedan.cxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Car.hxx" />
-    <ClInclude Include="Limousine.hxx" />
-    <ClInclude Include="RentalAdministration.hxx" />
-    <ClInclude Include="Sedan.hxx" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
