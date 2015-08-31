@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _RentalAdministration_H_
+#define _RentalAdministration_H_
+
 #include <string>
 #include <map>
 #include <exception>
@@ -14,8 +16,9 @@ class RentalAdministration
 public:
 	RentalAdministration();
 	~RentalAdministration();
-	bool Add(Car& car);
+	bool Add(Car car);
 	bool RentCar(const std::string& licencePlate);
 	double ReturnCar(const std::string& licensePlate, int kilometers);
 };
 
+#endif

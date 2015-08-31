@@ -4,9 +4,10 @@ static const double PricePerKM = 0.29;
 
 Sedan::Sedan(const std::string& manufacturer, const std::string& model,
 	int buildYear, const std::string& licencePlate, bool hasTowBar)
-	: _HasTowBar(hasTowBar), Car(manufacturer, model, buildYear, licencePlate, PricePerKM), _LastCleanedAtKM(0)
+	: Car(manufacturer, model, buildYear, licencePlate, PricePerKM)
 {
-
+	_LastCleanedAtKM = 0;
+	_HasTowBar = hasTowBar;
 }
 
 Sedan::~Sedan()
@@ -16,7 +17,7 @@ Sedan::~Sedan()
 
 void Sedan::Clean()
 {
-	_LastCleanedAtKM = Kilometers();
+	_LastCleanedAtKM = GetKilometers();
 }
 
 bool Sedan::HasTowBar()
@@ -26,5 +27,5 @@ bool Sedan::HasTowBar()
 
 bool Sedan::NeedsCleaning()
 {
-	return (Kilometers() - _LastCleanedAtKM) >= 1000;
+	return (GetKilometers() - _LastCleanedAtKM) >= 1000;
 }

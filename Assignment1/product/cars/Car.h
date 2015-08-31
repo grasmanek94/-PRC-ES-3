@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _Car_H_
+#define _Car_H_
+
 #include <string>
 #include <exception>
 
@@ -22,10 +24,12 @@ public:
 	virtual bool NeedsCleaning();
 	virtual void Clean();
 	std::string ToString();
-	std::string Manufacturer();
-	std::string Model();
-	int BuildYear();
-	std::string LicencePlate();
-	int Kilometers();
+	std::string GetManufacturer();
+	std::string GetModel();
+	int GetBuildYear();
+	std::string GetLicencePlate();
+	int GetKilometers();
 	bool IsAvailable();
 };
+
+#endif

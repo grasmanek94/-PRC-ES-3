@@ -7,11 +7,11 @@ Car::Car(const std::string& manufacturer, const std::string& model,
 {
 	if (_BuildYear < 1890)
 	{
-		throw std::exception("cars cannot be built before 1890!");
+		throw std::exception(/*"cars cannot be built before 1890!"*/);
 	}
 	if (_PricePerKm < 0.0)
 	{
-		throw std::exception("PricePerKm cannot be smaller than 0");
+		throw std::exception(/*"PricePerKm cannot be smaller than 0"*/);
 	}
 }
 
@@ -21,11 +21,11 @@ Car::Car()
 {
 	if (_BuildYear < 1890)
 	{
-		throw std::exception("cars cannot be built before 1890!");
+		throw std::exception(/*"cars cannot be built before 1890!"*/);
 	}
 	if (_PricePerKm < 0.0)
 	{
-		throw std::exception("PricePerKm cannot be smaller than 0");
+		throw std::exception(/*"PricePerKm cannot be smaller than 0"*/);
 	}
 }
 
@@ -49,12 +49,12 @@ double Car::Return(int kilometers)
 {
 	if (_IsAvailable)
 	{
-		throw std::exception("Car is not being rented");
+		throw std::exception(/*"Car is not being rented"*/);
 	}
 
 	if (kilometers < _Kilometers)
 	{
-		throw std::exception("car is returned with less kilometers than it had");
+		throw std::exception(/*"car is returned with less kilometers than it had"*/);
 	}
 
 	double cost = _PricePerKm * (double)(kilometers - _Kilometers);
@@ -67,30 +67,30 @@ double Car::Return(int kilometers)
 
 std::string Car::ToString()
 {
-	return (Manufacturer() + " - " + Model() + ", " + LicencePlate());
+	return (GetManufacturer() + " - " + GetModel() + ", " + GetLicencePlate());
 }
 
-std::string Car::Manufacturer()
+std::string Car::GetManufacturer()
 {
 	return _Manufacturer;
 }
 
-std::string Car::Model()
+std::string Car::GetModel()
 {
 	return _Model;
 }
 
-int Car::BuildYear()
+int Car::GetBuildYear()
 {
 	return _BuildYear;
 }
 
-std::string Car::LicencePlate()
+std::string Car::GetLicencePlate()
 {
 	return _LicencePlate;
 }
 
-int Car::Kilometers()
+int Car::GetKilometers()
 {
 	return _Kilometers;
 }

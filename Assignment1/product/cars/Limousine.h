@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _Limousine_H_
+#define _Limousine_H_
+
 #include <string>
 #include "Car.h"
 
@@ -11,9 +13,10 @@ public:
 	Limousine(const std::string& manufacturer, const std::string& model,
 		int buildYear, const std::string& licencePlate, bool hasMiniBar);
 	~Limousine();
-	void Clean() override;
-	double Return(int kilometers) override;
+	void Clean();
+	double Return(int kilometers);
 	bool HasMiniBar();
-	bool NeedsCleaning() override;
+	bool NeedsCleaning();
 };
 
+#endif

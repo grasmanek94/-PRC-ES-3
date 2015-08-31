@@ -1,14 +1,5 @@
-comma:= ,
-empty:=
-space:= $(empty) $(empty)
+CFLAGS=-Wall -Werror -pedantic -ggdb -O0 -std=c++98 -Iproduct -I$(CYGWIN_BASE)/prc31libs
 
-CYGWIN_BASE=/cygdrive/$(subst \,/,$(subst :,$(empty),$(CYGWIN64)))
-PRC22LIBS=$(CYGWIN_BASE)/prc31libs
-
-mkfile_path := $(subst $(space),$(empty),$(abspath $(lastword $(MAKEFILE_LIST))))
-project_name := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
-
-CFLAGS=-Wall -Werror -pedantic -ggdb -O0 -std=c++98 -Iproduct
 CFLAGS_NORMAL=$(CFLAGS) -Iproduct/cars
 CFLAGS_MOCK=$(CFLAGS) -Itest
 
@@ -28,17 +19,19 @@ MAIN_SOURCES=product/main.cpp \
 
 SEDANTEST_SOURCES=test/SedanTest.cpp \
              $(CAR_SOURCE) \
-             $(SEDAN_SOURCE)
+             $(SEDAN_SOURCE) \
+             $(PRC31LIBS)/*.cc
 
 LIMOUSINETEST_SOURCES=test/LimousineTest.cpp \
              $(CAR_SOURCE) \
-             $(LIMOUSINE_SOURCE)
+             $(LIMOUSINE_SOURCE) \
+             $(PRC31LIBS)/*.cc
 
 RENTALADMINTEST_SOURCE=test/RentalAdministrationTest.cpp \
-             $(RENTALADMIN_TESTSOURCE)
+             $(RENTALADMIN_TESTSOURCE) \
+             $(PRC31LIBS)/*.cc
 
-#TEST_LIBS=-lgtest -lgtest_main -lpthread
-TEST_LIBS=-lgtest -lgmock -lgmock_main -lpthread
+TEST_LIBS=-lgmock -lgtest -lgtest_main -lpthread
 
 GCC=g++
 
@@ -61,8 +54,6 @@ RentalAdministrationTest: $(RENTALADMINTEST_SOURCE) Makefile product/*.h test/*.
 # $(RENTALADMIN_TESTSOURCE): $(RENTALADMIN_SOURCE)
 # 	@ln -s ../$(RENTALADMIN_SOURCE) $(RENTALADMIN_TESTSOURCE)
 # 	@ln -s ../$(RENTALADMIN_SOURCE:.cpp=.h) $(RENTALADMIN_TESTSOURCE:.cpp=.h)
-# 	@ln -s ../$(RENTALADMIN_SOURCE:.cpp=.hpp) $(RENTALADMIN_TESTSOURCE:.cpp=.hpp)
-# 	@ln -s ../$(RENTALADMIN_SOURCE:.cxx=.hxx) $(RENTALADMIN_TESTSOURCE:.cxx=.hxx)
 
 clean:
 	@rm -rf CarRental SedanTest LimousineTest RentalAdministrationTest test/RentalAdministration.cpp test/RentalAdministration.h

@@ -10,16 +10,16 @@ RentalAdministration::~RentalAdministration()
 
 }
 
-bool RentalAdministration::Add(Car& car)
+bool RentalAdministration::Add(Car car)
 {
 	try
 	{
-		Car& unused = GetCar(car.LicencePlate());
+		Car& unused = GetCar(car.GetLicencePlate());
 		return false;
 	}
-	catch (const std::exception&)
+	catch (std::exception)
 	{
-		_Cars[car.LicencePlate()] = car;
+		_Cars[car.GetLicencePlate()] = car;
 		return true;
 	}
 }
@@ -41,7 +41,7 @@ Car& RentalAdministration::GetCar(const std::string& licencePlate)
 	CarsMap::iterator it = _Cars.find(licencePlate);
 	if (_Cars.end() == it)
 	{
-		throw std::exception("Car with such licence plate does not exist");
+		throw std::exception(/*"Car with such licence plate does not exist"*/);
 	}
 	return it->second;
 }

@@ -4,9 +4,10 @@ static const double PricePerKM = 2.5;
 
 Limousine::Limousine(const std::string& manufacturer, const std::string& model,
 	int buildYear, const std::string& licencePlate, bool hasMiniBar)
-	: _HasMiniBar(hasMiniBar), Car(manufacturer, model, buildYear, licencePlate, PricePerKM), _NeedsCleaning(false)
+	: Car(manufacturer, model, buildYear, licencePlate, PricePerKM)
 {
-
+	_HasMiniBar = hasMiniBar;
+	_NeedsCleaning = false;
 }
 
 Limousine::~Limousine()
