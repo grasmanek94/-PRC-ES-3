@@ -19,17 +19,14 @@ MAIN_SOURCES=product/main.cpp \
 
 SEDANTEST_SOURCES=test/SedanTest.cpp \
              $(CAR_SOURCE) \
-             $(SEDAN_SOURCE) \
-             $(PRC31LIBS)/*.cc
+             $(SEDAN_SOURCE)
 
 LIMOUSINETEST_SOURCES=test/LimousineTest.cpp \
              $(CAR_SOURCE) \
-             $(LIMOUSINE_SOURCE) \
-             $(PRC31LIBS)/*.cc
+             $(LIMOUSINE_SOURCE)
 
 RENTALADMINTEST_SOURCE=test/RentalAdministrationTest.cpp \
-             $(RENTALADMIN_TESTSOURCE) \
-             $(PRC31LIBS)/*.cc
+             $(RENTALADMIN_TESTSOURCE)
 
 TEST_LIBS=-lgmock -lgtest -lgtest_main -lpthread
 

@@ -1,0 +1,124 @@
+﻿  RentalAdministrationTest.cpp
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(13): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(13): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(13): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(21): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(21): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(21): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(24): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(24): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(24): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(32): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(32): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(32): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(35): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(35): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(35): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(42): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(42): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(42): error C2311: 'overloaded function type': is caught by '...' on line 42
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(48): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(48): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(48): error C2311: 'overloaded function type': is caught by '...' on line 48
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(54): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(54): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(54): error C2311: 'overloaded function type': is caught by '...' on line 54
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(81): error C3646: 'licencePlates': unknown override specifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(81): error C2143: syntax error: missing ',' before '['
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(81): error C2143: syntax error: missing ')' before ';'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(81): error C2238: unexpected token(s) preceding ';'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(68): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(69): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(71): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(71): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(71): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(71): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(71): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(72): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(72): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(72): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(73): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(73): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(73): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(86): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(86): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(86): error C2228: left of '.WillRepeatedly' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(87): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(87): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(87): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(87): error C2311: 'overloaded function type': is caught by '...' on line 87
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(92): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(92): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(92): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(92): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(92): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(93): error C2039: 'gmock_Rent': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(93): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(93): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(94): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(94): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(94): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(99): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(99): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(99): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(99): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(99): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(100): error C2039: 'gmock_Rent': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(100): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(100): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(101): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(101): error C2780: 'testing::AssertionResult testing::internal::EqHelper<true>::Compare(const char *,const char *,testing::internal::Secret *,T *)': expects 4 arguments - 3 provided
+  d:\development\prc3\assignment1\include\gtest\gtest.h(1469): note: see declaration of 'testing::internal::EqHelper<true>::Compare'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(101): error C2780: 'testing::AssertionResult testing::internal::EqHelper<true>::Compare(const char *,const char *,const T1 &,const T2 &,EnableIf<!testing::internal::is_pointer<T2>::value>::type *)': expects 5 arguments - 3 provided
+  d:\development\prc3\assignment1\include\gtest\gtest.h(1451): note: see declaration of 'testing::internal::EqHelper<true>::Compare'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(101): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(106): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(106): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(106): error C2228: left of '.WillRepeatedly' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(107): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(107): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(107): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(107): error C2311: 'overloaded function type': is caught by '...' on line 107
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(112): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(112): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(112): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(112): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(112): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(113): error C2039: 'gmock_Return': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(113): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(113): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(114): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(114): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(114): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(119): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(119): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(119): error C2228: left of '.WillRepeatedly' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(120): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(120): error C2061: syntax error: identifier 'out_of_range'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(120): error C2310: catch handlers must specify one type
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(120): error C2311: 'overloaded function type': is caught by '...' on line 120
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): error C2039: 'gmock_GetLicencePlate': is not a member of 'Car'
+  d:\development\prc3\assignment1\product\cars\car.h(9): note: see declaration of 'Car'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): error C2228: left of '.InternalExpectedAt' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): error C2228: left of '.WillOnce' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): error C2065: 'licencePlates': undeclared identifier
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): error C2660: 'testing::Return': function does not take 1 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(125): fatal error C1003: error count exceeds 100; stopping compilation

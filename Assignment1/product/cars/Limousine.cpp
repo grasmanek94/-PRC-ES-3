@@ -25,7 +25,7 @@ bool Limousine::NeedsCleaning()
 	return _NeedsCleaning;
 }
 
-bool Limousine::HasMiniBar()
+bool Limousine::HasMinibar()
 {
 	return _HasMiniBar;
 }

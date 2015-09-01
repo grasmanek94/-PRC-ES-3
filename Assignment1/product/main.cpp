@@ -10,10 +10,10 @@ RentalAdministration admin;
 
 int main()
 {
-	std::cout << admin.Add(Sedan("Volvo", "S40", 1999, "111111", true));
-	std::cout << admin.Add(Sedan("Audi", "A4", 2000, "222222", true));
-	std::cout << admin.Add(Limousine("Unk", "Unk", 2010, "333333", true));
-	std::cout << admin.Add(Limousine("Unk", "Unk", 2010, "333333", true));
+	std::cout << admin.Add(new Sedan("Volvo", "S40", 1999, "111111", true));
+	std::cout << admin.Add(new Sedan("Audi", "A4", 2000, "222222", true));
+	std::cout << admin.Add(new Limousine("Unk", "Unk", 2010, "333333", true));
+	std::cout << admin.Add(new Limousine("Unk", "Unk", 2010, "333333", true));
 
 	std::cout << std::endl;
 

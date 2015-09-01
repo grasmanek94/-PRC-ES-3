@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="product">
+      <UniqueIdentifier>{3e5c1be7-042f-4574-9419-d4c069b4e62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="product\cars">
+      <UniqueIdentifier>{43db1859-37b4-4a89-8152-18f455548bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{10b2ef23-e0eb-41f6-ba9d-30ae1013e8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="google">
+      <UniqueIdentifier>{c335598c-453c-4718-9da2-d36282d198ef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="product\cars\Car.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\cars\Limousine.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\cars\Sedan.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\RentalAdministration.h">
+      <Filter>product</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gtest-internal-inl.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-actions.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-cardinalities.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-generated-actions.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-generated-function-mockers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-generated-matchers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-generated-nice-strict.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-matchers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-more-actions.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-more-matchers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock-spec-builders.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\gmock.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\gmock-internal-utils.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\gmock-port.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\gmock-generated-internal-utils.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\custom\gmock-port.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\custom\gmock-generated-actions.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gmock\internal\custom\gmock-matchers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest_pred_impl.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest_prod.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-death-test.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-message.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-param-test.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-printers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-spi.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-test-part.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest-typed-test.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\gtest.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-filepath.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-internal.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-linked_ptr.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-param-util.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-param-util-generated.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-port.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-port-arch.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-string.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-tuple.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-type-util.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\gtest-death-test-internal.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\custom\gtest-port.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\custom\gtest-printers.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gtest\internal\custom\gtest.h">
+      <Filter>google</Filter>
+    </ClInclude>
+    <ClInclude Include="test\Car.h">
+      <Filter>test</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="product\cars\Car.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\cars\Limousine.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\cars\Sedan.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\RentalAdministration.cpp">
+      <Filter>product</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-death-test.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-filepath.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-port.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-printers.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-test-part.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-typed-test.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock_main.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock-all.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock-cardinalities.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock-internal-utils.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock-matchers.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gmock-spec-builders.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest_main.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gtest-all.cc">
+      <Filter>google</Filter>
+    </ClCompile>
+    <ClCompile Include="test\SedanTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\LimousineTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\RentalAdministrationTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\gmock\gmock-generated-actions.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gmock\gmock-generated-function-mockers.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gmock\gmock-generated-matchers.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gmock\gmock-generated-nice-strict.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gmock\internal\gmock-generated-internal-utils.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gmock\internal\custom\gmock-generated-actions.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gtest\gtest-param-test.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gtest\internal\gtest-param-util-generated.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gtest\internal\gtest-tuple.h.pump">
+      <Filter>google</Filter>
+    </None>
+    <None Include="include\gtest\internal\gtest-type-util.h.pump">
+      <Filter>google</Filter>
+    </None>
+  </ItemGroup>
+</Project>

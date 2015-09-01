@@ -1,0 +1,30 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Assignment1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  RentalAdministrationTest.cpp
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(54): error C2039: 'CleanCar': is not a member of 'RentalAdministration'
+  d:\development\prc3\assignment1\product\rentaladministration.h(13): note: see declaration of 'RentalAdministration'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(60): error C2039: 'GetCars': is not a member of 'RentalAdministration'
+  d:\development\prc3\assignment1\product\rentaladministration.h(13): note: see declaration of 'RentalAdministration'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(60): error C2228: left of '.size' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(60): error C2780: 'testing::AssertionResult testing::internal::EqHelper<true>::Compare(const char *,const char *,testing::internal::Secret *,T *)': expects 4 arguments - 3 provided
+  d:\development\prc3\assignment1\include\gtest\gtest.h(1469): note: see declaration of 'testing::internal::EqHelper<true>::Compare'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(60): error C2780: 'testing::AssertionResult testing::internal::EqHelper<true>::Compare(const char *,const char *,const T1 &,const T2 &,EnableIf<!testing::internal::is_pointer<T2>::value>::type *)': expects 5 arguments - 3 provided
+  d:\development\prc3\assignment1\include\gtest\gtest.h(1451): note: see declaration of 'testing::internal::EqHelper<true>::Compare'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(60): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(76): error C2039: 'GetCars': is not a member of 'RentalAdministration'
+  d:\development\prc3\assignment1\product\rentaladministration.h(13): note: see declaration of 'RentalAdministration'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(76): error C2228: left of '.size' must have class/struct/union
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(76): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(76): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(120): error C2039: 'CleanCar': is not a member of 'RentalAdministration'
+  d:\development\prc3\assignment1\product\rentaladministration.h(13): note: see declaration of 'RentalAdministration'
+d:\development\prc3\assignment1\test\rentaladministrationtest.cpp(127): error C2039: 'CleanCar': is not a member of 'RentalAdministration'
+  d:\development\prc3\assignment1\product\rentaladministration.h(13): note: see declaration of 'RentalAdministration'
+  LimousineTest.cpp
+d:\development\prc3\assignment1\test\limousinetest.cpp(19): error C2039: 'HasMinibar': is not a member of 'Limousine'
+  d:\development\prc3\assignment1\product\cars\limousine.h(7): note: see declaration of 'Limousine'
+d:\development\prc3\assignment1\test\limousinetest.cpp(19): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+d:\development\prc3\assignment1\test\limousinetest.cpp(19): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+  d:\development\prc3\assignment1\include\gtest\gtest.h(256): note: see declaration of 'testing::AssertionResult'
+  Generating Code...
