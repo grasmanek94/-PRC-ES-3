@@ -1,27 +1,23 @@
-#ifndef _RentalAdministration_H_
-#define _RentalAdministration_H_
+#ifndef __RENTALADMINISTRATION_H
+#define __RENTALADMINISTRATION_H
 
-#include <string>
-#include <map>
-#include <exception>
 #include <vector>
 
-#include <Car.h>
-
-typedef std::map<std::string, Car*> CarsMap;
+#include "Car.h"
 
 class RentalAdministration
 {
-	CarsMap _Cars;
-	Car* GetCar(const std::string& licencePlate);
+private:
+	std::vector<Car*> _Cars;// std::map zou zoveel beter zijn, std::map<std::string, std::shared_ptr<Car>>
+
+	Car* InternalFindCar(const std::string& licencePlate);
 public:
-	RentalAdministration();
-	~RentalAdministration();
+	std::vector<Car*> GetCars();
+	Car* FindCar(const std::string& licencePlate);
 	bool Add(Car* car);
 	bool RentCar(const std::string& licencePlate);
-	double ReturnCar(const std::string& licensePlate, int kilometers);
+	double ReturnCar(const std::string& licencePlate, int kilometers);
 	void CleanCar(const std::string& licencePlate);
-	std::vector<Car*> GetCars();
 };
 
 #endif

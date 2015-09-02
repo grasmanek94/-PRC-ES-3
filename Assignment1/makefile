@@ -1,6 +1,4 @@
-#CFLAGS=-Wall -Werror -pedantic -ggdb -O0 -std=c++98 -Iproduct
-CFLAGS=-O0 -std=c++98 -Iproduct
-
+CFLAGS=-Wall -Werror -pedantic -ggdb -O0 -std=c++98 -Iproduct
 CFLAGS_NORMAL=$(CFLAGS) -Iproduct/cars
 CFLAGS_MOCK=$(CFLAGS) -Itest
 
@@ -19,17 +17,18 @@ MAIN_SOURCES=product/main.cpp \
              $(LIMOUSINE_SOURCE)
 
 SEDANTEST_SOURCES=test/SedanTest.cpp \
-             $(CAR_SOURCE) \
-             $(SEDAN_SOURCE)
+                  $(CAR_SOURCE) \
+                  $(SEDAN_SOURCE)
 
 LIMOUSINETEST_SOURCES=test/LimousineTest.cpp \
-             $(CAR_SOURCE) \
-             $(LIMOUSINE_SOURCE)
+                      $(CAR_SOURCE) \
+                      $(LIMOUSINE_SOURCE)
 
 RENTALADMINTEST_SOURCE=test/RentalAdministrationTest.cpp \
-             $(RENTALADMIN_TESTSOURCE)
+                        $(RENTALADMIN_TESTSOURCE)
 
-TEST_LIBS=-lgmock -lgtest -lgtest_main -lpthread
+#TEST_LIBS=-lgtest -lgtest_main -lpthread
+TEST_LIBS=-lgtest -lgmock -lgmock_main -lpthread
 
 GCC=g++
 

@@ -1,22 +1,19 @@
-#ifndef _Limousine_H_
-#define _Limousine_H_
+#ifndef __LIMOUSINE_H
+#define __LIMOUSINE_H
 
-#include <string>
 #include "Car.h"
 
-class Limousine :
-	public Car
+class Limousine : public Car
 {
-	bool _HasMiniBar;
+private:
 	bool _NeedsCleaning;
+	bool _HasMinibar;
 public:
-	Limousine(const std::string& manufacturer, const std::string& model,
-		int buildYear, const std::string& licencePlate, bool hasMiniBar);
-	~Limousine();
-	void Clean();
-	double Return(int kilometers);
 	bool HasMinibar() const;
 	bool NeedsCleaning() const;
+	Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar);
+	double Return(int kilometers);
+	void Clean();
 };
 
 #endif

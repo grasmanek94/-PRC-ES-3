@@ -1,21 +1,18 @@
-#ifndef _Sedan_H_
-#define _Sedan_H_
+#ifndef __SEDAN_H
+#define __SEDAN_H
 
-#include <string>
 #include "Car.h"
 
-class Sedan :
-	public Car
+class Sedan : public Car
 {
-	bool _HasTowBar;
-	int _LastCleanedAtKM;
+private:
+	int _LastCleanedAtKm;
+	bool _HasTowbar;
 public:
-	Sedan(const std::string& manufacturer, const std::string& model,
-		int buildYear, const std::string& licencePlate, bool hasTowBar);
-	~Sedan();
-	void Clean();
 	bool HasTowBar() const;
 	bool NeedsCleaning() const;
+	Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar);
+	void Clean();
 };
 
 #endif

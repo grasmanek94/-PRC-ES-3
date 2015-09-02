@@ -1,65 +1,72 @@
+#include <stdexcept>
+
 #include "RentalAdministration.h"
 
-RentalAdministration::RentalAdministration()
+Car* RentalAdministration::InternalFindCar(const std::string& licencePlate)//return std::shared_ptr<Car>!!!
 {
-
+	/*for (std::vector<Car*>::iterator it = _Cars.begin(); it != _Cars.end(); ++it)// or in C++11 and above: for(auto car_ptr: _Cars) { if(car_ptr->GetLicencePlate() ....
+	{
+		if (!(*it)->GetLicencePlate().compare(licencePlate))
+		{
+			return *it;
+		}
+	}*/
+	for (size_t i = 0; i < _Cars.size(); ++i)
+	{
+		if (!_Cars[i]->GetLicencePlate().compare(licencePlate))
+		{
+			return _Cars[i];
+		}
+	}
+	return NULL;//nullptr if decide to use raw pointers or std::shared_ptr<Car>()
 }
 
-RentalAdministration::~RentalAdministration()
+std::vector<Car*> RentalAdministration::GetCars()//RAW :'(
 {
+	return _Cars;
+}
 
+Car* RentalAdministration::FindCar(const std::string& licencePlate)
+{
+	Car * car = InternalFindCar(licencePlate);
+	if (!car)
+	{
+		throw std::exception();
+	}
+	return car;
 }
 
 bool RentalAdministration::Add(Car* car)
 {
-	try
+	if (!car)
 	{
-		GetCar(car->GetLicencePlate());
+		throw std::exception();
+	}
+
+	Car * fcar = InternalFindCar(car->GetLicencePlate());
+	if (fcar)
+	{
 		return false;
 	}
-	catch (std::exception)
-	{
-		_Cars[car->GetLicencePlate()] = new Car(*car);
-		return true;
-	}
+
+	_Cars.push_back(car);
+	return true;
 }
 
 bool RentalAdministration::RentCar(const std::string& licencePlate)
 {
-	Car* car = GetCar(licencePlate);
-	return car->IsAvailable() && car->Rent();
+	Car* car = FindCar(licencePlate);
+	return car->Rent();
 }
 
 double RentalAdministration::ReturnCar(const std::string& licencePlate, int kilometers)
 {
-	return GetCar(licencePlate)->Return(kilometers);
-}
-
-Car* RentalAdministration::GetCar(const std::string& licencePlate)
-{
-	CarsMap::iterator it = _Cars.find(licencePlate);
-	if (_Cars.end() == it)
-	{
-		throw std::exception(/*"Car with such licence plate does not exist"*/);
-	}
-	return it->second;
+	Car* car = FindCar(licencePlate);
+	return car->Return(kilometers);
 }
 
 void RentalAdministration::CleanCar(const std::string& licencePlate)
 {
-	GetCar(licencePlate)->Clean();
-}
-
-template <typename M, typename V>
-void MapToVec(const  M & m, V & v) {
-	for (typename M::const_iterator it = m.begin(); it != m.end(); ++it) {
-		v.push_back(it->second);
-	}
-}
-
-std::vector<Car*> RentalAdministration::GetCars()
-{
-	std::vector<Car*> cars;
-	MapToVec(_Cars, cars);
-	return cars;
+	Car* car = FindCar(licencePlate);
+	car->Clean();
 }

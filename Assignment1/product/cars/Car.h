@@ -1,36 +1,31 @@
-#ifndef _Car_H_
-#define _Car_H_
+#ifndef __CAR_H
+#define __CAR_H
 
 #include <string>
-#include <exception>
-#include <stdexcept>
 
 class Car
 {
+private:
+	double _PricePerKm;
 	std::string _Manufacturer;
 	std::string _Model;
-	int _BuildYear;
 	std::string _LicencePlate;
+	int _BuildYear;
 	int _Kilometers;
 	bool _IsAvailable;
-	double _PricePerKm;
 public:
-	Car(const std::string& manufacturer, const std::string& model,
-		int buildYear, const std::string& licencePlate, double pricePerKm);
-	Car();
-	~Car();
-
-	bool Rent();
-	virtual double Return(int kilometers);
-	virtual bool NeedsCleaning()  const;
-	virtual void Clean();
-	std::string ToString() const;
+	std::string GetLicencePlate() const;
 	std::string GetManufacturer() const;
 	std::string GetModel() const;
 	int GetBuildYear() const;
-	std::string GetLicencePlate() const;
 	int GetKilometers() const;
 	bool IsAvailable() const;
+	Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm);
+	bool Rent();
+	double Return(int kilometers);
+	std::string ToString() const;
+	bool NeedsCleaning() const;
+	void Clean();
 };
 
 #endif

@@ -4,11 +4,6 @@
 
 #include "RentalAdministration.h"
 
-/*	
-	https://groups.google.com/forum/#!topic/googlemock/H_otB0drT98
-
-	"I have fixed the last warning in r503, but I don't think we can do much about variadic macros. They are essential for typed tests, and you can only get rid of the warning if you disable them."
-*/
 using ::testing::Return;
 
 TEST(RentalAdministrationAdd, test_add_car_to_empty_administration)

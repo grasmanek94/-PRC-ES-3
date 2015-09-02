@@ -1,23 +1,10 @@
 #include "Limousine.h"
 
-static const double PricePerKM = 2.5;
+static const double pricePerKm = 2.50;
 
-Limousine::Limousine(const std::string& manufacturer, const std::string& model,
-	int buildYear, const std::string& licencePlate, bool hasMiniBar)
-	: Car(manufacturer, model, buildYear, licencePlate, PricePerKM)
+bool Limousine::HasMinibar() const
 {
-	_HasMiniBar = hasMiniBar;
-	_NeedsCleaning = false;
-}
-
-Limousine::~Limousine()
-{
-
-}
-
-void Limousine::Clean()
-{
-	_NeedsCleaning = false;
+	return _HasMinibar;
 }
 
 bool Limousine::NeedsCleaning() const
@@ -25,16 +12,21 @@ bool Limousine::NeedsCleaning() const
 	return _NeedsCleaning;
 }
 
-bool Limousine::HasMinibar() const
+Limousine::Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar)
+	: Car(manufacturer, model, buildYear, licencePlate, pricePerKm)
 {
-	return _HasMiniBar;
+	_HasMinibar = hasMinibar;
+	_NeedsCleaning = false;
 }
 
 double Limousine::Return(int kilometers)
 {
-	double cost = Car::Return(kilometers);
-
+	double price = Car::Return(kilometers);
 	_NeedsCleaning = true;
+	return price;
+}
 
-	return cost;
+void Limousine::Clean()
+{
+	_NeedsCleaning = false;
 }
