@@ -3,6 +3,17 @@
 
 #include "Car.h"
 
-// TODO: your class definition goes here
+class Limousine : public Car
+{
+private:
+	bool _NeedsCleaning;
+	bool _HasMinibar;
+public:
+	bool HasMinibar() const;
+	bool NeedsCleaning() const;
+	Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar);
+	double Return(int kilometers);
+	void Clean();
+};
 
 #endif
