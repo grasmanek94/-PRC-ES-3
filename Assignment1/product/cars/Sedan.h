@@ -14,8 +14,8 @@ public:
 		int buildYear, const std::string& licencePlate, bool hasTowBar);
 	~Sedan();
 	void Clean();
-	bool HasTowBar();
-	bool NeedsCleaning();
+	bool HasTowBar() const;
+	bool NeedsCleaning() const;
 };
 
 #endif

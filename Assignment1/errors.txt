@@ -1,2 +1,0 @@
-g++ -Wall -Werror -pedantic -ggdb -O0 -std=c++98 -Iproduct -I/prc31libs -Itest test/RentalAdministrationTest.cpp product/RentalAdministration.cpp -lgmock -lgtest -lgtest_main -lpthread -o RentalAdministrationTest
-makefile:49: recipe for target 'RentalAdministrationTest' failed

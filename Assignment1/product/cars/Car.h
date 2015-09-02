@@ -22,15 +22,15 @@ public:
 
 	bool Rent();
 	virtual double Return(int kilometers);
-	virtual bool NeedsCleaning();
+	virtual bool NeedsCleaning()  const;
 	virtual void Clean();
-	std::string ToString();
-	std::string GetManufacturer();
-	std::string GetModel();
-	int GetBuildYear();
-	std::string GetLicencePlate();
-	int GetKilometers();
-	bool IsAvailable();
+	std::string ToString() const;
+	std::string GetManufacturer() const;
+	std::string GetModel() const;
+	int GetBuildYear() const;
+	std::string GetLicencePlate() const;
+	int GetKilometers() const;
+	bool IsAvailable() const;
 };
 
 #endif

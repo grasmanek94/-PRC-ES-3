@@ -1,4 +1,4 @@
-#include "Car.h"
+#include <Car.h>
 
 Car::Car(const std::string& manufacturer, const std::string& model,
 	int buildYear, const std::string& licencePlate, double pricePerKm)
@@ -34,7 +34,6 @@ Car::~Car()
 
 }
 
-#ifndef TESTING
 bool Car::Rent()
 {
 	if (!_IsAvailable)
@@ -66,7 +65,7 @@ double Car::Return(int kilometers)
 	return cost;
 }
 
-std::string Car::GetLicencePlate()
+std::string Car::GetLicencePlate() const
 {
 	return _LicencePlate;
 }
@@ -75,39 +74,38 @@ void Car::Clean()
 {
 
 }
-#endif
 
-std::string Car::ToString()
+std::string Car::ToString() const
 {
 	return (GetManufacturer() + " - " + GetModel() + ", " + GetLicencePlate());
 }
 
-std::string Car::GetManufacturer()
+std::string Car::GetManufacturer() const
 {
 	return _Manufacturer;
 }
 
-std::string Car::GetModel()
+std::string Car::GetModel() const
 {
 	return _Model;
 }
 
-int Car::GetBuildYear()
+int Car::GetBuildYear() const
 {
 	return _BuildYear;
 }
 
-int Car::GetKilometers()
+int Car::GetKilometers() const
 {
 	return _Kilometers;
 }
 
-bool Car::IsAvailable()
+bool Car::IsAvailable() const
 {
 	return _IsAvailable;
 }
 
-bool Car::NeedsCleaning()
+bool Car::NeedsCleaning() const
 {
 	return false;
 }

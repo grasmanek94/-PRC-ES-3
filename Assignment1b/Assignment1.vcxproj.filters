@@ -7,9 +7,6 @@
     <Filter Include="product\cars">
       <UniqueIdentifier>{43db1859-37b4-4a89-8152-18f455548bdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="test">
-      <UniqueIdentifier>{10b2ef23-e0eb-41f6-ba9d-30ae1013e8de}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="product\cars\Car.h">
@@ -24,9 +21,6 @@
     <ClInclude Include="product\RentalAdministration.h">
       <Filter>product</Filter>
     </ClInclude>
-    <ClInclude Include="test\Car.h">
-      <Filter>test</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="product\cars\Car.cpp">
@@ -38,17 +32,11 @@
     <ClCompile Include="product\cars\Sedan.cpp">
       <Filter>product\cars</Filter>
     </ClCompile>
-    <ClCompile Include="product\RentalAdministration.cpp">
+    <ClCompile Include="product\main.cpp">
       <Filter>product</Filter>
     </ClCompile>
-    <ClCompile Include="test\SedanTest.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="test\LimousineTest.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="test\RentalAdministrationTest.cpp">
-      <Filter>test</Filter>
+    <ClCompile Include="product\RentalAdministration.cpp">
+      <Filter>product</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

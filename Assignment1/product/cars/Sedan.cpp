@@ -20,12 +20,12 @@ void Sedan::Clean()
 	_LastCleanedAtKM = GetKilometers();
 }
 
-bool Sedan::HasTowBar()
+bool Sedan::HasTowBar() const
 {
 	return _HasTowBar;
 }
 
-bool Sedan::NeedsCleaning()
+bool Sedan::NeedsCleaning() const
 {
 	return (GetKilometers() - _LastCleanedAtKM) >= 1000;
 }

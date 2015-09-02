@@ -20,12 +20,12 @@ void Limousine::Clean()
 	_NeedsCleaning = false;
 }
 
-bool Limousine::NeedsCleaning()
+bool Limousine::NeedsCleaning() const
 {
 	return _NeedsCleaning;
 }
 
-bool Limousine::HasMinibar()
+bool Limousine::HasMinibar() const
 {
 	return _HasMiniBar;
 }

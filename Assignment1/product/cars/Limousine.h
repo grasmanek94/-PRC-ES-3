@@ -15,8 +15,8 @@ public:
 	~Limousine();
 	void Clean();
 	double Return(int kilometers);
-	bool HasMinibar();
-	bool NeedsCleaning();
+	bool HasMinibar() const;
+	bool NeedsCleaning() const;
 };
 
 #endif

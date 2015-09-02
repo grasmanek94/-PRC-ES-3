@@ -1,4 +1,5 @@
 @echo off
 cd /D "%~dp0"
 set PATH=%CYGWIN64%\bin;%PATH%
-make all
+make clean
+make
