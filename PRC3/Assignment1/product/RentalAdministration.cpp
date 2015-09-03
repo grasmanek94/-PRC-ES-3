@@ -31,7 +31,7 @@ Car* RentalAdministration::FindCar(const std::string& licencePlate)
 	Car * car = InternalFindCar(licencePlate);
 	if (!car)
 	{
-		throw std::exception();
+		throw std::out_of_range();
 	}
 	return car;
 }
