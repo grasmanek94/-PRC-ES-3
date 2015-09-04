@@ -55,18 +55,15 @@ bool RentalAdministration::Add(Car* car)
 
 bool RentalAdministration::RentCar(const std::string& licencePlate)
 {
-	Car* car = FindCar(licencePlate);
-	return car->Rent();
+	return FindCar(licencePlate)->Rent();
 }
 
 double RentalAdministration::ReturnCar(const std::string& licencePlate, int kilometers)
 {
-	Car* car = FindCar(licencePlate);
-	return car->Return(kilometers);
+	return FindCar(licencePlate)->Return(kilometers);
 }
 
 void RentalAdministration::CleanCar(const std::string& licencePlate)
 {
-	Car* car = FindCar(licencePlate);
-	car->Clean();
+	return FindCar(licencePlate)->Clean();
 }
