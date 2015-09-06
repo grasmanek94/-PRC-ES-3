@@ -50,8 +50,10 @@ void loop() {
   }
   if (d10 && d12) {
     // Timer for pin 3
-    TCCR2A |= _BV(COM2B1);
-    OCR2B = 200;
+    if ((TCCR2A & ~_BV(COM2B1))){
+      TCCR2A |= _BV(COM2B1);
+    }
+    OCR2B = 16;
   } else {
     TCCR2A &= ~_BV(COM2B1);
   }
