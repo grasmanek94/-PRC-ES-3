@@ -3,7 +3,7 @@
           12           B4  Button
           5            D5  LED
           6            D6  LED
-          3            D3  Buzzer
+          3            D3  Buzzer OCR2B
           
    Buttons: 10 & 12
    LEDs   : 5  & 6
@@ -11,7 +11,7 @@
 */
 
 //Buzzer help thing
-bool toot = true;
+//bool toot = true;
 
 void setup() {
   Serial.begin(9600);
@@ -24,7 +24,7 @@ void setup() {
   DDRB  &= ~(_BV(DDB2) | _BV(DDB4));
   
   // Pullup bits
-  //PORTB |=   _BV(PORTB2) | _BV(PORTB4);  
+  //PORTB |=   _BV(PORTB2) | _BV(PORTB4);
 }
 
 void loop() {
@@ -51,17 +51,11 @@ void loop() {
     PORTD &= ~_BV(PORTD6);
   }
   if (d10 && d12) {
-    if (toot) {
-      PORTD &= ~_BV(PORTD3);
-    }
-    else {
-      PORTD |= _BV(PORTD3);
-    }
-    toot = !toot;
-    //Serial.print stealing precious microseconds
-    //Also I don't know how to make non-blocking sounds
-    //in combination with port manipulation manually
-    //delayMicroseconds(500);
+    // Timer for pin 3
+    TCCR2A |= _BV(COM2B1);
+    OCR2B = 200;
+  } else {
+    TCCR2A &= ~_BV(COM2B1);
   }
 }
 
