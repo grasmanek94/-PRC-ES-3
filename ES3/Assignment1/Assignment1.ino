@@ -8,10 +8,8 @@
    Buttons: 10 & 12
    LEDs   : 5  & 6
    Buzzer : 3
+   ($ARDUINO_DIR)/hardware/arduino/avr/cores/arduino/*
 */
-
-//Buzzer help thing
-//bool toot = true;
 
 void setup() {
   Serial.begin(9600);
