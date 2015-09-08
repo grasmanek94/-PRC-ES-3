@@ -18,19 +18,20 @@ void setup() {
   // Also DDD3
   DDRD |= _BV(DDD5) | _BV(DDD6) | _BV(DDD3);
   
-  // Set DDB2 and DDB4 as input
-  DDRB  &= ~(_BV(DDB2) | _BV(DDB4));
+  // Set DDB2 DDB3 DDB4 as input
+  DDRB  &= ~(_BV(DDB2) | _BV(DDB4) | _BV(DDB3));
   
   // Pullup bits
-  PORTB |=   _BV(PORTB2) | _BV(PORTB4);
+  PORTB |= _BV(PORTB2) | _BV(PORTB3) | _BV(PORTB4);
 }
 
 void loop() {
-  // Read and store pins d10 & d12
+  // digitalRead and store pins of buttons
   int d10 = PINB & _BV(PINB2);
+  int d11 = PINB & _BV(PINB3);
   int d12 = PINB & _BV(PINB4);
 
-  if (!d10 && d12) {
+  if (!d10 && d12 && d11) {
     // Enable bit PORTD5
     PORTD |= _BV(PORTD5);
   }
@@ -40,7 +41,7 @@ void loop() {
     PORTD &= ~_BV(PORTD5);
   }
   
-  if (!d12 && d10) {
+  if (!d12 && d10 && d11) {
     PORTD |= _BV(PORTD6);
     Serial.print("Hello World!");
   }
@@ -48,12 +49,13 @@ void loop() {
   {
     PORTD &= ~_BV(PORTD6);
   }
-  if (!d10 && !d12) {
+  if (!d10 && !d12 && d11) {
     // Timer for pin 3
     if ((TCCR2A & ~_BV(COM2B1))){
+      TCCR2B &= 0b11111000 | 0x05;
       TCCR2A |= _BV(COM2B1) | _BV(COM2B0);
     }
-    OCR2B = 64;
+    OCR2B = 128;
   } else {
     TCCR2A &= ~_BV(COM2B1);
     TCCR2A &= ~_BV(COM2B0);
