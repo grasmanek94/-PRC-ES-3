@@ -22,7 +22,7 @@ void setup() {
   DDRB  &= ~(_BV(DDB2) | _BV(DDB4));
   
   // Pullup bits
-  //PORTB |=   _BV(PORTB2) | _BV(PORTB4);
+  PORTB |=   _BV(PORTB2) | _BV(PORTB4);
 }
 
 void loop() {
@@ -30,7 +30,7 @@ void loop() {
   int d10 = PINB & _BV(PINB2);
   int d12 = PINB & _BV(PINB4);
 
-  if (d10) {
+  if (!d10 && d12) {
     // Enable bit PORTD5
     PORTD |= _BV(PORTD5);
   }
@@ -40,7 +40,7 @@ void loop() {
     PORTD &= ~_BV(PORTD5);
   }
   
-  if (d12) {
+  if (!d12 && d10) {
     PORTD |= _BV(PORTD6);
     Serial.print("Hello World!");
   }
@@ -48,14 +48,15 @@ void loop() {
   {
     PORTD &= ~_BV(PORTD6);
   }
-  if (d10 && d12) {
+  if (!d10 && !d12) {
     // Timer for pin 3
     if ((TCCR2A & ~_BV(COM2B1))){
-      TCCR2A |= _BV(COM2B1);
+      TCCR2A |= _BV(COM2B1) | _BV(COM2B0);
     }
-    OCR2B = 16;
+    OCR2B = 64;
   } else {
     TCCR2A &= ~_BV(COM2B1);
+    TCCR2A &= ~_BV(COM2B0);
   }
 }
 
