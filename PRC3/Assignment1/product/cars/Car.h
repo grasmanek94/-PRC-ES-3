@@ -24,8 +24,8 @@ public:
 	bool Rent();
 	double Return(int kilometers);
 	std::string ToString() const;
-	bool NeedsCleaning() const;
-	void Clean();
+	virtual bool NeedsCleaning() const = 0;
+	virtual void Clean() = 0;
 };
 
 #endif

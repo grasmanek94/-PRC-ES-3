@@ -27,11 +27,6 @@ bool Car::IsAvailable() const
 	return _IsAvailable;
 }
 
-void Car::Clean()
-{
-
-}
-
 Car::Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm)
 {
 	if (buildYear < 1890)
@@ -85,9 +80,4 @@ std::string Car::ToString() const
 	return _Manufacturer +
 		" - " + _Model +
 		", " + _LicencePlate;
-}
-
-bool Car::NeedsCleaning() const
-{
-	return false;
 }
