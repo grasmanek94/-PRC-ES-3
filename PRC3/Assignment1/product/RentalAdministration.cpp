@@ -2,26 +2,19 @@
 
 #include "RentalAdministration.h"
 
-Car* RentalAdministration::InternalFindCar(const std::string& licencePlate)//return std::shared_ptr<Car>!!!
+Car* RentalAdministration::InternalFindCar(const std::string& licencePlate)//return std::shared_ptr<Car>
 {
-	/*for (std::vector<Car*>::iterator it = _Cars.begin(); it != _Cars.end(); ++it)// or in C++11 and above: for(auto car_ptr: _Cars) { if(car_ptr->GetLicencePlate() ....
+	for (std::vector<Car*>::iterator it = _Cars.begin(); it != _Cars.end(); ++it)// or in C++11 and above: for(auto car_ptr: _Cars) { if(car_ptr->GetLicencePlate() ....
 	{
 		if (!(*it)->GetLicencePlate().compare(licencePlate))
 		{
 			return *it;
 		}
-	}*/
-	for (size_t i = 0; i < _Cars.size(); ++i)
-	{
-		if (!_Cars[i]->GetLicencePlate().compare(licencePlate))
-		{
-			return _Cars[i];
-		}
 	}
 	return NULL;//nullptr if decide to use raw pointers or std::shared_ptr<Car>()
 }
 
-std::vector<Car*> RentalAdministration::GetCars()//RAW :'(
+std::vector<Car*> RentalAdministration::GetCars()
 {
 	return _Cars;
 }
