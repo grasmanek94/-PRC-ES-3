@@ -12,6 +12,7 @@ uint8_t val;
 boolean ledstate = false;
 boolean dot = false;
 unsigned long derp = 0;
+unsigned long debouncePrev = 0;
 
 const uint8_t displayCharSet[] = 
 {
@@ -64,8 +65,11 @@ void blink_dot() {
 
 ISR(PCINT0_vect)
 {
-  ledstate = !ledstate;
-  digitalWrite (LED1, ledstate);
+  if (debouncePrev + 200 < millis()) {
+    ledstate = !ledstate;
+    debouncePrev = millis();
+    digitalWrite (LED1, ledstate);
+  }
 }
 
 ISR(TIMER1_COMPA_vect)
