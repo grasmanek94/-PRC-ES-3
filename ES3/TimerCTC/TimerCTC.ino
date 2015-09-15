@@ -130,7 +130,7 @@ void loop() {
   if (sliderNow > sliderPrev + hystVal || sliderNow < sliderPrev - hystVal) {
     sliderPrev = sliderNow;    
     cli();
-    OCR1A = map(sliderNow, 0, 1023, 0, 65536);
+    OCR1A = map(sliderNow, 1014, 10, 0, 65536);
     sei();
     Serial.println(sliderNow);
   }
