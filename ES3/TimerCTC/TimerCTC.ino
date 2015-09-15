@@ -8,7 +8,10 @@
 
 int hystVal = 2;
 int sliderPrev = 0;
+uint8_t val;
 boolean ledstate = false;
+boolean dot = false;
+unsigned long derp = 0;
 
 const uint8_t displayCharSet[] = 
 {
@@ -35,7 +38,6 @@ const uint8_t displayCharSet[] =
 void inc_8segment(void)
 {
   static int i = 0;
-  uint8_t val;
 
   val = displayCharSet[i];
 
@@ -47,6 +49,19 @@ void inc_8segment(void)
   i %= sizeof (displayCharSet);
 }
 
+void blink_dot() {
+  if (dot) {
+    digitalWrite(LATCH,LOW);
+    shiftOut(DATA,CLOCK,MSBFIRST, val & 0x7F);
+    digitalWrite(LATCH,HIGH);
+  }
+  else {
+    digitalWrite(LATCH,LOW);
+    shiftOut(DATA,CLOCK,MSBFIRST, val);
+    digitalWrite(LATCH,HIGH);
+  }
+}
+
 ISR(PCINT0_vect)
 {
   ledstate = !ledstate;
@@ -56,7 +71,17 @@ ISR(PCINT0_vect)
 ISR(TIMER1_COMPA_vect)
 {
   inc_8segment();
+  blink_dot();
+  
+  derp += OCR1A;
+
+  // 62.5*64*250000 = 1e9ns
+  if (derp > 250000) {
+    derp = 0;
+    dot = !dot;
+  }
 }
+
 
 void setup() {
   Serial.begin(9600);
