@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="product">
+      <UniqueIdentifier>{3e5c1be7-042f-4574-9419-d4c069b4e62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{ec831bb6-9b99-4f3f-89d3-789370457bd3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="product\Wheel.cpp">
+      <Filter>product</Filter>
+    </ClCompile>
+    <ClCompile Include="product\Car.cpp">
+      <Filter>product</Filter>
+    </ClCompile>
+    <ClCompile Include="product\Truck.cpp">
+      <Filter>product</Filter>
+    </ClCompile>
+    <ClCompile Include="test\CarTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\TruckTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\WheelTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="product\Wheel.h">
+      <Filter>product</Filter>
+    </ClInclude>
+    <ClInclude Include="product\Car.h">
+      <Filter>product</Filter>
+    </ClInclude>
+    <ClInclude Include="product\Truck.h">
+      <Filter>product</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
