@@ -9,7 +9,7 @@ class Truck : public Car
     int* power;
 
   public:
-	Truck(const string& model, const string& material, int diameter, int nrWheels, int power);
+	Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power);
     /* pre : diameter > 0, nrWheels > 2 and vermogen > 0
        post: A Truck object is created that contains 'power' power and nrWheels
              Wheel objects with the given material and diameter

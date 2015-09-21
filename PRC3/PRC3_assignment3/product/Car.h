@@ -4,18 +4,16 @@
 #include "Wheel.h"
 #include <vector>
 #include <string>
-using std::string;
-using std::vector;
 
 class Car
 {
   private:
-     vector<Wheel*> wheels;
-     string licencePlate;
-     string model;
+     std::vector<Wheel*> wheels;
+     std::string licencePlate;
+	 std::string model;
 
   public:
-    Car(const string& model, const string& material, int diameter, int nrWheels);
+    Car(const std::string& model, const std::string& material, int diameter, int nrWheels);
     /* pre : diameter > 0 and nrWheels > 2
        post: A Car object is created that contains nrWheels Wheel objects
              with the given material and diameter
@@ -26,17 +24,17 @@ class Car
 	   post: the Car object is destroyed including all allocated memory
 	*/
 
-    string getModel();
+   std::string getModel();
     /* pre : -
        post: getModel()= <Car> model
     */
 
-    void setLicencePlate(const string& licence);
+    void setLicencePlate(const std::string& licence);
     /* pre : -
        post: <Car>'s licence plate is licence
     */
 
-    string getLicencePlate();
+	std::string getLicencePlate();
     /* pre : -
        post: getLicencePlate()= <Car>'s licence plate
     */
@@ -58,7 +56,7 @@ class Car
              else out_of_range exception with text: "illegal index" is thrown
     */
 
-	void addWheel(int diameter, const string& material);
+	void addWheel(int diameter, const std::string& material);
 	/* pre : diameter > 0
 	   post: a wheel with given diameter and material is added to <Car>
 	*/
