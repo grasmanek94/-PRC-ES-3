@@ -25,6 +25,9 @@ Limousine::Limousine(string manufacturer, string model, int buildYear,
 	needsCleaning = false;
 }
 
+Limousine::~Limousine(void) {
+}
+
 double Limousine::Return(int kilometers) {
 	double price = Car::Return(kilometers);
 	needsCleaning = true;

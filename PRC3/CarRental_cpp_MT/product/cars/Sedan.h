@@ -13,6 +13,7 @@ class Sedan: public Car {
 			int buildYear,
 			string licensePlate,
 			int hasTowbar);
+		~Sedan(void);
 		int HasTowBar() const;
 		//double Return(int kilometers);
 		int NeedsCleaning() const;

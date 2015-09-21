@@ -28,6 +28,11 @@ class LimousineTest : public ::testing::Test
         }
         
         Limousine* testPtr;
+        
+        ~LimousineTest(){
+			delete testPtr;
+			testPtr = NULL;
+		}
 };
 
 TEST_F(LimousineTest, test_construction_values_copied_correctly)

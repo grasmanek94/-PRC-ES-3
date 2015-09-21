@@ -17,7 +17,7 @@ class Limousine: public Car {
 		double Return(int kilometers);
 		int NeedsCleaning() const;
 		void Clean();
-		
+		~Limousine(void);
 	private:
 		int hasMinibar;
 		int needsCleaning;

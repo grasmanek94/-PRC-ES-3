@@ -76,6 +76,9 @@ class AdminTest : public ::testing::Test
             EXPECT_EQ(2, admin.GetCars().size());
         }
         
+        ~AdminTest(){
+		}
+        
         RentalAdministration admin;
         Car car;
         string licencePlates[2];

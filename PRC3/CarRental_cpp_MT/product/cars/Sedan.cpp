@@ -17,6 +17,9 @@ Sedan::Sedan(string manufacturer, string model, int buildYear,
 	lastCleanedAtKm = 0;
 }
 
+Sedan::~Sedan(void){
+}
+
 int Sedan::HasTowBar() const {
 	return hasTowbar;
 }

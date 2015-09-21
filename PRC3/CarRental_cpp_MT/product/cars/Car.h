@@ -11,6 +11,7 @@ class Car {
 			int buildYear,
 			string licencePlate,
 			double pricePerKm);
+		virtual ~Car(void);
 		int Rent();
 		virtual double Return(int kilometers);
 		virtual int NeedsCleaning() const = 0;

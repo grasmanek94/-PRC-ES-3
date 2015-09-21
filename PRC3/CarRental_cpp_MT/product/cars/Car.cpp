@@ -19,6 +19,10 @@ Car::Car(	string manufacturer, string model, int buildYear,
 		throw invalid_argument("Price per km can't be negative.");
 	}
 }
+
+Car::~Car(void){
+	
+}
 	
 int Car::Rent() {
 	if (!isAvailable) {

@@ -22,7 +22,11 @@ static void CheckSedanProperties(Sedan* sedanPtr, string manufacturer, string mo
 TEST(SedanIllegalParameterTests, test_construction_exception)
 {
     EXPECT_THROW(new Sedan("Ford", "Ka", 1889, "licenceplate", true), invalid_argument);
-    EXPECT_NO_THROW(new Sedan("Ford", "Ka", 1890, "licenceplate", true));
+    Car* ptr;
+    EXPECT_NO_THROW(ptr = new Sedan("Ford", "Ka", 1890, "licenceplate", true));
+    delete ptr;
+    ptr = NULL;
+    
 }
 
 class SedanTest : public ::testing::Test
@@ -33,7 +37,15 @@ class SedanTest : public ::testing::Test
             testPtr = new Sedan("Audi", "R8", 2015, "1-c++-98", false);
         }
         
-        Sedan* testPtr;
+		Sedan* testPtr;
+		
+		~SedanTest(void)
+		{
+			delete testPtr;
+			testPtr = NULL;
+		};
+        
+       
 };
 
 TEST_F(SedanTest, test_construction_values_copied_correctly)
