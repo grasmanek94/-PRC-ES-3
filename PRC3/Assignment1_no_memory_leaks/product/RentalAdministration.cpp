@@ -60,3 +60,11 @@ void RentalAdministration::CleanCar(const std::string& licencePlate)
 {
 	return FindCar(licencePlate)->Clean();
 }
+
+RentalAdministration::~RentalAdministration()
+{
+	/*for (std::vector<Car*>::iterator it = _Cars.begin(); it != _Cars.end(); ++it)
+	{
+		delete *it;
+	}*/
+}

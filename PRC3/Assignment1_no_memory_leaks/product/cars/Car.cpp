@@ -6,22 +6,27 @@ std::string Car::GetLicencePlate() const
 {
 	return _LicencePlate;
 }
+
 std::string Car::GetManufacturer() const
 {
 	return _Manufacturer;
 }
+
 std::string Car::GetModel() const
 {
 	return _Model;
 }
+
 int Car::GetBuildYear() const
 {
 	return _BuildYear;
 }
+
 int Car::GetKilometers() const
 {
 	return _Kilometers;
 }
+
 bool Car::IsAvailable() const
 {
 	return _IsAvailable;
@@ -80,4 +85,9 @@ std::string Car::ToString() const
 	return _Manufacturer +
 		" - " + _Model +
 		", " + _LicencePlate;
+}
+
+Car::~Car()
+{
+
 }

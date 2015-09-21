@@ -26,6 +26,7 @@ public:
 	std::string ToString() const;
 	virtual bool NeedsCleaning() const = 0;
 	virtual void Clean() = 0;
+	virtual ~Car();
 };
 
 #endif
