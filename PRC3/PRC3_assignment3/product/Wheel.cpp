@@ -1,10 +1,15 @@
 #include <string>
+#include <stdexcept>
+
 #include "Wheel.h"
 
 Wheel::Wheel(int diameter, const std::string& material)
 	: diameter(diameter), material(material)
 {
-
+	if (!(diameter > 0))
+	{
+		throw std::invalid_argument("");
+	}
 }
 /* pre : d > 0
 post: A Wheel object is created with the given material and diameter
