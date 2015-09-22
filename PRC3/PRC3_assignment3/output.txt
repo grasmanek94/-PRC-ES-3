@@ -1,0 +1,121 @@
+==1225== Memcheck, a memory error detector
+==1225== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==1225== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==1225== Command: ./CarTest
+==1225== 
+==1225== Invalid read of size 8
+==1225==    at 0x4C2D636: memcpy@GLIBC_2.2.5 (vg_replace_strmem.c:914)
+==1225==    by 0x406033: Wheel** std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<Wheel*>(Wheel* const*, Wheel* const*, Wheel**) (stl_algobase.h:378)
+==1225==    by 0x405F0B: Wheel** std::__copy_move_a<false, Wheel**, Wheel**>(Wheel**, Wheel**, Wheel**) (stl_algobase.h:396)
+==1225==    by 0x405D2E: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::__copy_move_a2<false, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:434)
+==1225==    by 0x405AB6: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::copy<__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:466)
+==1225==    by 0x4056C3: std::vector<Wheel*, std::allocator<Wheel*> >::_M_erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (vector.tcc:145)
+==1225==    by 0x405198: std::vector<Wheel*, std::allocator<Wheel*> >::erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_vector.h:1150)
+==1225==    by 0x404D03: Car::removeWheel(int) (Car.cpp:83)
+==1225==    by 0x4077DD: CarTest_test_remove_wheel_too_much_Test::TestBody() (CarTest.cpp:110)
+==1225==    by 0x42C6E7: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427B97: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x40F000: testing::Test::Run() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==  Address 0x5c34d90 is 0 bytes after a block of size 32 alloc'd
+==1225==    at 0x4C29180: operator new(unsigned long) (vg_replace_malloc.c:324)
+==1225==    by 0x405E81: __gnu_cxx::new_allocator<Wheel*>::allocate(unsigned long, void const*) (new_allocator.h:104)
+==1225==    by 0x405C84: __gnu_cxx::__alloc_traits<std::allocator<Wheel*> >::allocate(std::allocator<Wheel*>&, unsigned long) (alloc_traits.h:182)
+==1225==    by 0x4059D5: std::_Vector_base<Wheel*, std::allocator<Wheel*> >::_M_allocate(unsigned long) (stl_vector.h:170)
+==1225==    by 0x405425: std::vector<Wheel*, std::allocator<Wheel*> >::_M_insert_aux(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, Wheel* const&) (vector.tcc:353)
+==1225==    by 0x4050C7: std::vector<Wheel*, std::allocator<Wheel*> >::push_back(Wheel* const&) (stl_vector.h:925)
+==1225==    by 0x4049AA: Car::Car(std::string const&, std::string const&, int, int) (Car.cpp:17)
+==1225==    by 0x4081AF: CarTest::CarTest() (CarTest.cpp:29)
+==1225==    by 0x408671: CarTest_test_remove_wheel_too_much_Test::CarTest_test_remove_wheel_too_much_Test() (CarTest.cpp:103)
+==1225==    by 0x40966B: testing::internal::TestFactoryImpl<CarTest_test_remove_wheel_too_much_Test>::CreateTest() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x42C7AD: testing::Test* testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427E29: testing::Test* testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225== 
+==1225== Invalid write of size 8
+==1225==    at 0x4C2D62B: memcpy@GLIBC_2.2.5 (vg_replace_strmem.c:914)
+==1225==    by 0x406033: Wheel** std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<Wheel*>(Wheel* const*, Wheel* const*, Wheel**) (stl_algobase.h:378)
+==1225==    by 0x405F0B: Wheel** std::__copy_move_a<false, Wheel**, Wheel**>(Wheel**, Wheel**, Wheel**) (stl_algobase.h:396)
+==1225==    by 0x405D2E: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::__copy_move_a2<false, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:434)
+==1225==    by 0x405AB6: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::copy<__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:466)
+==1225==    by 0x4056C3: std::vector<Wheel*, std::allocator<Wheel*> >::_M_erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (vector.tcc:145)
+==1225==    by 0x405198: std::vector<Wheel*, std::allocator<Wheel*> >::erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_vector.h:1150)
+==1225==    by 0x404D03: Car::removeWheel(int) (Car.cpp:83)
+==1225==    by 0x4077DD: CarTest_test_remove_wheel_too_much_Test::TestBody() (CarTest.cpp:110)
+==1225==    by 0x42C6E7: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427B97: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x40F000: testing::Test::Run() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==  Address 0x5c34d90 is 0 bytes after a block of size 32 alloc'd
+==1225==    at 0x4C29180: operator new(unsigned long) (vg_replace_malloc.c:324)
+==1225==    by 0x405E81: __gnu_cxx::new_allocator<Wheel*>::allocate(unsigned long, void const*) (new_allocator.h:104)
+==1225==    by 0x405C84: __gnu_cxx::__alloc_traits<std::allocator<Wheel*> >::allocate(std::allocator<Wheel*>&, unsigned long) (alloc_traits.h:182)
+==1225==    by 0x4059D5: std::_Vector_base<Wheel*, std::allocator<Wheel*> >::_M_allocate(unsigned long) (stl_vector.h:170)
+==1225==    by 0x405425: std::vector<Wheel*, std::allocator<Wheel*> >::_M_insert_aux(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, Wheel* const&) (vector.tcc:353)
+==1225==    by 0x4050C7: std::vector<Wheel*, std::allocator<Wheel*> >::push_back(Wheel* const&) (stl_vector.h:925)
+==1225==    by 0x4049AA: Car::Car(std::string const&, std::string const&, int, int) (Car.cpp:17)
+==1225==    by 0x4081AF: CarTest::CarTest() (CarTest.cpp:29)
+==1225==    by 0x408671: CarTest_test_remove_wheel_too_much_Test::CarTest_test_remove_wheel_too_much_Test() (CarTest.cpp:103)
+==1225==    by 0x40966B: testing::internal::TestFactoryImpl<CarTest_test_remove_wheel_too_much_Test>::CreateTest() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x42C7AD: testing::Test* testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427E29: testing::Test* testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225== 
+==1225== Invalid read of size 8
+==1225==    at 0x4C2D628: memcpy@GLIBC_2.2.5 (vg_replace_strmem.c:914)
+==1225==    by 0x406033: Wheel** std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<Wheel*>(Wheel* const*, Wheel* const*, Wheel**) (stl_algobase.h:378)
+==1225==    by 0x405F0B: Wheel** std::__copy_move_a<false, Wheel**, Wheel**>(Wheel**, Wheel**, Wheel**) (stl_algobase.h:396)
+==1225==    by 0x405D2E: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::__copy_move_a2<false, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:434)
+==1225==    by 0x405AB6: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::copy<__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:466)
+==1225==    by 0x4056C3: std::vector<Wheel*, std::allocator<Wheel*> >::_M_erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (vector.tcc:145)
+==1225==    by 0x405198: std::vector<Wheel*, std::allocator<Wheel*> >::erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_vector.h:1150)
+==1225==    by 0x404D03: Car::removeWheel(int) (Car.cpp:83)
+==1225==    by 0x4077DD: CarTest_test_remove_wheel_too_much_Test::TestBody() (CarTest.cpp:110)
+==1225==    by 0x42C6E7: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427B97: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x40F000: testing::Test::Run() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==  Address 0x5c34da0 is 16 bytes after a block of size 32 alloc'd
+==1225==    at 0x4C29180: operator new(unsigned long) (vg_replace_malloc.c:324)
+==1225==    by 0x405E81: __gnu_cxx::new_allocator<Wheel*>::allocate(unsigned long, void const*) (new_allocator.h:104)
+==1225==    by 0x405C84: __gnu_cxx::__alloc_traits<std::allocator<Wheel*> >::allocate(std::allocator<Wheel*>&, unsigned long) (alloc_traits.h:182)
+==1225==    by 0x4059D5: std::_Vector_base<Wheel*, std::allocator<Wheel*> >::_M_allocate(unsigned long) (stl_vector.h:170)
+==1225==    by 0x405425: std::vector<Wheel*, std::allocator<Wheel*> >::_M_insert_aux(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, Wheel* const&) (vector.tcc:353)
+==1225==    by 0x4050C7: std::vector<Wheel*, std::allocator<Wheel*> >::push_back(Wheel* const&) (stl_vector.h:925)
+==1225==    by 0x4049AA: Car::Car(std::string const&, std::string const&, int, int) (Car.cpp:17)
+==1225==    by 0x4081AF: CarTest::CarTest() (CarTest.cpp:29)
+==1225==    by 0x408671: CarTest_test_remove_wheel_too_much_Test::CarTest_test_remove_wheel_too_much_Test() (CarTest.cpp:103)
+==1225==    by 0x40966B: testing::internal::TestFactoryImpl<CarTest_test_remove_wheel_too_much_Test>::CreateTest() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x42C7AD: testing::Test* testing::internal::HandleSehExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427E29: testing::Test* testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::TestFactoryBase, testing::Test*>(testing::internal::TestFactoryBase*, testing::Test* (testing::internal::TestFactoryBase::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225== 
+==1225== 
+==1225== Process terminating with default action of signal 11 (SIGSEGV)
+==1225==  Access not within mapped region at address 0x601D000
+==1225==    at 0x4C2D628: memcpy@GLIBC_2.2.5 (vg_replace_strmem.c:914)
+==1225==    by 0x406033: Wheel** std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<Wheel*>(Wheel* const*, Wheel* const*, Wheel**) (stl_algobase.h:378)
+==1225==    by 0x405F0B: Wheel** std::__copy_move_a<false, Wheel**, Wheel**>(Wheel**, Wheel**, Wheel**) (stl_algobase.h:396)
+==1225==    by 0x405D2E: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::__copy_move_a2<false, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:434)
+==1225==    by 0x405AB6: __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > std::copy<__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > > >(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >, __gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_algobase.h:466)
+==1225==    by 0x4056C3: std::vector<Wheel*, std::allocator<Wheel*> >::_M_erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (vector.tcc:145)
+==1225==    by 0x405198: std::vector<Wheel*, std::allocator<Wheel*> >::erase(__gnu_cxx::__normal_iterator<Wheel**, std::vector<Wheel*, std::allocator<Wheel*> > >) (stl_vector.h:1150)
+==1225==    by 0x404D03: Car::removeWheel(int) (Car.cpp:83)
+==1225==    by 0x4077DD: CarTest_test_remove_wheel_too_much_Test::TestBody() (CarTest.cpp:110)
+==1225==    by 0x42C6E7: void testing::internal::HandleSehExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x427B97: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==    by 0x40F000: testing::Test::Run() (in /mnt/hgfs/PRCES3/PRC3/PRC3_assignment3/CarTest)
+==1225==  If you believe this happened as a result of a stack
+==1225==  overflow in your program's main thread (unlikely but
+==1225==  possible), you can try to increase the size of the
+==1225==  main thread stack using the --main-stacksize= flag.
+==1225==  The main thread stack size used in this run was 8388608.
+==1225== 
+==1225== HEAP SUMMARY:
+==1225==     in use at exit: 4,852 bytes in 78 blocks
+==1225==   total heap usage: 573 allocs, 495 frees, 60,105 bytes allocated
+==1225== 
+==1225== LEAK SUMMARY:
+==1225==    definitely lost: 16 bytes in 1 blocks
+==1225==    indirectly lost: 0 bytes in 0 blocks
+==1225==      possibly lost: 1,272 bytes in 31 blocks
+==1225==    still reachable: 3,564 bytes in 46 blocks
+==1225==         suppressed: 0 bytes in 0 blocks
+==1225== Rerun with --leak-check=full to see details of leaked memory
+==1225== 
+==1225== For counts of detected and suppressed errors, rerun with: -v
+==1225== ERROR SUMMARY: 1024092 errors from 3 contexts (suppressed: 0 from 0)
