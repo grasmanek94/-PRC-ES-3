@@ -1,4 +1,6 @@
 #include <string>
+#include <algorithm>
+#include <stdexcept>
 
 #include "Car.h"
 
@@ -22,7 +24,11 @@ with the given material and diameter
 
 Car::~Car()
 {
-
+	for (size_t i = 0; i < wheels.size(); ++i)
+	{
+		delete wheels[i];
+		wheels[i] = NULL;
+	}
 }
 /* pre : -
 post: the Car object is destroyed including all allocated memory
@@ -88,8 +94,12 @@ post: a wheel with given diameter and material is added to <Car>
 */
 
 Car::Car(const Car& myCar)
+	: licencePlate(myCar.licencePlate), model(myCar.model)
 {
-
+	for (size_t i = 0; i < myCar.wheels.size(); ++i)
+	{
+		wheels.push_back(new Wheel(*myCar.wheels[i]));
+	}
 }
 /* pre : -
 post: a Car object is created with all properties of myCar, a deep copy is performed
@@ -97,6 +107,10 @@ post: a Car object is created with all properties of myCar, a deep copy is perfo
 
 Car& Car::operator=(const Car& mijnCar)
 {
+	Car temp(mijnCar);
+	std::swap(licencePlate, temp.licencePlate);
+	std::swap(model, temp.model);
+	std::swap(wheels, temp.wheels);
 	return *this;
 }
 /* pre : -

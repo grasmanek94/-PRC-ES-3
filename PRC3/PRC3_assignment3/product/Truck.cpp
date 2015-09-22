@@ -1,9 +1,15 @@
 #include <string>
+#include <stdexcept>
 #include "Truck.h"
 
 Truck::Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power)
 	: Car(model, material, diameter, nrWheels)
 {
+	if (!(nrWheels > 2) || !(diameter > 0) || !(power > 0))
+	{
+		throw std::invalid_argument("");
+	}
+
 	this->power = new int;
 	*(this->power) = power;
 }
@@ -40,6 +46,9 @@ post: a Truck object is created with all properties of myTruck, a deep copy is p
 
 Truck& Truck::operator=(const Truck& myTruck)
 {
+	Truck temp(myTruck);
+	Car::operator=(temp);
+	std::swap(*power, *temp.power);
 	return *this;
 }
 /* pre : -
