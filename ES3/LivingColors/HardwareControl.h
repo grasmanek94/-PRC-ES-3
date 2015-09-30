@@ -20,4 +20,4 @@ class HardwareControl {
     
   private:
 
-}
+};

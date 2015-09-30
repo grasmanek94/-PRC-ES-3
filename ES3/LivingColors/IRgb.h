@@ -5,6 +5,6 @@ class IRgb {
   private:
   public:
     virtual void SetColor(byte r, byte g, byte b);
-}
+};
 
 #endif

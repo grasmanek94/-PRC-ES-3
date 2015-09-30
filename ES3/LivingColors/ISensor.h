@@ -5,6 +5,6 @@ class ISensor {
   private:
   public:
     virtual int GetValue();
-}
+};
 
 #endif
