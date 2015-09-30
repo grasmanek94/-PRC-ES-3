@@ -71,7 +71,6 @@ TEST_F(CarTest, test_set_licence_plate)
 TEST_F(CarTest, test_assignment_operator)
 {
 	*testPtr = *testPtr2;
-
 	CheckCarProperties(testPtr, "BMW", "", 6);
 	CheckCarProperties(testPtr2, "BMW", "", 6);
 }
