@@ -62,12 +62,18 @@ int Car::getNrWheels()
 {
 	return wheels.size();
 }
+
 /* pre : -
 post: getNrWheels()= <Car>'s nr wheels
 */
 
 Wheel* Car::getWheel(int index)
 {
+	if (index < 0 || index >= getNrWheels())
+	{
+		throw std::out_of_range("illegal index");
+	}
+
 	return wheels[index];
 }
 /* pre : 0 <= index < nr wheels in <Car>
@@ -76,8 +82,15 @@ post: getWheel(i) = Wheel nr index of <Car>
 
 void Car::removeWheel(int index)
 {
+	if (index < 0 || index >= getNrWheels())
+	{
+		throw std::out_of_range("illegal index");
+	}
+
 	delete wheels[index];
 	wheels[index] = NULL;
+
+	wheels.erase(wheels.begin() + index);
 }
 /* pre : -
 post: if 0 <= index < nr wheels in <Car>

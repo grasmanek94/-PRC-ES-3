@@ -7,6 +7,9 @@
     <Filter Include="test">
       <UniqueIdentifier>{ec831bb6-9b99-4f3f-89d3-789370457bd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="google_test">
+      <UniqueIdentifier>{1b65edef-9adf-4772-b16f-744f32cc137c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="product\Wheel.cpp">
@@ -26,6 +29,12 @@
     </ClCompile>
     <ClCompile Include="test\WheelTest.cpp">
       <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\VMShared\gtest-1.7.0\src\gtest_main.cc">
+      <Filter>google_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\VMShared\gtest-1.7.0\src\gtest-all.cc">
+      <Filter>google_test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
