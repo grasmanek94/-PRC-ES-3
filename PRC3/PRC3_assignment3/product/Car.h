@@ -72,8 +72,6 @@ class Car
 	         all previously existing properties are properly cleaned up and new
 	         properties are deep copied
 	*/
-
-	void swap(Car& other);
 };
 
 #endif

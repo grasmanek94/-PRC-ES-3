@@ -118,20 +118,14 @@ Car::Car(const Car& myCar)
 post: a Car object is created with all properties of myCar, a deep copy is performed
 */
 
-void Car::swap(Car& other)
-{
-	std::swap(licencePlate, other.licencePlate);
-	std::swap(model, other.model);
-	std::swap(wheels, other.wheels);
-}
-
 Car& Car::operator=(const Car& mijnCar)
 {
-	Car temp(mijnCar);	//eerst de copy constructor gebruiken om ervoor te zorgen dat er geen exceptie optreed tijdens het veranderen van huidig object
-	swap(temp);			//swaps uitvoeren
-	return *this;		//dit returnen
-}						//temp wordt gedestroyed, oude variables mooi clenaup (Destructor van Car op temp wordt gerunt)
-
+	Car temp(mijnCar);
+	std::swap(licencePlate, temp.licencePlate);
+	std::swap(model, temp.model);
+	std::swap(wheels, temp.wheels);
+	return *this;
+}
 /* pre : -
 post: all properties of this object are replaced with myCar's properties,
 all previously existing properties are properly cleaned up and new
