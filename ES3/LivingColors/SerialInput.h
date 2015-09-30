@@ -1,10 +1,17 @@
 #ifndef SERIALINPUT_H
 #define SERIALINPUT_H
 
-class SerialInput {
+#include "ISensor.h"
+
+class SerialInput: public ISensor {
   private:
+    int _Min;
+    int _Max;
   public:
+    SerialInput();
     int GetValue();
+    int GetMin();
+    int GetMax();
 };
 
 #endif

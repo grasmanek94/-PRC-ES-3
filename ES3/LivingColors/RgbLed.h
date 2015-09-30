@@ -1,10 +1,16 @@
 #ifndef RGBLED_H
 #define RGBLED_H
 
-class RgbLed {
+#include "IRgb.h"
+
+class RgbLed: public IRgb {
   private:
+    int pinr;
+    int ping;
+    int pinb;
   public:
-    void SetColor(byte r, byte g, byte b);
+    RgbLed(int pinr, int ping, int pinb);
+    void SetColor(int hue);
 };
 
 #endif

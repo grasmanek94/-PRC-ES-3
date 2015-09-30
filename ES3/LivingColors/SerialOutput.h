@@ -1,10 +1,13 @@
 #ifndef SERIALOUTPUT_H
 #define SERIALOUTPUT_H
 
-class SerialOutput {
+#include "IRgb.h"
+
+class SerialOutput: public IRgb {
   private:
   public:
-    void SetColor(byte r, byte g, byte b);
+    SerialOutput();
+    void SetColor(int hue);
 };
 
 #endif

@@ -9,17 +9,20 @@
 
 HardwareControl::HardwareControl() {
   Serial.begin(9600);
+  
 }
 
-HardwareControl::WriteValue(int value) {
-
-}
-
-HardwareConrol::ReadSensor(Type type) {
-  if (type == Type.Ultrasonic) {
-    
+void HardwareControl::WriteValue(IRgb* out) {
+  if (out) {
+    out->SetColor(hue);
   }
-  if (type == Type.Infrared) {
-    
+}
+
+void HardwareControl::ReadSensor(ISensor* sensor) {
+  if (sensor) {
+    int val = sensor->GetValue();
+    hue = map(val, sensor->GetMin(), sensor->GetMax(), 0, 360);
+  } else {
+    hue = -1;
   }
 }
