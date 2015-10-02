@@ -1,17 +1,15 @@
 #ifndef SERIALINPUT_H
 #define SERIALINPUT_H
+#include <Arduino.h>
 
-#include "ISensor.h"
+#define IN_BAUDRATE 9600
 
-class SerialInput: public ISensor {
+class SerialInput {
   private:
-    int _Min;
-    int _Max;
   public:
     SerialInput();
+    void Init();
     int GetValue();
-    int GetMin();
-    int GetMax();
 };
 
 #endif

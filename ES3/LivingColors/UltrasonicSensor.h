@@ -1,18 +1,14 @@
 #ifndef ULTRASONICSENSOR_H
 #define ULTRASONICSENSOR_H
+#include <Arduino.h>
 
-#include "ISensor.h"
-
-class UltrasonicSensor: public ISensor {
+class UltrasonicSensor {
   private:
-    int _Min;
-    int _Max;
     int pin;
   public:
-    UltrasonicSensor(int pin);
+    UltrasonicSensor();
+    void Init();
     int GetValue();
-    int GetMin();
-    int GetMax();
 };
 
 #endif

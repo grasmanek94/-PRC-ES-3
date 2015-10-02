@@ -1,18 +1,13 @@
 #ifndef INFRAREDSENSOR_H
 #define INFRAREDSENSOR_H
+#include <Arduino.h>
 
-#include "ISensor.h"
-
-class InfraredSensor: public ISensor {
+class InfraredSensor {
   private:
-    int pin;
-    int _Min;
-    int _Max;
   public:
-    InfraredSensor(int pin);
+    InfraredSensor();
+    void Init();
     int GetValue();
-    int GetMin();
-    int GetMax();
 };
 
 #endif

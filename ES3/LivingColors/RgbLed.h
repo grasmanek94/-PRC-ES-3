@@ -1,15 +1,16 @@
 #ifndef RGBLED_H
 #define RGBLED_H
+#include <Arduino.h>
 
-#include "IRgb.h"
-
-class RgbLed: public IRgb {
+class RgbLed {
   private:
-    int pinr;
-    int ping;
-    int pinb;
+    int rpin;
+    int gpin;
+    int bpin;
+    void calculateRGB(int hue, int *rgb);
   public:
-    RgbLed(int pinr, int ping, int pinb);
+    RgbLed();
+    void Init();
     void SetColor(int hue);
 };
 
