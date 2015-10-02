@@ -1,6 +1,7 @@
 #include "HardwareControl.h"
 
-HardwareControl::HardwareControl() {
+HardwareControl::HardwareControl() 
+{
 }
 
 /*
@@ -9,64 +10,53 @@ HardwareControl::HardwareControl() {
  * moeten doen!!
  */
 
-void HardwareControl::InitS(ESensor sensor){
-	if (sensor == iSensor::Ultrasonic) {
+void HardwareControl::Init(SensorEnum sensor)
+{
+	if (sensor == iSensor::Ultrasonic)
+	{
 		Input = new UltrasonicSensor();
-                Input->Init(TRIGPIN, ECHOPIN);
+		Input->Init();
 		inMode = 0;
 	}
-	
-	if (sensor == iSensor::Infrared) {
+
+	if (sensor == iSensor::Infrared)
+	{
 		Input = new InfraredSensor();
-                Input->Init(irpin);
+		Input->Init();
 		inMode = 1;
 	}
-	
-	if (sensor == iSensor::Serialp && !Serial) {
+
+	if (sensor == iSensor::Serialp && !Serial)
+	{
 		Input = new SerialInput();
-                Input->Init(baudrate);
+		Input->Init();
 		inMode = 2;
 	}
 }
 
-void HardwareControl::InitO(EOutput output){
-	if (output == iRgb::Led) {
+void HardwareControl::Init(ERGBOutput output)
+{
+	if (output == iRgb::Led) 
+	{
 		Output = new RgbLed();
-                Output->Init(rpin, gpin, bpin);
+		Output->Init();
 		outMode = 0;
 	}
-	
-	if (output == iRgb::Serialp && !Serial) {
+
+	if (output == iRgb::Serialp && !Serial)
+	{
 		Output = new SerialOutput();
-                Output->Init(baudrate);
+		Output->Init();
 		outMode = 1;
 	}
 }
 
-void HardwareControl::SetColor(int hue) {
+void HardwareControl::SetColor(int hue)
+{
 	Output->SetColor(hue);
 }
 
-int HardwareControl::GetValue() {
+int HardwareControl::GetValue()
+{
 	Input->GetValue();
 }
-
-void HardwareControl::SetPins(int r, int g, int b) {
-  rpin = r;
-  gpin = g;
-  bpin = b;
-}
-
-void HardwareControl::SetBaudrate(int baud) {
-  baudrate = baud;
-}
-
-void HardwareControl::SetIrPin(int pin) {
-  irpin = pin;
-}
-
-void HardwareControl::SetUsPins(int TRIGPIN, int ECHOPIN) {
-  TRIGPIN = TRIGPIN;
-  ECHOPIN = ECHOPIN;
-}
-

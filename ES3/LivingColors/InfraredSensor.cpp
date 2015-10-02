@@ -1,12 +1,15 @@
 #include "InfraredSensor.h"
 
-InfraredSensor::InfraredSensor(){
+InfraredSensor::InfraredSensor()
+{
 }
 
-void InfraredSensor::Init(){
+void InfraredSensor::Init()
+{
 }
 
-int InfraredSensor::GetValue() {
-  return map(analogRead(pin), 0, 1023, 0, 360);
+int InfraredSensor::GetValue()
+{
+	return map(analogRead(IR_PIN), 0, 1023, 0, 360);
 }
 
