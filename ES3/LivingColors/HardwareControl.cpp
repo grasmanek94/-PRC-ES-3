@@ -9,7 +9,7 @@ void UpdateInput()
 {
 	if (debouncePrevIn + 200 < millis())
 	{
-		latest->Change((SensorType)(digitalRead(2) + digitalRead(3) * 2 + digitalRead(4) * 4));
+		latest->Change((SensorType)((digitalRead(2) * 2) + digitalRead(3)));
 		debouncePrevIn = millis();
 	}
 }
@@ -18,20 +18,15 @@ void UpdateOutput()
 {
 	if (debouncePrevOut + 200 < millis())
 	{
-		latest->Change((ERGBOutput)digitalRead(5));
+		latest->Change((ERGBOutput)digitalRead(4));
 		debouncePrevOut = millis();
 	}
 }
 
-// ISR on pins 2,3,4,5: change in/out mode
-ISR(PCINT21_vect)
-{
-	UpdateOutput();
-}
-
+// ISR on pins 2,3,4: change in/out mode
 ISR(PCINT20_vect)
 {
-	UpdateInput();
+	UpdateOutput();
 }
 
 ISR(PCINT19_vect)
@@ -44,18 +39,23 @@ ISR(PCINT18_vect)
 	UpdateInput();
 }
 
-
 HardwareControl::HardwareControl() 
 {
 	cli();
-	// Enable interrupt on pis 2,3,4,5
-	PCMSK2 |= _BV(PCINT21);  // Enable pin 5
+	// Enable interrupt on pins 2,3,4
 	PCMSK2 |= _BV(PCINT20);  // Enable pin 4
 	PCMSK2 |= _BV(PCINT19);  // Enable pin 3
 	PCMSK2 |= _BV(PCINT18);  // Enable pin 2
 	PCIFR |= _BV(PCIF2);    // Enable PCINT16-23
 	PCICR |= _BV(PCIE2);    // Enable Change interrupt
 	sei();
+
+	inMode_last = (SensorType)1;
+	outMode_last = (ERGBOutput)1;
+	inMode = (SensorType)0;
+	outMode = (ERGBOutput)0;
+	Input = NULL;
+	Output = NULL;
 
 	Change(SensorType::Serialp);
 	Change(ERGBOutput::Serialp);
@@ -71,20 +71,25 @@ HardwareControl::HardwareControl()
 
 void HardwareControl::Change(SensorType input)
 {
-	switch (input)
+	if (inMode != inMode_last)
 	{
-		case SensorType::Ultrasonic:
-			Input = new UltrasonicSensor();
-			//Input->Init();
-			break;
-		case SensorType::Infrared:
-			Input = new InfraredSensor();
-			//Input->Init();
-			break;
-		case SensorType::Serialp:
-			Input = new SerialInput();
-			//Input->Init();
-			break;
+		delete Input;
+		switch (input)
+		{
+			case SensorType::Ultrasonic:
+				Input = new UltrasonicSensor();
+				//Input->Init();
+				break;
+			case SensorType::Infrared:
+				Input = new InfraredSensor();
+				//Input->Init();
+				break;
+			case SensorType::Serialp:
+			default:
+				Input = new SerialInput();
+				//Input->Init();
+				break;
+		}
 	}
 
 	inMode = input;
@@ -93,16 +98,21 @@ void HardwareControl::Change(SensorType input)
 
 void HardwareControl::Change(ERGBOutput output)
 {
-	switch (output)
+	if (outMode != outMode_last)
 	{
-		case iRgb::Led:
-			Output = new RgbLed();
-			//Output->Init();
-			break;
-		case iRgb::Serialp:
-			Output = new SerialOutput();
-			//Output->Init();
-			break;
+		delete Output;
+		switch (output)
+		{
+			case iRgb::Led:
+				Output = new RgbLed();
+				//Output->Init();
+				break;
+			case iRgb::Serialp:
+			default:
+				Output = new SerialOutput();
+				//Output->Init();
+				break;
+		}
 	}
 
 	outMode = output;
