@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "iSensor.h"
 
-#define IR_PIN (9)
+#define IR_PIN (A0)
 
 class InfraredSensor: public iSensor
 {

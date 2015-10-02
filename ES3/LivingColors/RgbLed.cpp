@@ -2,9 +2,9 @@
 
 RgbLed::RgbLed() 
 {
-	pinMode(rpin, OUTPUT);
-	pinMode(gpin, OUTPUT);
-	pinMode(bpin, OUTPUT);
+	pinMode(RGB_LED_PINR, OUTPUT);
+	pinMode(RGB_LED_PING, OUTPUT);
+	pinMode(RGB_LED_PINB, OUTPUT);
 }
 
 //void RgbLed::Init() 
@@ -18,9 +18,9 @@ void RgbLed::SetColor(int hue)
 {
 	int rgb[3];
 	calculateRGB(hue, rgb);
-	analogWrite(rpin, rgb[0]);
-	analogWrite(gpin, rgb[1]);
-	analogWrite(bpin, rgb[2]);
+	analogWrite(RGB_LED_PINR, rgb[0]);
+	analogWrite(RGB_LED_PING, rgb[1]);
+	analogWrite(RGB_LED_PINB, rgb[2]);
 }
 
 void RgbLed::calculateRGB(int hue, int *rgb) 
