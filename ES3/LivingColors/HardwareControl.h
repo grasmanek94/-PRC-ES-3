@@ -13,18 +13,24 @@ class HardwareControl : public iRgb, public iSensor
 {
 public:
 	HardwareControl();
-	void Change(SensorEnum sensor);
+
+	void Change(SensorType sensor);
 	void Change(ERGBOutput output);
+
 	void SetColor(int hue);
 	int GetValue();
+
+	SensorType GetInputMode();
+	ERGBOutput GetOutputMode();
 
 private:
 	iSensor* Input;
 	iRgb* Output;
-	int inMode;
-	int outMode;
-	int hue;
-	int rgb[3];
+
+	SensorType inMode;
+	SensorType inMode_last;
+	ERGBOutput outMode;
+	ERGBOutput outMode_last;
 };
 
 #endif

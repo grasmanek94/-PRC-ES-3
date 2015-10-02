@@ -15,5 +15,5 @@ public:
 	virtual int GetValue() = 0;
 };
 
-typedef iSensor::ESensor SensorEnum;
+typedef iSensor::ESensor SensorType;
 #endif
