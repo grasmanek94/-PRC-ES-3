@@ -10,7 +10,7 @@ class InfraredSensor: public iSensor
 private:
 public:
 	InfraredSensor();
-	void Init();
+	//void Init();
 	int GetValue();
 };
 

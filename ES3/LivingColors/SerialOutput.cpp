@@ -2,13 +2,15 @@
 
 SerialOutput::SerialOutput()
 {
-}
-
-void SerialOutput::Init()
-{
 	//if (!Serial)
 	Serial.begin(OUT_BOUDRATE);
 }
+
+//void SerialOutput::Init()
+//{
+//	//if (!Serial)
+//	Serial.begin(OUT_BOUDRATE);
+//}
 
 void SerialOutput::SetColor(int hue)
 {

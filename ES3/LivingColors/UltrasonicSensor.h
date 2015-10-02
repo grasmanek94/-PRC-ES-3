@@ -11,7 +11,7 @@ class UltrasonicSensor: public iSensor
     int pin;
   public:
     UltrasonicSensor();
-    void Init();
+    //void Init();
     int GetValue();
 };
 

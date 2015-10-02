@@ -4,9 +4,9 @@ InfraredSensor::InfraredSensor()
 {
 }
 
-void InfraredSensor::Init()
-{
-}
+//void InfraredSensor::Init()
+//{
+//}
 
 int InfraredSensor::GetValue()
 {

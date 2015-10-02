@@ -2,13 +2,15 @@
 
 UltrasonicSensor::UltrasonicSensor()
 {
-}
-
-void UltrasonicSensor::Init()
-{
 	pinMode(TRIGPIN, OUTPUT);
 	pinMode(ECHOPIN, INPUT);
 }
+
+//void UltrasonicSensor::Init()
+//{
+//	pinMode(TRIGPIN, OUTPUT);
+//	pinMode(ECHOPIN, INPUT);
+//}
 
 int UltrasonicSensor::GetValue()
 {

@@ -10,43 +10,43 @@ HardwareControl::HardwareControl()
  * moeten doen!!
  */
 
-void HardwareControl::Init(SensorEnum sensor)
+void HardwareControl::Change(SensorEnum input)
 {
-	if (sensor == iSensor::Ultrasonic)
+	if (input == iSensor::Ultrasonic)
 	{
 		Input = new UltrasonicSensor();
-		Input->Init();
+		//Input->Init();
 		inMode = 0;
 	}
 
-	if (sensor == iSensor::Infrared)
+	if (input == iSensor::Infrared)
 	{
 		Input = new InfraredSensor();
-		Input->Init();
+		//Input->Init();
 		inMode = 1;
 	}
 
-	if (sensor == iSensor::Serialp && !Serial)
+	if (input == iSensor::Serialp && !Serial)
 	{
 		Input = new SerialInput();
-		Input->Init();
+		//Input->Init();
 		inMode = 2;
 	}
 }
 
-void HardwareControl::Init(ERGBOutput output)
+void HardwareControl::Change(ERGBOutput output)
 {
 	if (output == iRgb::Led) 
 	{
 		Output = new RgbLed();
-		Output->Init();
+		//Output->Init();
 		outMode = 0;
 	}
 
 	if (output == iRgb::Serialp && !Serial)
 	{
 		Output = new SerialOutput();
-		Output->Init();
+		//Output->Init();
 		outMode = 1;
 	}
 }

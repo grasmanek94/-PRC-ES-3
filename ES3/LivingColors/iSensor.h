@@ -11,7 +11,7 @@ public:
 		Infrared,
 		Serialp
 	};
-	virtual void Init() = 0;
+	//virtual void Init() = 0;
 	virtual int GetValue() = 0;
 };
 

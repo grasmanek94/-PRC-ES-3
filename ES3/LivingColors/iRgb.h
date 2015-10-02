@@ -10,7 +10,7 @@ public:
 		Led,
 		Serialp
 	};
-	virtual void Init() = 0;
+	//virtual void Init() = 0;
 	virtual void SetColor(int hue) = 0;
 
 };

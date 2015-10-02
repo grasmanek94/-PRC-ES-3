@@ -2,14 +2,17 @@
 
 RgbLed::RgbLed() 
 {
-}
-
-void RgbLed::Init() 
-{
 	pinMode(rpin, OUTPUT);
 	pinMode(gpin, OUTPUT);
 	pinMode(bpin, OUTPUT);
 }
+
+//void RgbLed::Init() 
+//{
+//	pinMode(rpin, OUTPUT);
+//	pinMode(gpin, OUTPUT);
+//	pinMode(bpin, OUTPUT);
+//}
 
 void RgbLed::SetColor(int hue) 
 {

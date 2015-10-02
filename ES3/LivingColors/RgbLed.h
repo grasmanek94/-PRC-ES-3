@@ -12,7 +12,7 @@ private:
 	void calculateRGB(int hue, int *rgb);
 public:
 	RgbLed();
-	void Init();
+	//void Init();
 	void SetColor(int hue);
 };
 

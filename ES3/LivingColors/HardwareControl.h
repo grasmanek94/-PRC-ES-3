@@ -13,8 +13,8 @@ class HardwareControl : public iRgb, public iSensor
 {
 public:
 	HardwareControl();
-	void Init(SensorEnum sensor);
-	void Init(ERGBOutput output);
+	void Change(SensorEnum sensor);
+	void Change(ERGBOutput output);
 	void SetColor(int hue);
 	int GetValue();
 

@@ -10,7 +10,7 @@ private:
 	void calculateRGB(int hue, int *rgb);
 public:
 	SerialOutput();
-	void Init();
+	//void Init();
 	void SetColor(int hue);
 };
 

@@ -9,7 +9,7 @@ class SerialInput : public iSensor
 private:
 public:
 	SerialInput();
-	void Init();
+	//void Init();
 	int GetValue();
 };
 
