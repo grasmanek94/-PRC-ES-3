@@ -17,7 +17,7 @@
 
 #include "iSensor.h"
 #include "iRgb.h"
-#include "UltrasonicSensor"
+#include "UltrasonicSensor.h"
 
 #include "HardwareControl.h"
 
