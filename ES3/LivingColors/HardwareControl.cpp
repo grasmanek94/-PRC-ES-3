@@ -41,6 +41,10 @@ ISR(PCINT18_vect)
 
 HardwareControl::HardwareControl() 
 {
+	pinMode(2, INPUT_PULLUP);
+	pinMode(3, INPUT_PULLUP);
+	pinMode(4, INPUT_PULLUP);
+
 	cli();
 	// Enable interrupt on pins 2,3,4
 	PCMSK2 |= _BV(PCINT20);  // Enable pin 4
@@ -49,6 +53,7 @@ HardwareControl::HardwareControl()
 	PCIFR |= _BV(PCIF2);    // Enable PCINT16-23
 	PCICR |= _BV(PCIE2);    // Enable Change interrupt
 	sei();
+
 
 	inMode_last = (SensorType)1;
 	outMode_last = (ERGBOutput)1;
