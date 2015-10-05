@@ -20,7 +20,7 @@ int led1s = 0;
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(9600);
-  led1.Blink(0.5);
+  led1.Blink(4);
   led2.Blink(2);
   led3.Blink(3);  
   led4.Blink(5); 
