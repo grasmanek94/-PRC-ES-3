@@ -73,6 +73,16 @@ TEST_F(CarTest, test_assignment_operator)
 	*testPtr = *testPtr2;
 	CheckCarProperties(testPtr, "BMW", "", 6);
 	CheckCarProperties(testPtr2, "BMW", "", 6);
+
+	for (size_t i = 0; i < testPtr->getNrWheels(); ++i)
+	{
+		ASSERT_NE(testPtr->getWheel(i), testPtr2->getWheel(i));
+	}
+
+	{
+		*testPtr = Car("Renault", "Aluminium", 6, 4);
+	}
+	CheckCarProperties(testPtr, "Renault", "Aluminium", 4);
 }
 
 TEST_F(CarTest, test_remove_wheel_0)
