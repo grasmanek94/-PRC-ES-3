@@ -32,6 +32,8 @@
     <ClCompile Include="CreateTCPServerSocket.c" />
     <ClCompile Include="getaddrinfo.c" />
     <ClCompile Include="HandleTCPClient.c" />
+    <ClCompile Include="TCPChatClient.c" />
+    <ClCompile Include="TCPChatServer.c" />
     <ClCompile Include="TCPEchoClient.c" />
     <ClCompile Include="TCPEchoServer-Fork.c" />
     <ClCompile Include="TCPEchoServer-Thread.c" />
