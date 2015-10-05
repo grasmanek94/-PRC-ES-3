@@ -1,6 +1,6 @@
 #ifndef Timer_H
-#define timer_H
-#include <arduino.h>
+#define Timer_H
+#include <Arduino.h>
 
 class Timer {
 public:
