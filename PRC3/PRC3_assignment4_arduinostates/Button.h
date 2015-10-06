@@ -1,8 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-class Button
-{
+class Button {
   public:
     Button(int pin);
     ~Button();
@@ -14,3 +13,4 @@ class Button
 };
 
 #endif
+

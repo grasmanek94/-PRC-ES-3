@@ -1,15 +1,13 @@
 #include "Led.h"
 
 
-Led::Led(int pin)
-{
+Led::Led(int pin) {
 // put your code here
   LedPin = pin;
   pinMode(LedPin, OUTPUT); // set hardware off to match te state
 }
 
-Led::~Led()
-{
+Led::~Led() {
   //nothing for now
 }
 
@@ -19,8 +17,7 @@ void Led::On() {
   
 }
 
-void Led::Off() 
-{
+void Led::Off() {
 // put your code here
   digitalWrite(LedPin, LOW);
 }
@@ -32,18 +29,15 @@ void Led::Blink(float frequency) {
   mytimer.Start(BlinkTime);
 }
 
-void Led::beActive()
-{
+void Led::beActive() {
   // here we poll the time, if it is elapsed we will generate an event
-  if (mytimer.Elapsed())
-  {
+  if (mytimer.Elapsed()) {
     // put your code here
     HandleEvent();
     mytimer.Start(BlinkTime);
   }
 }
-void Led::HandleEvent(/* ???*/)
-{
+void Led::HandleEvent(/* ???*/) {
  // put your code here
  if (digitalRead(LedPin)) {
     Off();
@@ -54,22 +48,4 @@ void Led::HandleEvent(/* ???*/)
     //Serial.println(String("On: ") + LedPin);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
