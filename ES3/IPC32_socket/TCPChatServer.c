@@ -15,7 +15,7 @@ int main (int argc, char * argv[])
     for (;;) /* Run forever */
     {
         clntSock = AcceptTCPConnection (servSock);
-        HandleTCPClient (clntSock);
+        HandleTCPChatClient (clntSock);
     }
     /* NOT REACHED */
 }

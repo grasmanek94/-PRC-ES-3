@@ -2,6 +2,8 @@
 #include <ctype.h>      // for isupper() etc.
 #include <sys/socket.h> // for send() and recv()
 #include <unistd.h>     // for sleep(), close()
+#include <string.h>
+#include <stdlib.h>		// free
 
 #include "Auxiliary.h"
 #include "HandleTCPClient.h"
@@ -66,4 +68,80 @@ void HandleTCPClient (int clntSocket)
 
     close (clntSocket);    /* Close client socket */
     info ("close");
+}
+
+void HandleTCPChatClient(int clntSocket)
+{
+	// 'clntSocket' is obtained from AcceptTCPConnection()
+
+	char echoBuffer[RCVBUFSIZE];        /* Buffer for echo string */
+	int  recvMsgSize;                   /* Size of received message */
+	char* line = NULL;
+
+	while (true)
+	{
+		//waiting for chat message after connection is established
+		recvMsgSize = recv(clntSocket, echoBuffer, RCVBUFSIZE - 1, 0);
+		if (recvMsgSize < 0)
+		{
+			if (recvMsgSize == 107/*ENOTCONN*/)
+			{
+				info("Client disconnected");
+				break;
+			}
+			else
+			{
+				info("An error occured in recv()");
+				break;
+			}
+		}
+
+		if (recvMsgSize == 0)//we don't want empty messages
+		{
+			usleep(10000);
+			continue;
+		}
+
+		info("received chat message");
+
+		echoBuffer[recvMsgSize] = 0;//ensure string safety
+		printf("Client: %s\nType your message:\n", echoBuffer);
+
+		line = ANSIC_getline();
+		
+		if (line)
+		{
+			int len = strlen(line) + 1;
+			if (!strcmp(line, ":Q\n"))
+			{
+				break;
+			}
+			else
+			{
+				if (send(clntSocket, line, len, 0) != len)
+				{
+					DieWithError("send() failed");
+				}
+				else
+				{
+					printf("Server: %s\n", line);
+				}
+			}
+			free(line);
+			line = NULL;
+		}
+		else
+		{
+			DieWithError("Cannot read stdin");
+		}
+	}
+	
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
+
+	close(clntSocket);    /* Close client socket */
+	info("close");
 }

@@ -6,7 +6,7 @@
 #include <sys/socket.h> // for socket(), bind(), getsockname and connect()
 #include <time.h>       // for time()
 #include <unistd.h>     // for sleep(), close()
-
+#include <stdlib.h>		// free
 #include "Auxiliary.h"
 
 #define MAX_DATA       10
@@ -16,7 +16,7 @@ unsigned short  argv_port           = 0;
 int             argv_timeout        = 1;
 char *          argv_tty            = NULL;
 int             argv_forkmax        = 0;
-bool            argv_verbose        = true;
+bool            argv_verbose        = false;
 bool            argv_delay          = false;
 bool            argv_debug          = false;
 bool            argv_userprefix     = false;
@@ -290,3 +290,51 @@ void parse_args (int argc, char *argv[])
     }
 }
 
+//ANSI C, so.. NO GNU EXTENSIONS ALLOWED, which means we MAY NOT use getline function from GNU!!!
+//So we make our own:
+char* ANSIC_getline(void)
+{
+	char* line = (char*)malloc(100);
+	char* linep = line;
+
+	size_t lenmax = 100;
+	size_t len = lenmax;
+
+	int c;
+
+	if (line == NULL)
+	{
+		return NULL;
+	}
+
+	for (;;)
+	{
+		c = fgetc(stdin);
+		if (c == EOF)
+		{
+			break;
+		}
+
+		if (--len == 0)
+		{
+			len = lenmax;
+			char * linen = (char*)realloc(linep, lenmax *= 2);
+
+			if (linen == NULL)
+			{
+				free(linep);
+				return NULL;
+			}
+			line = linen + (line - linep);
+			linep = linen;
+		}
+
+		if ((*line++ = c) == '\n')
+		{
+			break;
+		}
+	}
+
+	*line = '\0';
+	return linep;
+}

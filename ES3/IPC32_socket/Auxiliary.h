@@ -28,4 +28,8 @@ extern void info_set_local_peer (int sock);
 extern char * remove_nl (char * s);
 extern void parse_args (int argc, char * argv[]);
 
+//ANSI C, so.. NO GNU EXTENSIONS ALLOWED, which means we MAY NOT use getline function from GNU!!!
+//So we make our own:
+extern char* ANSIC_getline(void);
+
 #endif
