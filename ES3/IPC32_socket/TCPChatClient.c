@@ -38,9 +38,9 @@ int main (int argc, char *argv[])
 				if (send(sock, line, len, 0) != len)
 				{
 					DieWithError("send() failed");
-				}
-				else									/////////////////////////////////////////////////
-				{										////										  ///
+				}										 
+				else								  ///////////////////////////////////////////////////
+				{									   /////										  ///
 					printf("Client: %s\n", line);		//											  ///
 					inner_loop://this is justified because we are in an inner loop, goto/labels are made FOR this!
 					{																				  ///
