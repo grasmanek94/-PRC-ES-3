@@ -62,8 +62,8 @@ HardwareControl::HardwareControl()
 	Input = NULL;
 	Output = NULL;
 
-	Change(SensorType::Serialp);
-	Change(ERGBOutput::Serialp);
+	Change(ST_Serialp);
+	Change(ERGBO_Serialp);
 
 	latest = this;
 }
@@ -81,15 +81,15 @@ void HardwareControl::Change(SensorType input)
 		delete Input;
 		switch (input)
 		{
-			case SensorType::Ultrasonic:
+			case ST_Ultrasonic:
 				Input = new UltrasonicSensor();
 				//Input->Init();
 				break;
-			case SensorType::Infrared:
+			case ST_Infrared:
 				Input = new InfraredSensor();
 				//Input->Init();
 				break;
-			case SensorType::Serialp:
+			case ST_Serialp:
 			default:
 				Input = new SerialInput();
 				//Input->Init();
@@ -108,11 +108,11 @@ void HardwareControl::Change(ERGBOutput output)
 		delete Output;
 		switch (output)
 		{
-			case iRgb::Led:
+			case ERGBO_Led:
 				Output = new RgbLed();
 				//Output->Init();
 				break;
-			case iRgb::Serialp:
+			case ERGBO_Serialp:
 			default:
 				Output = new SerialOutput();
 				//Output->Init();

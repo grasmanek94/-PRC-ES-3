@@ -3,8 +3,8 @@
 
 enum ERGBOutput
 {
-	Led,
-	Serialp
+	ERGBO_Led,
+	ERGBO_Serialp
 };
 
 class iRgb

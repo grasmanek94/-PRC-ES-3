@@ -3,9 +3,9 @@
 
 enum SensorType
 {
-	Ultrasonic,
-	Infrared,
-	Serialp
+	ST_Ultrasonic,
+	ST_Infrared,
+	ST_Serialp
 };
 
 class iSensor
