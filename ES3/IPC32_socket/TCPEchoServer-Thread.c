@@ -1,11 +1,24 @@
+#ifdef _MSC_VER
+typedef int pthread_t;
+typedef int pthread_attr_t;
+#define NULL (0)
+#endif
+
 #include <pthread.h>
+#include <unistd.h> //close
+#include <stdlib.h>     /* malloc, free */
 
 #include "Auxiliary.h"
 #include "AcceptTCPConnection.h"
 #include "CreateTCPServerSocket.h"
 #include "HandleTCPClient.h"
 
-static void * myThread (void * arg);            /* thread that does the work */
+typedef struct
+{
+	int clntSock;
+} SThreadArgs;
+
+static void* myThread (void* arg);            /* thread that does the work */
 
 int main (int argc, char *argv[])
 {
@@ -15,36 +28,38 @@ int main (int argc, char *argv[])
     bool        to_quit = false;
 
     parse_args (argc, argv);
-
     servSock = CreateTCPServerSocket (argv_port);
-
     while (to_quit == false)                /* run until someone indicates to quit... */
     {
         clntSock = AcceptTCPConnection (servSock);
+		info("Client connected, creating thread...");
 
-        // TODO: create&start the thread myThread() te creeeren
-        // use the POSIX operation pthread_create()
-        //
-        // make sure that clntSock and servSock are closed at the correct locations 
-        // (in particular: at those places where you don't need them any more)
-		clntSock;
-		threadID;
+		SThreadArgs* args = (SThreadArgs*)malloc(sizeof(SThreadArgs));
+		args->clntSock = clntSock;
+		if(pthread_create(&threadID, NULL, myThread, (void*)args))
+		{
+			free(args);
+			DieWithError("Thread creation failed");
+		}
+		if (pthread_detach(threadID))
+		{
+			DieWithError("Thread detach failed");
+		}
     }
-    
+
+	close(servSock);
     // server stops...
 	return (0);
 }
 
 static void *
-myThread (void * threadArgs)
+myThread (void* threadArgs)
 {
-	threadArgs;
-    // TODO: write the code to handle the client data
-    // use operation HandleTCPClient()
-    //  
-    // Hint: use the info(), info_d(), info_s() operations to trace what happens
-    //
-    // Note: a call of pthread_detach() is obligatory
+	int clntSock = ((SThreadArgs*)threadArgs)->clntSock;
+	free(threadArgs);
 
+	info("Thread handling socket...");
+	HandleTCPClient(clntSock);
+	info("... thread handled socket!");
     return (NULL);
 }
