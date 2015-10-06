@@ -5,13 +5,12 @@
 Truck::Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power)
 	: Car(model, material, diameter, nrWheels)
 {
-	if (!(nrWheels > 2) || !(diameter > 0) || !(power > 0))
+	if (!(power > 0))
 	{
 		throw std::invalid_argument("");
 	}
 
-	this->power = new int;
-	*(this->power) = power;
+	this->power = new int(power);
 }
 /* pre : diameter > 0, nrWheels > 2 and vermogen > 0
 post: A Truck object is created that contains 'power' power and nrWheels
@@ -37,8 +36,7 @@ post: returns power
 Truck::Truck(const Truck& myTruck)
 	: Car(myTruck)
 {
-	this->power = new int;
-	*(this->power) = *myTruck.power;
+	this->power = new int(*myTruck.power);
 }
 /* pre : -
 post: a Truck object is created with all properties of myTruck, a deep copy is performed

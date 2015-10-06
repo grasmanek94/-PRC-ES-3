@@ -5,7 +5,7 @@
 #include "Car.h"
 
 Car::Car(const std::string& model, const std::string& material, int diameter, int nrWheels)
-	: model(model)
+	: licencePlate(""), model(model)
 {
 	if (!(nrWheels > 2) || !(diameter > 0))
 	{
