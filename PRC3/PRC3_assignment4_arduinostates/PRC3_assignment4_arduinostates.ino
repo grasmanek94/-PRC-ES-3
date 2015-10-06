@@ -32,7 +32,6 @@ void loop() {
     switch (led1s) {
       case 1:
         if (buttonTimer.Elapsed()) {
-
           led1.Off();
         }
         if (button1.Pressed()) {
@@ -44,7 +43,6 @@ void loop() {
           led1s = 1;
           buttonTimer.Start(5000);
           led1.On();
-
         }
         led1.beActive();
         break;

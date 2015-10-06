@@ -3,8 +3,7 @@
 #include "Timer.h"
 #include <Arduino.h>
 
-class Led 
-{
+class Led {
 public:
   Led(int pin);
   ~Led();
