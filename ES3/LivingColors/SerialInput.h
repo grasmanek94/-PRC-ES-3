@@ -7,6 +7,7 @@
 class SerialInput : public iSensor
 {
 private:
+	int lastKnown;
 public:
 	SerialInput();
 	//void Init();
