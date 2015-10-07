@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Led.cpp" />
+    <ClCompile Include="Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Led.h" />
+    <ClInclude Include="Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PRC3_assignment4_arduinostates.ino" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4960FD38-7DB6-409A-990B-4AA19EB05C68}</ProjectGuid>
     <RootNamespace>LivingColors</RootNamespace>
@@ -121,46 +134,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <None Include="LivingColors.ino">
-      <FileType>CppCode</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HardwareControl.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="InfraredSensor.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="iRgb.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="iSensor.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="RgbLed.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="SerialInput.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="SerialOutput.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="UltrasonicSensor.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="Visual Micro\.LivingColors.vsarduino.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="HardwareControl.cpp" />
-    <ClCompile Include="InfraredSensor.cpp" />
-    <ClCompile Include="RgbLed.cpp" />
-    <ClCompile Include="SerialInput.cpp" />
-    <ClCompile Include="SerialOutput.cpp" />
-    <ClCompile Include="UltrasonicSensor.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
