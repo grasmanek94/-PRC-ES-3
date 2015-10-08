@@ -4,6 +4,7 @@ SerialInput::SerialInput()
 {
 	//if (!Serial) 
 	Serial.begin(IN_BAUDRATE);
+	lastKnown = 0;
 }
 
 //void SerialInput::Init()
@@ -15,7 +16,24 @@ SerialInput::SerialInput()
 int SerialInput::GetValue()
 {
 	if (Serial.available() > 0)
-	{
-		return Serial.parseInt();
+	{		
+		while (Serial.peek() < '0' || Serial.peek() > '9')
+		{
+			if (Serial.read() == -1)
+			{
+				break;
+			}
+		}
+
+		if (Serial.available() > 0)
+		{
+			lastKnown = Serial.parseInt();
+		}
+
+		while (Serial.available())//discard all remaining bytes
+		{
+			Serial.read();
+		}
 	}
+	return lastKnown;
 }

@@ -13,11 +13,6 @@ typedef int pthread_attr_t;
 #include "CreateTCPServerSocket.h"
 #include "HandleTCPClient.h"
 
-typedef struct
-{
-	int clntSock;
-} SThreadArgs;
-
 static void* myThread (void* arg);            /* thread that does the work */
 
 int main (int argc, char *argv[])
@@ -34,8 +29,8 @@ int main (int argc, char *argv[])
         clntSock = AcceptTCPConnection (servSock);
 		info("Client connected, creating thread...");
 
-		SThreadArgs* args = (SThreadArgs*)malloc(sizeof(SThreadArgs));
-		args->clntSock = clntSock;
+		int* args = (int*)malloc(sizeof(int));
+		*args = clntSock;
 		if(pthread_create(&threadID, NULL, myThread, (void*)args))
 		{
 			free(args);
@@ -55,9 +50,8 @@ int main (int argc, char *argv[])
 static void *
 myThread (void* threadArgs)
 {
-	int clntSock = ((SThreadArgs*)threadArgs)->clntSock;
+	int clntSock = *(int*)threadArgs;
 	free(threadArgs);
-
 	info("Thread handling socket...");
 	HandleTCPClient(clntSock);
 	info("... thread handled socket!");
