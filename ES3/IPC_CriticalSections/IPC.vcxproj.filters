@@ -1,24 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="CreateTCPServerSocket.h" />
-    <ClInclude Include="HandleTCPClient.h" />
-    <ClInclude Include="AcceptTCPConnection.h" />
-    <ClInclude Include="Auxiliary.h" />
-    <ClInclude Include="CreateTCPClientSocket.h" />
+    <ClCompile Include="progb.c" />
+    <ClCompile Include="shm.c" />
+    <ClCompile Include="proga.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AcceptTCPConnection.c" />
-    <ClCompile Include="Auxiliary.c" />
-    <ClCompile Include="CreateTCPClientSocket.c" />
-    <ClCompile Include="CreateTCPServerSocket.c" />
-    <ClCompile Include="getaddrinfo.c" />
-    <ClCompile Include="HandleTCPClient.c" />
-    <ClCompile Include="TCPEchoClient.c" />
-    <ClCompile Include="TCPEchoServer.c" />
-    <ClCompile Include="TCPEchoServer-Fork.c" />
-    <ClCompile Include="TCPEchoServer-Thread.c" />
-    <ClCompile Include="TCPChatClient.c" />
-    <ClCompile Include="TCPChatServer.c" />
+    <None Include="Makefile" />
   </ItemGroup>
 </Project>

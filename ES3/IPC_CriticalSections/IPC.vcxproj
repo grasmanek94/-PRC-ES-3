@@ -19,25 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AcceptTCPConnection.h" />
-    <ClInclude Include="Auxiliary.h" />
-    <ClInclude Include="CreateTCPClientSocket.h" />
-    <ClInclude Include="CreateTCPServerSocket.h" />
-    <ClInclude Include="HandleTCPClient.h" />
+    <ClCompile Include="proga.c" />
+    <ClCompile Include="progb.c" />
+    <ClCompile Include="shm.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AcceptTCPConnection.c" />
-    <ClCompile Include="Auxiliary.c" />
-    <ClCompile Include="CreateTCPClientSocket.c" />
-    <ClCompile Include="CreateTCPServerSocket.c" />
-    <ClCompile Include="getaddrinfo.c" />
-    <ClCompile Include="HandleTCPClient.c" />
-    <ClCompile Include="TCPChatClient.c" />
-    <ClCompile Include="TCPChatServer.c" />
-    <ClCompile Include="TCPEchoClient.c" />
-    <ClCompile Include="TCPEchoServer-Fork.c" />
-    <ClCompile Include="TCPEchoServer-Thread.c" />
-    <ClCompile Include="TCPEchoServer.c" />
+    <None Include="Makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{990DF822-39B2-465F-9EF6-F5408DA104B2}</ProjectGuid>
