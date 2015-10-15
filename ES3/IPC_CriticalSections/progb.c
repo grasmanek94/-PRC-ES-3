@@ -12,7 +12,7 @@ char* shm_addr;
 int rtnval = 0;
 int size;
 char* alphabet;
-char* shm_name = "ipc4";
+const char* shm_name = "ipc4";
 
 int main(void)
 {

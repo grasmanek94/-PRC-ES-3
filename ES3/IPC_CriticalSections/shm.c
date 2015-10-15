@@ -122,15 +122,15 @@ int main(void)
                 break;
             case 'w':
                 //printf ("Enter date to write @ %#x:\n", (unsigned int) shm_addr);
-                printf ("Enter date to write @ %#x:\n", shm_addr);
+                printf ("Enter date to write @ %p:\n", shm_addr);
                 fgets  (shm_addr, size, stdin);
                 //break; (no break: check written data by reading it again...)
             case 'r':
                 //printf ("data (@ %#x): '%s'\n", (unsigned int) shm_addr, shm_addr);
-                printf ("data (@ %#x): '%s'\n", shm_addr, shm_addr);
+                printf ("data (@ %p): '%s'\n", shm_addr, shm_addr);
                 break;
             case 'c':
-                printf ("Calling close(%#x)\n", shm_fd);
+                printf ("Calling close(%x)\n", shm_fd);
                 rtnval = close (shm_fd);
                 if (rtnval != 0)
                 {

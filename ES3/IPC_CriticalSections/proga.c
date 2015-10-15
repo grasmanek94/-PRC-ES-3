@@ -11,8 +11,8 @@ static int shm_fd = -1;
 char* shm_addr;
 int rtnval = 0;
 int size = 26;
-char* alphabet = "abcdefghijklmnopqrstuvwzyz";
-char* shm_name = "ipc4";
+const char* alphabet = "abcdefghijklmnopqrstuvwzyz";
+const char* shm_name = "ipc4";
 
 
 int main(void) {
@@ -36,7 +36,7 @@ int main(void) {
 	while (shm_addr[0] != 'A') {
 	}
 	
-	printf ("data (@ %#x): '%s'\n", shm_addr, shm_addr);
+	printf ("data (@ %p): '%s'\n", shm_addr, shm_addr);
 	
 	rtnval = close (shm_fd);
 	if (rtnval != 0) {
