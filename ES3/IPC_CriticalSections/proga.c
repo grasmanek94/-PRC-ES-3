@@ -48,3 +48,28 @@ int main(void) {
 	}
 	return 0;
 }
+
+/*
+process 0:							process 1:
+
+while (true)						while (true)
+{									{
+	a_mon = true;					  	b_mon = true;
+	b_ern = false;					  	a_ern = false;
+	if (b_mon == true)				  	if (a_mon == true)
+	{								  	{
+		b_ern = true;				  		a_ern = true;
+		a_mon = false;				  		b_mon = false;
+	}								  	}
+	while (b_ern || b_mon)			  	while (a_ern || a_mon)
+	{								  	{
+		a_mon = false;				  		b_mon = false;
+		a_mon = true;				  		b_mon = true;
+	}								  	}
+
+	CriticalSection();				  	CriticalSection();
+
+	a_mon = false;					  	b_mon = false;
+	a_ern = false;					  	b_ern = false;
+}									}
+*/
