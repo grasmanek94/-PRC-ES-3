@@ -14,7 +14,6 @@ int size = 26;
 const char* alphabet = "abcdefghijklmnopqrstuvwzyz";
 const char* shm_name = "ipc4";
 
-
 int main(void) {
     shm_fd = shm_open(shm_name, O_CREAT | O_EXCL | O_RDWR, 0600);
     if (shm_fd == -1) {
@@ -47,6 +46,5 @@ int main(void) {
 	if (rtnval != 0) {
 		perror ("ERROR: shm_unlink() failed");
 	}
-	
 	return 0;
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -27,11 +28,18 @@ int main(void)
         perror ("ERROR: mmap() failed");
     }
     
+	while (shm_addr[0] != 'a')	//wacht totdat byte 0 in shm 'a' is
+	{ }
+
+	alphabet = (char*)malloc(size+1);
     for (int i = 0; i < size; i++) {
-		alphabet[i] = shm_addr[i]+32;
+		alphabet[i] = shm_addr[i] + 'A' - 'a';
 	}
-	
+	alphabet[size] = 0;
+
 	printf("%s\n", alphabet);
-    
-	return (0);
+	free(alphabet);
+
+	shm_addr[0] += 'A' - 'a';	//maak van kleine letter 'a' hoofdletter 'A'
+	return (0);					//stop
 }
