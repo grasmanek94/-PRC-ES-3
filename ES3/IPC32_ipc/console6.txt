@@ -1,0 +1,10 @@
+Script started on Sun 01 Nov 2015 04:03:53 PM EST
+root@windowsslave:/dev/shm# exit./sem[1Pexitod -t x1 sem.qazexit[K./sem[1Pexit[Kls -l
+total 4
+-rw------- 1 root root 1024 Nov  1 15:04 qaz
+-rwxr--r-x 1 root root   32 Nov  1 16:02 sem.wsx
+-rw------- 1 root root 1024 Nov  1 15:05 wsx
+root@windowsslave:/dev/shm# exi[K[K[Kexit
+exit
+
+Script done on Sun 01 Nov 2015 04:05:35 PM EST

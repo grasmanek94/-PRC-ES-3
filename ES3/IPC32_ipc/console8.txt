@@ -1,0 +1,125 @@
+Script started on Sun 01 Nov 2015 06:48:32 PM EST
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# exit./sem_rv & ./sem_rv & ./sem_rv &[16Prm /dev/shm/ -rf
+rm: cannot remove ‘/dev/shm/’: Device or resource busy
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# rm /dev/shm/ -rfexit[K./sem_rv & ./sem_rv & ./sem_rv &
+[1] 2025
+[2] 2026
+[3] 2027
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# Calling shm_open('whichprogramcounter')
+shm_open() returned 3
+Calling ftrucate(3,1)
+ftruncate() returned 0
+Calling mmap(len=1,fd=3)
+mmap() returned 0x7f22eb632000
+[2027][1]
+Calling shm_open('whichprogramcounter')
+ERROR: shm_open() failed: File exists
+Calling shm_open('whichprogramcounter')
+Calling shm_open('whichprogramcounter')
+shm_open() returned 3
+Calling lseek(fd=3,SEEK_END)
+lseek() returned 1
+Calling mmap(len=1,fd=3)
+mmap() returned 0x7ff5dfef6000
+[2026][1]
+ERROR: shm_open() failed: File exists
+Calling shm_open('whichprogramcounter')
+shm_open() returned 3
+Calling lseek(fd=3,SEEK_END)
+lseek() returned 1
+Calling mmap(len=1,fd=3)
+mmap() returned 0x7fa0459ce000
+[2025][1]
+
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# ./sem_rv &
+[4] 2028
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# Calling shm_open('whichprogramcounter')
+ERROR: shm_open() failed: File exists
+Calling shm_open('whichprogramcounter')
+shm_open() returned 3
+Calling lseek(fd=3,SEEK_END)
+lseek() returned 1
+Calling mmap(len=1,fd=3)
+mmap() returned 0x7fe5a03d8000
+[2028][1]
+[2026][2]
+[2027][2]
+[2025][2]
+[2028][2]
+[2025][1]
+[2027][1]
+[2026][1]
+[2028][1]
+[2028][2]
+[2025][2]
+[2027][2]
+[2026][2]
+[2027][1]
+[2025][1]
+[2028][1]
+[2026][1]
+[2026][2]
+[2025][2]
+[2027][2]
+[2028][2]
+[2025][1]
+[2027][1]
+[2028][1]
+[2026][1]
+[2026][2]
+[2025][2]
+[2027][2]
+[2028][2]
+[2027][1]
+[2025][1]
+[2028][1]
+[2026][1]
+[2026][2]
+[2027][2]
+[2028][2]
+[2025][2]
+[2026][1]
+[2027][1]
+[2028][1]
+[2025][1]
+
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# [2028][2]
+[2025][2]
+[2027][2]
+[2026][2]
+[2028][1]
+[2025][1]
+[2027][1]
+[2026][1]
+[2026][2]
+[2027][2]
+[2025][2]
+[2028][2]
+[2027][1]
+[2026][1]
+[2025][1]
+[2028][1]
+[2028][2]
+[2027][2]
+[2025][2]
+[2026][2]
+[2027][1]
+[2028][1]
+[2025][1]
+[2026][1]
+[2026][2]
+[2027][2]
+[2025][2]
+[2028][2]
+[2026][1]
+[2027][1]
+[2028][1]
+
+[1]   Terminated              ./sem_rv
+[2]   Terminated              ./sem_rv
+[3]-  Terminated              ./sem_rv
+[4]+  Terminated              ./sem_rv
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# exit
+exit
+
+Script done on Sun 01 Nov 2015 06:49:19 PM EST

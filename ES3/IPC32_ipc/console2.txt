@@ -1,0 +1,167 @@
+Script started on Sun 01 Nov 2015 03:12:37 PM EST
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# ./sem
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: o
+
+Enter name: qaz
+Calling sem_open('qaz',0)
+sem_open() returned 0x7f42abc4d000
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: p
+
+Calling sem_post(0x7f42abc4d000)
+sem_post() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: g
+
+Calling sem_getvalue(0x7f42abc4d000)
+sem_getvalue() returned 0; value:0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: w
+
+Calling sem_wait(0x7f42abc4d000)
+sem_wait() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: t
+
+Calling sem_trywait(0x7f42abc4d000)
+sem_trywait() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: w
+
+Calling sem_wait(0x7f42abc4d000)
+sem_wait() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: w
+
+Calling sem_wait(0x7f42abc4d000)
+sem_wait() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: x c
+
+Calling sem_close(0x7f42abc4d000)
+sem_close() returned 0
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: u
+
+Enter name: qaz
+Calling sem_unlink('qaz')
+ERROR: sem_unlink() failed: No such file or directory
+sem_unlink() returned -1
+
+Menu
+========
+   [n]    create new semaphore
+   [o]    open existing semaphore
+   [p]    post
+   [t]    trywait
+   [w]    wait
+   [g]    getvalue
+   [c]    close
+   [u]    unlink
+   [q]    quit
+Enter choice: q
+
+root@windowsslave:/mnt/hgfs/PRCES3/ES3/IPC32_ipc# exit
+exit
+
+Script done on Sun 01 Nov 2015 03:30:54 PM EST
