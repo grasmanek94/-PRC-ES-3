@@ -19,12 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="proga.c" />
-    <ClCompile Include="progb.c" />
-    <ClCompile Include="shm.c" />
+    <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Makefile" />
+    <ClCompile Include="dutycycle.c" />
+    <ClCompile Include="fork.c" />
+    <ClCompile Include="mq.c" />
+    <ClCompile Include="sem.c" />
+    <ClCompile Include="sem_mult.c" />
+    <ClCompile Include="sem_rv.c" />
+    <ClCompile Include="shm.c" />
+    <ClCompile Include="thread.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{990DF822-39B2-465F-9EF6-F5408DA104B2}</ProjectGuid>
