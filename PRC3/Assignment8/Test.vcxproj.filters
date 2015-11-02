@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="product">
+      <UniqueIdentifier>{3e5c1be7-042f-4574-9419-d4c069b4e62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="product\cars">
+      <UniqueIdentifier>{43db1859-37b4-4a89-8152-18f455548bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{10b2ef23-e0eb-41f6-ba9d-30ae1013e8de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="product\cars\Car.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\cars\Limousine.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\cars\Sedan.h">
+      <Filter>product\cars</Filter>
+    </ClInclude>
+    <ClInclude Include="product\RentalAdministration.h">
+      <Filter>product</Filter>
+    </ClInclude>
+    <ClInclude Include="test\Car.h">
+      <Filter>test</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="product\cars\Car.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\cars\Limousine.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\cars\Sedan.cpp">
+      <Filter>product\cars</Filter>
+    </ClCompile>
+    <ClCompile Include="product\RentalAdministration.cpp">
+      <Filter>product</Filter>
+    </ClCompile>
+    <ClCompile Include="test\SedanTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\LimousineTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\RentalAdministrationTest.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,2 @@
+/mnt/hgfs/VMShared/gtest-1.7.0/CMakeFiles/gtest.dir
+/mnt/hgfs/VMShared/gtest-1.7.0/CMakeFiles/gtest_main.dir
