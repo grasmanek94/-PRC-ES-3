@@ -114,6 +114,5 @@ int main()
 	std::cout << list->getTimesRecycled(10) << std::endl;
 	std::cout << list->getTimesRecycled(12) << std::endl;
 
-	while (true);
 	return 0;
 }
