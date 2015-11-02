@@ -1,4 +1,0 @@
-/mnt/hgfs/VMShared/gmock-1.7.0/CMakeFiles/gmock.dir
-/mnt/hgfs/VMShared/gmock-1.7.0/CMakeFiles/gmock_main.dir
-/mnt/hgfs/VMShared/gmock-1.7.0/gtest/CMakeFiles/gtest.dir
-/mnt/hgfs/VMShared/gmock-1.7.0/gtest/CMakeFiles/gtest_main.dir

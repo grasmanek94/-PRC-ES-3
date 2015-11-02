@@ -1,1 +1,0 @@
-#include "../googletest/src/gtest-all.cc"
