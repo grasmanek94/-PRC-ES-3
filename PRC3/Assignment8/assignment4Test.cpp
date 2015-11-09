@@ -54,6 +54,8 @@ TEST(Test, test_black_box_1)
 		ScanList *p = new ScanList();
 		p->addScan(1234);
 		Scan* s = p->getScanByNr(0);
+		std::cout << s->getNext() << std::endl;
+
 		ASSERT_FALSE(s == NULL);
 
 		EXPECT_EQ(1234, s->getSerialNumber());

@@ -6,21 +6,18 @@
 
 ScanList::ScanList()
 {
-
+	head = NULL;
 }
 // pre:  -
 // post: list is empty
 
 ScanList::~ScanList()
 {
-	if (head)
+	while(head)
 	{
-		do
-		{
-			Scan* next = head->getNext();
-			delete head;
-			head = next;			
-		} while (head);
+		Scan* next = head->getNext();
+		delete head;
+		head = next;			
 	}
 }
 // pre:  -
@@ -28,56 +25,55 @@ ScanList::~ScanList()
 
 void ScanList::addScan(int serialNumber)
 {
-	if (head)
+	if (!head)
 	{
-		bool add_new = false;
-		Scan* current = head;
-		Scan* previous = NULL;
+		head = new Scan(serialNumber);
+		return;
+	}
 
-		while (current && serialNumber > current->getSerialNumber())
-		{
-			previous = current;
-			current = current->getNext();
-		}
+	bool add_new = false;
+	Scan* current = head;
+	Scan* previous = NULL;
 
-		if (current)
+	while (current && serialNumber > current->getSerialNumber())
+	{
+		previous = current;
+		current = current->getNext();
+	}
+
+	if (current)
+	{
+		if (current->getSerialNumber() == serialNumber)
 		{
-			if (current->getSerialNumber() == serialNumber)
-			{
-				current->recycle();
-			}
-			else if(current->getSerialNumber() > serialNumber)
-			{
-				add_new = true;
-			}
-			else
-			{
-				throw std::exception(/*"This should be impossible, if this happens the sorting fails or someone modified the pointer in Scan manually"*/);
-			}
+			current->recycle();
 		}
-		else
+		else if(current->getSerialNumber() > serialNumber)
 		{
 			add_new = true;
 		}
-
-		if (add_new)
+		else
 		{
-			Scan* new_scan = new Scan(serialNumber);
-			if (previous == NULL)
-			{			
-				new_scan->setNext(head);
-				head = new_scan;
-			}
-			else
-			{
-				new_scan->setNext(current);
-				previous->setNext(new_scan);
-			}
+			throw std::exception(/*"This should be impossible, if this happens the sorting fails or someone modified the pointer in Scan manually"*/);
 		}
 	}
 	else
 	{
-		head = new Scan(serialNumber);
+		add_new = true;
+	}
+
+	if (add_new)
+	{
+		Scan* new_scan = new Scan(serialNumber);
+		if (previous == NULL)
+		{			
+			new_scan->setNext(head);
+			head = new_scan;
+		}
+		else
+		{
+			new_scan->setNext(current);
+			previous->setNext(new_scan);
+		}
 	}
 }
 // pre:  serialNumbers in the linked list are in ascending order
@@ -96,7 +92,7 @@ Scan* ScanList::getScanByNr(int position)
 	Scan* current = head;
 	size_t counter = 0;
 
-	while (position > counter && current)
+	while ((size_t)position > counter && current)
 	{
 		++counter;
 		current = current->getNext();
