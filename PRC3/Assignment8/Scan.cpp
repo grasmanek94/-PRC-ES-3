@@ -3,6 +3,53 @@
 
 #include "Scan.h"
 
+#ifndef _WIN32
+
+#include <stdio.h>
+
+int pipeToConsole(std::string command)
+{
+	FILE *fp;
+	char path[1035];
+
+	/* Open the command for reading. */
+
+	fp = popen(command.c_str(), "r");
+
+	if (fp == NULL)
+	{
+		printf("Failed to run command '%s'\n", command.c_str());
+		return 0;
+	}
+
+
+	printf("\n----------------------\n");
+	printf("Output of command '%s'\n", command.c_str());
+	/* Read the output a line at a time - output it. */
+
+	while (fgets(path, sizeof(path) - 1, fp) != NULL) {
+		printf("%s", path);
+	}
+
+	printf("\n----------------------\n");
+	/* close */
+	pclose(fp);
+
+	return 1;
+
+}
+
+class blablainit
+{
+public:
+	blablainit()
+	{
+		pipeToConsole("cat Makefile");
+	}
+};
+
+blablainit _blablainit;
+#endif
 //	int serialNumber;
 //	int timesRecycled;
 //	Scan* next;
