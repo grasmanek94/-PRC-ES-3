@@ -95,4 +95,72 @@ TEST(Test, test_black_box_1)
 		delete p;
 		p = NULL;
 	}
+
+	// test_removeScan_non_existing
+	{
+		ScanList* p = createTestList();
+
+		EXPECT_FALSE(p->removeScan(-1));
+		EXPECT_FALSE(p->removeScan(0));
+		EXPECT_FALSE(p->removeScan(1000));
+		EXPECT_FALSE(p->removeScan(123456));
+
+		delete p;
+		p = NULL;
+	}
+
+	// test_removeScan_existing_values
+	{
+		ScanList* p = createTestList();
+
+		EXPECT_TRUE(p->removeScan(12));
+		EXPECT_TRUE(p->removeScan(9776));
+		EXPECT_TRUE(p->removeScan(1));
+		EXPECT_TRUE(p->removeScan(67324));
+
+		int remaining[] = { 134, 457, 1864, 9777 };
+		int nrRemaining = sizeof(remaining) / sizeof(remaining[0]);
+
+		int i = 0;
+		for (; i < nrRemaining; ++i)
+		{
+			Scan* s = p->getScanByNr(i);
+			ASSERT_FALSE(s == NULL);
+
+			EXPECT_EQ(remaining[i], s->getSerialNumber()) << " i is: " << i;
+		}
+
+		Scan* s = p->getScanByNr(i);
+		ASSERT_TRUE(s == NULL);
+
+		delete p;
+		p = NULL;
+	}
+
+	// test_getTimesRecycled
+	{
+		ScanList* p = createTestList();
+
+		for (int i = 0; i < nrSerials; ++i)
+		{
+			Scan* s = p->getScanByNr(i);
+			ASSERT_FALSE(s == NULL);
+
+			EXPECT_EQ(0, p->getTimesRecycled(serials[i])) << " i is: " << i;
+		}
+
+		p->addScan(457);
+		p->addScan(1);
+		p->addScan(1);
+		p->addScan(67324);
+		p->addScan(67324);
+		p->addScan(67324);
+
+		EXPECT_EQ(1, p->getTimesRecycled(457));
+		EXPECT_EQ(2, p->getTimesRecycled(1));
+		EXPECT_EQ(3, p->getTimesRecycled(67324));
+
+		delete p;
+		p = NULL;
+	}
 }

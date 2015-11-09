@@ -138,6 +138,7 @@ bool ScanList::removeScan(int serialNumber)
 
 		delete current;
 		current = NULL;
+		return true;
 	}
  
 	return false;
