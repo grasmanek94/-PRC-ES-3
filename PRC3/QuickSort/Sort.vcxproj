@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code\BubbleSort.h" />
     <ClInclude Include="code\FileStructure.h" />
     <ClInclude Include="code\Key.h" />
     <ClInclude Include="code\QuickSort.h" />

@@ -24,6 +24,9 @@
     <ClInclude Include="code\QuickSort.h">
       <Filter>code</Filter>
     </ClInclude>
+    <ClInclude Include="code\BubbleSort.h">
+      <Filter>code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">

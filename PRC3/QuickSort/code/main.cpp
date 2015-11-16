@@ -22,21 +22,13 @@ bool key_comparer(Key* a, Key* b)
 }
 
 #include "QuickSort.h"
+#include "BubbleSort.h"
 
-int main()
+Key* PerformQSort(Key* head)
 {
-    FileStructure f;
-    Key head;
-    
-    f.loadFile("data/gibberish.bin", head);
-
-    // next line is only to show what kind of data we're working with
-    // remove this line to increase performance!
-    //head.print();
-    
-    // sort all data
-    // todo: your code here!
-	Key* ckey = &head;
+	// sort all data
+	// todo: your code here!
+	Key* ckey = head;
 	std::vector<Key*> keys;
 	while (ckey)
 	{
@@ -67,18 +59,58 @@ int main()
 		ckey = ckey->getNext();
 	}
 
+	//sort the keys
 	qSort(keys, key_comparer);
 
+	//Apply sorted keys
 	for (size_t i = 1; i < keys.size(); ++i)
 	{
 		keys[i - 1]->setNext(keys[i]);
 	}
 	keys[keys.size() - 1]->setNext(NULL);
 
-	//keys[0] is head
-    // save sorted data into a new file called sorted.bin
+	return keys[0];
+}
 
-    //f.saveFile(*keys[0], "sorted.bin");
+Key* PerformBSort(Key* head)
+{
+	Key* ckey = head;
+	while (ckey)
+	{
+		ckey->setValuePtr(BubbleSort2(ckey->getValuePtr()));
+		//Go to next key (if any)
+		ckey = ckey->getNext();
+	}
+	return BubbleSort2(head);
+}
+
+int main()
+{
+    FileStructure f;
+    Key head;
+
+    f.loadFile("data/gibberish.bin", head);
+	/*
+	head.addValue("ac_ik");
+	head.addValue("ac_ben");
+	head.addValue("ac_meneer");
+	head.addValue("ac_rafal");
+	head.addValue("ac_meneer");
+	head.addValue("ac_ben");
+	head.addValue("ac_ik");
+
+	head.addValue("ab_ik");
+	head.addValue("ab_ben");
+	head.addValue("ab_meneer");
+	head.addValue("ab_rafal");
+	head.addValue("ab_meneer");
+	head.addValue("ab_ben");
+	head.addValue("ab_ik");
+	*/
+	Key* new_head = PerformBSort(&head);
+
+	//new_head->print();
+    f.saveFile(*new_head, "sorted.bin");
 
     return 0;
 }
