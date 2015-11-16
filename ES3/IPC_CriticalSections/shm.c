@@ -23,17 +23,17 @@ remove_nl (char * s)
     return (s);
 }
 
-static char *
-my_shm_create (char * shm_name, int size)
+template <typename T>
+T *my_shm_create (char * shm_name, int size)
 {
     int     rtnval;
-    char *  shm_addr;
+    T*  shm_addr;
     
     printf ("Calling shm_open('%s')\n", shm_name);
-    shm_fd = shm_open (shm_name, O_CREAT | O_EXCL | O_RDWR, 0600);
+    shm_fd = shm_open (shm_name, O_CREAT | O_EXCL | O_RDWR, 0777);
     if (shm_fd == -1)
     {
-        perror ("ERROR: shm_open() failed");
+		return NULL;
     }
     printf ("shm_open() returned %d\n", shm_fd);
                 
@@ -63,7 +63,7 @@ my_shm_open (char * shm_name)
     char *  shm_addr;
     
     printf ("Calling shm_open('%s')\n", shm_name);
-    shm_fd = shm_open (shm_name, O_RDWR, 0600);
+    shm_fd = shm_open (shm_name, O_RDWR, 0777);
     if (shm_fd == -1)
     {
         perror ("ERROR: shm_open() failed");

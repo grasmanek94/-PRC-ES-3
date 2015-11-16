@@ -1,0 +1,18 @@
+﻿  main.cpp
+  LINK : D:\Development\-PRC-ES-3\PRC3\QuickSort\Debug\Sort.exe not found or not built by the last incremental link; performing full link
+main.obj : error LNK2019: unresolved external symbol "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __thiscall Value::getText(void)const " (?getText@Value@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) referenced in function "bool __cdecl value_comparer(class Value *,class Value *)" (?value_comparer@@YA_NPAVValue@@0@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class Value * __thiscall Value::getNext(void)" (?getNext@Value@@QAEPAV1@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Value::setNext(class Value *)" (?setNext@Value@@QAEXPAV1@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: __thiscall Key::Key(void)" (??0Key@@QAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Key::~Key(void)" (??1Key@@UAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __thiscall Key::getText(void)const " (?getText@Key@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) referenced in function "bool __cdecl key_comparer(class Key *,class Key *)" (?key_comparer@@YA_NPAVKey@@0@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class Value * __thiscall Key::getValuePtr(void)" (?getValuePtr@Key@@QAEPAVValue@@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Key::setValuePtr(class Value *)" (?setValuePtr@Key@@QAEXPAVValue@@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Key::setNext(class Key *)" (?setNext@Key@@QAEXPAV1@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: class Key * __thiscall Key::getNext(void)" (?getNext@Key@@QAEPAV1@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Key::print(void)const " (?print@Key@@QBEXXZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: __thiscall FileStructure::FileStructure(void)" (??0FileStructure@@QAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall FileStructure::~FileStructure(void)" (??1FileStructure@@UAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall FileStructure::loadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class Key &)const " (?loadFile@FileStructure@@QBEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAVKey@@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall FileStructure::saveFile(class Key &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)const " (?saveFile@FileStructure@@QBEXAAVKey@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) referenced in function _main
+D:\Development\-PRC-ES-3\PRC3\QuickSort\Debug\Sort.exe : fatal error LNK1120: 15 unresolved externals
