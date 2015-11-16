@@ -8,3 +8,5 @@
 *.lastbuildstate
 *.idb
 ES3/IPC32_socket/~$IPC.docx
+PRC3/QuickSort/sort
+*.o

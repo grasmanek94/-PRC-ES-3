@@ -107,7 +107,8 @@ int main()
 	head.addValue("ab_ben");
 	head.addValue("ab_ik");
 	*/
-	Key* new_head = PerformBSort(&head);
+	Key* new_head =
+		PerformBSort(&head);
 
 	//new_head->print();
     f.saveFile(*new_head, "sorted.bin");
