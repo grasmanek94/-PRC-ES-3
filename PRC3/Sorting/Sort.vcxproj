@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\BubbleSort.h" />
+    <ClInclude Include="code\FileStructure.h" />
+    <ClInclude Include="code\Key.h" />
+    <ClInclude Include="code\QuickSort.h" />
+    <ClInclude Include="code\Value.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\gibberish.bin" />
+    <None Include="Makefile" />
+    <None Include="PRC3_assignment10_Sort.docx" />
+    <None Include="startPoint4Students32.tgz" />
+    <None Include="startPoint4Students64.tgz" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{990DF822-39B2-465F-9EF6-F5408DA104B2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Assignment1</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>%(AdditionalIncludeDirectories);.\;.\common;.\libraries;.\libraries\glm;.\main_ev3_application;.\main_ev3_application\lib;.\uwb_location\;.\uwb_location\lib;$(VC_IncludePath);$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\include\c++\4.8.3;$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\libc\usr\include\;$(PROFTAAK_T31_CROSS_COMPILE)\i686-mingw32\arm-none-linux-gnueabi\include;$(PROFTAAK_T31_CROSS_COMPILE)\usr\include;.\libraries\pixy\include;.\libraries\googlemock\include;.\libraries\googletest\include;.\pix_location;.\pix_location\lib;.\main_server_application;.\main_server_application\lib;.\path_processor;.\path_processor\lib</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>%(AdditionalIncludeDirectories);.\;.\common;.\libraries;.\libraries\glm;.\main_ev3_application;.\main_ev3_application\lib;.\uwb_location\;.\uwb_location\lib;$(VC_IncludePath);$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\include\c++\4.8.3;$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\libc\usr\include\;$(PROFTAAK_T31_CROSS_COMPILE)\i686-mingw32\arm-none-linux-gnueabi\include;$(PROFTAAK_T31_CROSS_COMPILE)\usr\include;.\libraries\pixy\include;.\libraries\googlemock\include;.\libraries\googletest\include;.\pix_location;.\pix_location\lib;.\main_server_application;.\main_server_application\lib;.\path_processor;.\path_processor\lib</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>%(AdditionalIncludeDirectories);.\;.\common;.\libraries;.\libraries\glm;.\main_ev3_application;.\main_ev3_application\lib;.\uwb_location\;.\uwb_location\lib;$(VC_IncludePath);$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\include\c++\4.8.3;$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\libc\usr\include\;$(PROFTAAK_T31_CROSS_COMPILE)\i686-mingw32\arm-none-linux-gnueabi\include;$(PROFTAAK_T31_CROSS_COMPILE)\usr\include;.\libraries\pixy\include;.\libraries\googlemock\include;.\libraries\googletest\include;.\pix_location;.\pix_location\lib;.\main_server_application;.\main_server_application\lib;.\path_processor;.\path_processor\lib</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>%(AdditionalIncludeDirectories);.\;.\common;.\libraries;.\libraries\glm;.\main_ev3_application;.\main_ev3_application\lib;.\uwb_location\;.\uwb_location\lib;$(VC_IncludePath);$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\include\c++\4.8.3;$(PROFTAAK_T31_CROSS_COMPILE)\arm-none-linux-gnueabi\libc\usr\include\;$(PROFTAAK_T31_CROSS_COMPILE)\i686-mingw32\arm-none-linux-gnueabi\include;$(PROFTAAK_T31_CROSS_COMPILE)\usr\include;.\libraries\pixy\include;.\libraries\googlemock\include;.\libraries\googletest\include;.\pix_location;.\pix_location\lib;.\main_server_application;.\main_server_application\lib;.\path_processor;.\path_processor\lib</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;.\googletest;.\googletest\include;.\googletest\src;.\googlemock;.\googlemock\include;.\googlemock\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;.\googletest;.\googletest\include;.\googletest\src;.\googlemock;.\googlemock\include;.\googlemock\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;.\googletest;.\googletest\include;.\googletest\src;.\googlemock;.\googlemock\include;.\googlemock\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;.\googletest;.\googletest\include;.\googletest\src;.\googlemock;.\googlemock\include;.\googlemock\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
