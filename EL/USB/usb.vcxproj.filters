@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libusb-1.0\libusb.h">
+      <Filter>libusb-1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="libusb-1.0\libusbi.h">
+      <Filter>libusb-1.0</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="libusb-1.0">
+      <UniqueIdentifier>{c271ffeb-dd67-4070-b81d-38b25ec28f14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

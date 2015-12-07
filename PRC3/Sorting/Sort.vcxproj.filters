@@ -21,15 +21,18 @@
     <ClInclude Include="code\FileStructure.h">
       <Filter>code</Filter>
     </ClInclude>
-    <ClInclude Include="code\QuickSort.h">
+    <ClInclude Include="code\BubbleSort.h">
       <Filter>code</Filter>
     </ClInclude>
-    <ClInclude Include="code\BubbleSort.h">
+    <ClInclude Include="code\Compare.h">
       <Filter>code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BubbleSort.cpp">
       <Filter>code</Filter>
     </ClCompile>
   </ItemGroup>
