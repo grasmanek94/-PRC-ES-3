@@ -1,9 +1,6 @@
 #ifndef MERGESORT_H
 #define MERGESORT_H
 
-#include "Compare.h"
-#include "Key.h"
-
 namespace MergeSort
 {
 	template <typename KV>
@@ -39,23 +36,21 @@ namespace MergeSort
 		{
 			return fn;
 		}
-		else if (!kv_comparer(fn, sn))
-		{
-			fn->setNext(Merge(fn->getNext(), sn));
-			return fn;
-		}
-		else
+		else if (fn->getText() > sn->getText())
 		{
 			sn->setNext(Merge(fn, sn->getNext()));
 			return sn;
+		}
+		else
+		{
+			fn->setNext(Merge(fn->getNext(), sn));
+			return fn;
 		}
 	}
 
 	template <typename KV>
 	KV* Sort(KV *elem)
 	{
-		KV *sn;
-
 		if (elem == NULL)
 		{
 			return NULL;
@@ -66,23 +61,8 @@ namespace MergeSort
 		}
 		else
 		{
-			sn = Split(elem);
-			return Merge(Sort(elem), Sort(sn));
+			return Merge(Sort(elem), Sort(Split(elem)));
 		}
 	}
-
-	struct mt_to_pass
-	{
-		long step;
-		long numCPU;
-		Key* head;
-
-		mt_to_pass(long step, long numCPU, Key* head)
-			: step(step), numCPU(numCPU), head(head)
-		{ }
-	};
-
-	Key* PerformSort(Key* head);
-	Key* PerformSortThreaded(Key* head);//todo?
 }
 #endif

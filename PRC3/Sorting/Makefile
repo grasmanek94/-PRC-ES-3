@@ -1,7 +1,7 @@
-CFLAGS=-Wall -Werror -ggdb -O0 -Icode -c -std=c++98
+CFLAGS=-Wall -Werror -ggdb -O3 -Icode -c -std=c++98
 LDDFLAGS=-lrt -lpthread
 
-MAIN_SOURCES=code/main.cpp code/BubbleSort.cpp code/MergeSort.cpp
+MAIN_SOURCES=code/main.cpp
 MAIN_OBJECTS=$(MAIN_SOURCES:.cpp=.o) \
 			 objects/FileStructure.o \
 			 objects/Key.o \
