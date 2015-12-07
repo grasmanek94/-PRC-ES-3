@@ -6,7 +6,6 @@
 
 namespace MergeSort
 {
-
 	template <typename KV>
 	KV* Split(KV* elem)
 	{
@@ -72,7 +71,18 @@ namespace MergeSort
 		}
 	}
 
+	struct mt_to_pass
+	{
+		long step;
+		long numCPU;
+		Key* head;
+
+		mt_to_pass(long step, long numCPU, Key* head)
+			: step(step), numCPU(numCPU), head(head)
+		{ }
+	};
+
 	Key* PerformSort(Key* head);
-	//Key* PerformSortThreaded(Key* head);//todo?
+	Key* PerformSortThreaded(Key* head);//todo?
 }
 #endif

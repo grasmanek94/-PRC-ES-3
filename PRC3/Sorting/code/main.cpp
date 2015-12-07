@@ -79,7 +79,7 @@ int my_main()
 
 	timemeasure.Start();
 	Key* new_head =
-		MergeSort::PerformSort(head);
+		MergeSort::PerformSortThreaded(head);
 	timemeasure.Stop();
 
 	std::cout << "Time: " << timemeasure.Elapsed() << std::endl;
@@ -98,7 +98,7 @@ int inleveren_main()
 	TimeStartLoadFile(&f, "data/gibberish.bin", head);
 
 	Key* new_head =
-		MergeSort::PerformSort(head);
+		MergeSort::PerformSortThreaded(head);
 
 	SaveFile(&f, "sorted.bin", new_head, true);
 
