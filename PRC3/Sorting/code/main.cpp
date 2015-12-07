@@ -8,6 +8,53 @@
 #include "Key.h"
 
 #include "BubbleSort.h"
+#include "MergeSort.h"
+
+class TM
+{
+private:
+	clock_t start;
+	clock_t end;
+	double cpu_time_used;
+public:
+	TM()
+		: start(0), end(0), cpu_time_used(0.0)
+	{ }
+
+	void Start()
+	{
+		start = clock();
+	}
+
+	void Stop()
+	{
+		end = clock();
+		cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+	}
+
+	double Elapsed()
+	{
+		return cpu_time_used;
+	}
+};
+
+TM timemeasure;
+
+void TimeStartLoadFile(FileStructure* fs, const std::string& filename, Key* head)
+{
+	fs->loadFile(filename, *head);
+	timemeasure.Start();
+}
+
+void SaveFile(FileStructure* fs, const std::string& filename, Key* head, bool print_time = false)
+{
+	timemeasure.Stop();
+	if (print_time)
+	{
+		std::cout << "Time: " << timemeasure.Elapsed() << std::endl;
+	}
+	fs->saveFile(*head, filename);
+}
 
 int my_main()
 {
@@ -29,19 +76,16 @@ int my_main()
 	head->addValue("ab_meneer");
 	head->addValue("ab_ben");
 	head->addValue("ab_ik");
-	
-	clock_t start, end;
-	double cpu_time_used;
 
-	start = clock();
-
+	timemeasure.Start();
 	Key* new_head =
-		BubbleSort::PerformSortThreaded(head);
+		MergeSort::PerformSort(head);
+	timemeasure.Stop();
 
-	end = clock();
-	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+	std::cout << "Time: " << timemeasure.Elapsed() << std::endl;
 
-	std::cout << "Time: " << cpu_time_used << std::endl;
+	new_head->print();
+
 	delete new_head;
     return 0;
 }
@@ -51,17 +95,21 @@ int inleveren_main()
 	FileStructure f;
 	Key* head = new Key();
 
-	f.loadFile("data/gibberish.bin", *head);
+	TimeStartLoadFile(&f, "data/gibberish.bin", head);
 
 	Key* new_head =
-		BubbleSort::PerformSortThreaded(head);
+		MergeSort::PerformSort(head);
 
-	f.saveFile(*new_head, "sorted.bin");
+	SaveFile(&f, "sorted.bin", new_head, true);
+
 	delete new_head;
 	return 0;
 }
 
 int main()
 {
-	return my_main();
+	int retval =
+		//my_main();
+		inleveren_main();
+	return retval;
 }

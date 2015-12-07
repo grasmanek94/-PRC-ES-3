@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "Compare.h"
+#include "Key.h"
 
 namespace BubbleSort
 {
