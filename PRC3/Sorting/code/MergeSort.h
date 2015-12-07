@@ -6,23 +6,21 @@ namespace MergeSort
 	template <typename KV>
 	KV* Split(KV* elem)
 	{
-		KV* sn;
-
 		if (elem == NULL)
 		{
 			return NULL;
 		}
-		else if (elem->getNext() == NULL)
+
+		KV* sn = elem->getNext();
+
+		if (sn == NULL)
 		{
 			return NULL;
 		}
-		else
-		{
-			sn = elem->getNext();
-			elem->setNext(sn->getNext());
-			sn->setNext(Split(sn->getNext()));
-			return sn;
-		}
+
+		elem->setNext(sn->getNext());
+		sn->setNext(Split(sn->getNext()));
+		return sn;
 	}
 
 	template <typename KV>
@@ -51,18 +49,12 @@ namespace MergeSort
 	template <typename KV>
 	KV* Sort(KV *elem)
 	{
-		if (elem == NULL)
-		{
-			return NULL;
-		}
-		else if (elem->getNext() == NULL)
+		if (elem == NULL || elem->getNext() == NULL)
 		{
 			return elem;
 		}
-		else
-		{
-			return Merge(Sort(elem), Sort(Split(elem)));
-		}
+
+		return Merge(Sort(elem), Sort(Split(elem)));
 	}
 }
 #endif

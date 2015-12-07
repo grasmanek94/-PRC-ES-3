@@ -4,6 +4,39 @@
 
 #include "MergeSort.h"
 
+#include <iostream>
+#include <time.h>
+class TM
+{
+private:
+	clock_t start;
+	clock_t end;
+	double cpu_time_used;
+public:
+	TM()
+		: start(0), end(0), cpu_time_used(0.0)
+	{ }
+
+	void Start()
+	{
+		start = clock();
+	}
+
+	void Stop()
+	{
+		end = clock();
+		cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+	}
+
+	double Elapsed()
+	{
+		return cpu_time_used;
+	}
+};
+
+TM timemeasure;
+
+
 int main()
 {
 	FileStructure f;
@@ -11,22 +44,8 @@ int main()
 	Key* ckey = NULL;
 	Key* new_head = NULL;
 
-	head->addValue("ac_ik");
-	head->addValue("ac_ben");
-	head->addValue("ac_meneer");
-	head->addValue("ac_rafal");
-	head->addValue("ac_meneer");
-	head->addValue("ac_ben");
-	head->addValue("ac_ik");
-
-	head->addValue("ab_ik");
-	head->addValue("ab_ben");
-	head->addValue("ab_meneer");
-	head->addValue("ab_rafal");
-	head->addValue("ab_meneer");
-	head->addValue("ab_ben");
-	head->addValue("ab_ik");
-	//f.loadFile("data/gibberish.bin", *head);
+	f.loadFile("data/gibberish.bin", *head);
+	timemeasure.Start();
 
 	ckey = head;
 	while (ckey)
@@ -36,7 +55,9 @@ int main()
 	}
 	new_head = MergeSort::Sort(head);
 
-	new_head->print();
+	timemeasure.Stop();
+
+	std::cout << timemeasure.Elapsed() * 1000.0 << " ms" << std::endl;
 
 	f.saveFile(*new_head, "sorted.bin");
 

@@ -19,14 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="code\BubbleSort.h" />
-    <ClInclude Include="code\Compare.h" />
     <ClInclude Include="code\FileStructure.h" />
     <ClInclude Include="code\Key.h" />
+    <ClInclude Include="code\MergeSort.h" />
     <ClInclude Include="code\Value.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\BubbleSort.cpp" />
     <ClCompile Include="code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
