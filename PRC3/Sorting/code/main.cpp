@@ -50,10 +50,10 @@ int main()
 	ckey = head;
 	while (ckey)
 	{
-		ckey->setValuePtr(MergeSort::Sort(ckey->getValuePtr()));
+		ckey->setValuePtr(MergeSort::Sort3(ckey->getValuePtr()));
 		ckey = ckey->getNext();
 	}
-	new_head = MergeSort::Sort(head);
+	new_head = MergeSort::Sort3(head);
 
 	timemeasure.Stop();
 

@@ -122,7 +122,7 @@ namespace MergeSort
 		return result;
 	}
 
-	//nonrecursive
+	//nonrecursive, seems to be the fastest, and ofcourse most complex to explain and implement >_>
 	template <typename KV>
 	KV* Sort3(KV* elem)
 	{
@@ -205,60 +205,5 @@ namespace MergeSort
 		while (numMerges>1);
 		return elem;
 	}
-
-	template <class T>
-	T* TM_GetMiddle(T* head) {
-		if (head == NULL) {
-			return head;
-		}
-		//std::cout << "Getting middle" << std::endl;
-
-		T* slow = NULL;
-		T* fast = NULL;
-		slow = fast = head;
-		while (fast->getNext() != NULL && fast->getNext()->getNext() != NULL) {
-			slow = slow->getNext();
-			fast = fast->getNext()->getNext();
-		}
-		return slow;
-	}
-
-
-	template <class T>
-	T* TM_Merge(T* firstNode, T* secondNode)
-	{
-		if (firstNode == NULL) return secondNode;
-		else if (secondNode == NULL) return firstNode;
-		else if (firstNode->getText() <= secondNode->getText()) //if I reverse the sign to >=, the behavior reverses
-		{
-			firstNode->setNext(TM_Merge(firstNode->getNext(), secondNode));
-			return firstNode;
-		}
-		else
-		{
-			secondNode->setNext(TM_Merge(firstNode, secondNode->getNext()));
-			return secondNode;
-		}
-	}
-	/*
-	* Merge sort
-	*/
-	template <class T>
-	T* TM_MergeSort(T* head) {
-		if (head == NULL || head->getNext() == NULL) {
-			return head;
-		}
-		T* middle = TM_GetMiddle(head);
-		//std::cout << "Got middle: " << middle->getText() << std::endl;
-
-		T* sHalf = middle->getNext();
-		//std::cout << "Got thing: " << sHalf->getText() << std::endl;
-
-		middle->setNext(NULL);
-		return TM_Merge(TM_MergeSort(head), TM_MergeSort(sHalf));
-	}
-
-
-
 }
 #endif
