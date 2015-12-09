@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -ggdb -O0 -Icode -c -std=c++98
+CFLAGS=-Wall -Werror -ggdb -O3 -Icode -c -std=c++98
 LDDFLAGS=-lrt -lpthread
 
 MAIN_SOURCES=code/main.cpp
