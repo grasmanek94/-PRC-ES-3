@@ -4,41 +4,60 @@
 
 #include "MergeSort.h"
 
-#include <cstring>
-#include <iostream>
-#include <time.h>
+//Sort  [ recursive multiple functions ] worst?
+//Sort2 [ recursive one function ] seems to be the fastest on an i7-4710MQ with both -O0 and -O3
+//Sort3 [ nonrecursive ] meh...
+#define WHICH_SORT_TO_USE Sort2
 
-class TM
-{
-private:
-	clock_t start;
-	clock_t end;
-	double cpu_time_used;
-public:
-	TM()
-		: start(0), end(0), cpu_time_used(0.0)
-	{ }
+/* 
+				-O0			-O3
 
-	void Start()
-	{
-		start = clock();
-	}
+	Sort[0]  :	56.361 ms	50.071 ms
+	Sort[1]  :	51.548 ms	47.656 ms
+	Sort[2]  :	51.225 ms	45.964 ms
+	Sort[3]  :	56.113 ms	45.343 ms
+	Sort[4]  :	54.049 ms	44.098 ms
+	Sort[5]  :	51.668 ms	49.451 ms
+	Sort[6]  :	53.373 ms	44.509 ms
+	Sort[7]  :	50.890 ms	43.721 ms
 
-	void Stop()
-	{
-		end = clock();
-		cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-	}
+	gem:		53.153 ms	46.352 ms
 
-	double Elapsed()
-	{
-		return cpu_time_used;
-	}
-};
+	Sort2[0] :	48.554 ms	40.834 ms
+	Sort2[1] :	45.433 ms	43.086 ms
+	Sort2[2] :	46.484 ms	40.579 ms
+	Sort2[3] :	46.677 ms	39.476 ms
+	Sort2[4] :	47.311 ms	40.691 ms
+	Sort2[5] :	45.758 ms	40.865 ms
+	Sort2[6] :	47.734 ms	41.925 ms
+	Sort2[7] :	45.565 ms	44.066 ms
 
-TM timemeasure;
+	gem:		46.690 ms	41.440 ms
 
-Key* timeSort(const std::string& name, size_t i, Key*(*key)(Key*), Value*(*value)(Value*))
+	Sort3[0] :	48.503 ms	41.392 ms
+	Sort3[1] :	58.640 ms	42.249 ms
+	Sort3[2] :	48.442 ms	40.869 ms
+	Sort3[3] :	49.619 ms	49.838 ms
+	Sort3[4] :	52.041 ms	41.052 ms
+	Sort3[5] :	49.496 ms	40.542 ms
+	Sort3[6] :	47.877 ms	41.247 ms
+	Sort3[7] :	47.953 ms	41.151 ms
+
+	gem:		50.321 ms	42.293 ms
+
+	SortMT[0]:	52.017 ms	44.344 ms
+	SortMT[1]:	49.655 ms	43.756 ms
+	SortMT[2]:	51.707 ms	42.996 ms
+	SortMT[3]:	49.049 ms	45.802 ms
+	SortMT[4]:	49.625 ms	43.515 ms
+	SortMT[5]:	50.244 ms	42.458 ms
+	SortMT[6]:	49.141 ms	43.519 ms
+	SortMT[7]:	51.132 ms	45.256 ms
+
+	gem:		50.321 ms	43.956 ms
+*/
+
+int main()
 {
 	FileStructure f;
 	Key* head = new Key();
@@ -46,74 +65,18 @@ Key* timeSort(const std::string& name, size_t i, Key*(*key)(Key*), Value*(*value
 	Key* new_head = NULL;
 
 	f.loadFile("data/gibberish.bin", *head);
-	timemeasure.Start();
 
 	ckey = head;
 	while (ckey)
 	{
-		ckey->setValuePtr(value(ckey->getValuePtr()));
+		ckey->setValuePtr(MergeSort::WHICH_SORT_TO_USE(ckey->getValuePtr()));
 		ckey = ckey->getNext();
 	}
-	new_head = key(head);
+	new_head = MergeSort::WHICH_SORT_TO_USE(head);
 
-	timemeasure.Stop();
-	std::cout << name << "[" << i << "]: " << timemeasure.Elapsed() * 1000.0 << " ms" << std::endl;
+	f.saveFile(*new_head, "sorted.bin");
 
-	return new_head;
-}
-
-int main()
-{
-	FileStructure f;
-
-	const size_t amount_of_test = 8;
-	const size_t max_test = 4;
-
-	size_t current_test = 0;
-	Key* test[max_test][amount_of_test];
-	memset(test, 0, sizeof(test));
-
-	for (size_t i = 0; i < amount_of_test; ++i)
-	{
-		test[current_test][i] = timeSort("Sort", i, MergeSort::Sort<Key>, MergeSort::Sort<Value>);
-	}
-
-	++current_test;
-
-	for (size_t i = 0; i < amount_of_test; ++i)
-	{
-		test[current_test][i] = timeSort("Sort2", i, MergeSort::Sort2<Key>, MergeSort::Sort2<Value>);
-	}
-
-	++current_test;
-
-	for (size_t i = 0; i < amount_of_test; ++i)
-	{
-		test[current_test][i] = timeSort("Sort3", i, MergeSort::Sort3<Key>, MergeSort::Sort3<Value>);
-	}
-
-	++current_test;
-
-	for (size_t i = 0; i < amount_of_test; ++i)
-	{
-		test[current_test][i] = timeSort("SortMT", i, MergeSort::TM_MergeSort<Key>, MergeSort::TM_MergeSort<Value>);
-	}
-
-	for (size_t i = 0; i < max_test; ++i)
-	{
-		//std::string savename = "0_sorted.bin";
-		//savename[0] += i;
-		//f.saveFile(*test[i][0], savename);
-
-		for (size_t j = 0; j < amount_of_test; ++j)
-		{
-			if (test[i][j])
-			{
-				delete test[i][j];
-				test[i][j] = NULL;
-			}
-		}
-	}
+	delete new_head;
 
 	return 0;
 }
