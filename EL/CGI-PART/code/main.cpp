@@ -64,7 +64,7 @@ mqd_t cgi_mq_create(int mq_flags, int mq_maxmsg, int mq_msgsize)
 	obuf.mq_curmsgs = 0;
 
 	unlink("/dev/mqueue/xbox_web_controller_app");
-	mqd = mq_open("xbox_web_controller_app", O_RDWR, 0777, &obuf);
+	mqd = mq_open("xbox_web_controller_app", O_CREAT | O_EXCL | O_RDWR, 0777, &obuf);
 	if (-1 == mqd)
 	{
 		perror("mq_open()");
@@ -72,7 +72,62 @@ mqd_t cgi_mq_create(int mq_flags, int mq_maxmsg, int mq_msgsize)
 
 	return mqd;
 }
-	
+
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/fcntl.h>
+
+//in daemon
+int* cgi_shm_create(int& shm_fd)
+{
+	unlink("/dev/shm/xbox_web_controller_app");
+	shm_fd = shm_open("xbox_web_controller_app", O_CREAT | O_EXCL | O_RDWR, 0777);
+	if (shm_fd == -1)
+	{
+		return NULL;
+	}
+
+	const size_t data_size = sizeof(int) * 21;
+	int rtnval = ftruncate(shm_fd, data_size);
+	if (rtnval != 0)
+	{
+		return NULL;
+	}
+
+	int* shm_addr = (int*)mmap(NULL, data_size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+	if (shm_addr == MAP_FAILED)
+	{
+		return NULL;
+	}
+
+	return (shm_addr);
+}
+
+//in cgi app
+int* cgi_shm_open(int& shm_fd)
+{
+	shm_fd = shm_open("xbox_web_controller_app", O_RDWR, 0777);
+	if (shm_fd == -1)
+	{
+		return NULL;
+	}
+
+	size_t size = lseek(shm_fd, 0, SEEK_END);
+
+	int* shm_addr = (int*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+	if (shm_addr == MAP_FAILED)
+	{
+		return NULL;
+	}
+
+	return (shm_addr);
+}
+
 enum Actions
 {
 	ACTION_RUMBLE,															
@@ -84,8 +139,8 @@ struct queue_message
 	int action;																
 	int value;																
 };																			
-																			
-int main()																	
+
+int main()
 {																			
 	std::cout																
 		<< "Content-type: text/html" << std::endl							
