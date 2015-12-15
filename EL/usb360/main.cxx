@@ -1,3 +1,14 @@
+//VS Intellisense libUSB fix
+#ifdef _MSC_VER
+#define __cplusplus
+#undef _WIN64
+#undef _WIN32
+#undef _MSC_VER
+#define __linux
+#define __GNUC__ 6
+#define __attribute__(a)
+#endif
+
 #include "controllerinput.hxx"
 #include "controlleroutput.hxx"
 #include <iostream>
@@ -76,38 +87,7 @@ int main() {
 		return 1;
 	}
 	std::cout << "Opened Xbox 360 controller." << std::endl;
-	
-	
-	
-	
-	//usleep(1000000);
-	
-	/*int transferred = 0;
-	unsigned char input[20];
-	//libusb_interrupt_transfer(h, endpointIN, input, sizeof input, &transferred, 0);
-	while (transferred != sizeof(input)) {
-		libusb_interrupt_transfer(h, endpointIN, input, sizeof input, &transferred, 0);
-		perror("Error while sending ");
-	}
-	if ((input[3] & 16) == 16) {
-		std::cout << "Doet iets" <<  std::endl;
-	}
-	else {
-		std::cout << "Neeeeeeee" <<  std::endl;
-	}*/
-	/*
-	std::vector<unsigned char> ledMessage({ 0x01, 0x03, ROTATING });
-	libusb_interrupt_transfer(h, endpointOUT, ledMessage.data(), ledMessage.size(), &transferred, 0);
-	if ((size_t)transferred != ledMessage.size())
-	{
-		perror("Error while sending.");
-	}
-	
-	std::cout << "rotating" << std::endl;
-	*/
-	
-	
-	
+
 	
 	ControllerInput* controls = new ControllerInput(h, endpointIN);
 	ControllerOutput* output = new ControllerOutput(h, endpointOUT);
@@ -122,17 +102,17 @@ int main() {
 		
 		}
 		std::cout << "\033[2J\033[1;1H";
-		
-		std::cout << "LTrig: " << controls->GetTrigger(TriggerL) << "     RTrig: " << controls->GetTrigger(TriggerR) << std::endl;
-		std::cout << "LB: " << controls->GetButton(ButtonLB) << "        RB: " << controls->GetButton(ButtonRB) << std::endl;
-		std::cout << "LX: " << controls->GetJoystick(JoystickLX) << "     RX: " << controls->GetJoystick(JoystickRX) << std::endl;
-		std::cout << "LY: " << controls->GetJoystick(JoystickLY) << "     RY: " << controls->GetJoystick(JoystickRY) << std::endl;
-		std::cout << "DU: " << controls->GetButton(DpadUp) << "        Y: " << controls->GetButton(ButtonY) << std::endl;
-		std::cout << "DD: " << controls->GetButton(DpadDown) << "        X: " << controls->GetButton(ButtonX) << std::endl;
-		std::cout << "DL: " << controls->GetButton(DpadLeft) << "        B: " << controls->GetButton(ButtonB) << std::endl;
-		std::cout << "DR: " << controls->GetButton(DpadRight) << "        A: " << controls->GetButton(ButtonA) << std::endl;
-		std::cout << "Back: " << controls->GetButton(ButtonBack) << "     Start: " << controls->GetButton(ButtonStart) << std::endl;
-		std::cout << "LJoy: " << controls->GetButton(ButtonL) << "     RJoy: " << controls->GetButton(ButtonR) << std::endl;
+		InputReport report = controls->GetButtonStates();
+		std::cout << "LTrig: " << report.TRIGGER_LEFT << "     RTrig: " << report.TRIGGER_RIGHT << std::endl;
+		std::cout << "LB: " << report.BTN_LB << "        RB: " << report.BTN_RB << std::endl;
+		std::cout << "LX: " << report.STICK_LEFT_X << "     RX: " << report.STICK_RIGHT_X << std::endl;
+		std::cout << "LY: " << report.STICK_LEFT_Y << "     RY: " << report.STICK_RIGHT_Y << std::endl;
+		std::cout << "DU: " << report.DPAD_UP << "        Y: " << report.BTN_Y << std::endl;
+		std::cout << "DD: " << report.DPAD_DOWN << "        X: " << report.BTN_X << std::endl;
+		std::cout << "DL: " << report.DPAD_LEFT << "        B: " << report.BTN_B << std::endl;
+		std::cout << "DR: " << report.DPAD_RIGHT << "        A: " << report.BTN_A << std::endl;
+		std::cout << "Back: " << report.BTN_BACK << "     Start: " << report.BTN_START << std::endl;
+		std::cout << "LJoy: " << report.BTN_STICK_LEFT << "     RJoy: " << report.BTN_STICK_RIGHT << std::endl;
 		
 		// LTrig: VAL			RTrig: VAL
 		// LB:	BOOL			RB: BOOL
@@ -144,30 +124,30 @@ int main() {
 		// DR: bool				A: bool
 		
 
-		if (controls->GetButton(ButtonA)) {
+		if (report.BTN_A) {
 			output->SetRumble(MAXRUMBLE);
 		}
 		else {
 			output->SetRumble(NORUMBLE);
 		}
 		
-		if (controls->GetButton(DpadUp)) {
+		if (report.DPAD_UP) {
 			output->SetLeds(ON_1);
 		}
 		
-		if (controls->GetButton(DpadDown)) {
+		if (report.DPAD_DOWN) {
 			output->SetLeds(ON_2);
 		}
 		
-		if (controls->GetButton(DpadLeft)) {
+		if (report.DPAD_LEFT) {
 			output->SetLeds(ON_3);
 		}
 		
-		if (controls->GetButton(DpadRight)) {
+		if (report.DPAD_RIGHT) {
 			output->SetLeds(ON_4);
 		}
 		
-		if (controls->GetButton(ButtonXbox)) {
+		if (report.BTN_LOGO) {
 			monitor = false;
 		}
 		//std::cout << "NotDeadYet" << std::endl;
