@@ -7,9 +7,9 @@
     <ClInclude Include="libusb-1.0\libusbi.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="controllerinput.cxx" />
     <ClCompile Include="controlleroutput.cxx" />
+    <ClCompile Include="main.cxx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
