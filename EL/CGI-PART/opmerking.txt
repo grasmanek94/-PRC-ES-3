@@ -1,0 +1,3 @@
+alle scripts chmod 755 (zodat iedereen kan lezen & executen)
+
+om init script bij elke rebuild met fs mee te maken voeg toe aan ./boards/raspberrypi/fs-overlay/etc/init.d
