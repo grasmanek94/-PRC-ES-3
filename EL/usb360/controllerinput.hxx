@@ -33,7 +33,8 @@ struct InputReport
 	short UNUSED_02 : 16;
 } __attribute__((packed));
 
-class ControllerInput {
+class ControllerInput 
+{
 	public:
 		ControllerInput(libusb_device_handle *h, unsigned char endpointIn);
 		bool Update();
