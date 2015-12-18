@@ -57,6 +57,7 @@ enum LED_ACTION
 	LED_BLINKING,
 	LED_SLOW_BLINKING,
 	LED_ALTERNATING,
+	MAX_LED_ACTIONS
 };
 
 enum Actions
@@ -71,5 +72,5 @@ const size_t message_amount = 16;
 InputReport* cgi_shm_create(int& shm_fd);
 mqd_t cgi_mq_create(int mq_flags, int mq_maxmsg, int mq_msgsize);
 mqd_t cgi_mq_open(mq_attr* obuf);
-int* cgi_shm_open(int& shm_fd);
+InputReport* cgi_shm_open(int& shm_fd);
 #endif

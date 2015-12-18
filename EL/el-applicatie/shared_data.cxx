@@ -73,7 +73,7 @@ mqd_t cgi_mq_open(mq_attr* obuf)
 }
 
 //in cgi app
-int* cgi_shm_open(int& shm_fd)
+InputReport* cgi_shm_open(int& shm_fd)
 {
 	shm_fd = shm_open("xbox_web_controller_app", O_RDWR, 0777);
 	if (shm_fd == -1)
@@ -83,7 +83,7 @@ int* cgi_shm_open(int& shm_fd)
 
 	size_t size = lseek(shm_fd, 0, SEEK_END);
 
-	int* shm_addr = (int*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+	InputReport* shm_addr = (InputReport*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 	if (shm_addr == MAP_FAILED)
 	{
 		return NULL;
