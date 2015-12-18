@@ -23,11 +23,15 @@
     <ClInclude Include="controlleroutput.hxx" />
     <ClInclude Include="libusb-1.0\libusb.h" />
     <ClInclude Include="libusb-1.0\libusbi.h" />
+    <ClInclude Include="shared_data.hxx" />
+    <ClInclude Include="sighandler.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="controllerinput.cxx" />
     <ClCompile Include="controlleroutput.cxx" />
-    <ClCompile Include="main.cxx" />
+    <ClCompile Include="daemon.cxx" />
+    <ClCompile Include="shared_data.cxx" />
+    <ClCompile Include="sighandler.cxx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

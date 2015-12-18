@@ -4,23 +4,7 @@
 #include <libusb-1.0/libusb.h>
 #include <vector>
 
-enum LED_ACTION
-{
-	LED_OFF,
-	LED_ALL_BLINKING,
-	LED_FLASH_1,
-	LED_FLASH_2,
-	LED_FLASH_3,
-	LED_FLASH_4,
-	LED_ON_1,
-	LED_ON_2,
-	LED_ON_3,
-	LED_ON_4,
-	LED_ROTATING,
-	LED_BLINKING,
-	LED_SLOW_BLINKING,
-	LED_ALTERNATING,
-};
+#include "shared_data.hxx"
 
 class ControllerOutput
 {

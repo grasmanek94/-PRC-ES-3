@@ -1,6 +1,8 @@
 #include <cstdio>
 #include "controllerinput.hxx"
 
+#include "shared_data.hxx"
+
 ControllerInput::ControllerInput(libusb_device_handle *h, unsigned char endpointIn)
 {
 	handle = h;
