@@ -1,6 +1,7 @@
 #ifndef CONTROLLERINPUT_H
 #define CONTROLLERINPUT_H
 #include <libusb-1.0/libusb.h>
+#include "shared_data.hxx"
 
 class ControllerInput 
 {

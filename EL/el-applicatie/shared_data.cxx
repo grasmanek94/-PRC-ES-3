@@ -54,8 +54,8 @@ mqd_t cgi_mq_open(mq_attr* obuf)
 	{
 		if (!mq_getattr(mqd, obuf))
 		{
-			printf("flags: 0x%x  maxmsg: %d  msgsize: %d  curmsgs: %d\n",
-				obuf->mq_flags, obuf->mq_maxmsg, obuf->mq_msgsize, obuf->mq_curmsgs);
+			//printf("flags: 0x%x  maxmsg: %d  msgsize: %d  curmsgs: %d\n",
+			//	obuf->mq_flags, obuf->mq_maxmsg, obuf->mq_msgsize, obuf->mq_curmsgs);
 		}
 		else
 		{

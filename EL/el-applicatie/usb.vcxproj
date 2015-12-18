@@ -27,6 +27,7 @@
     <ClInclude Include="sighandler.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cgi.cxx" />
     <ClCompile Include="controllerinput.cxx" />
     <ClCompile Include="controlleroutput.cxx" />
     <ClCompile Include="daemon.cxx" />
