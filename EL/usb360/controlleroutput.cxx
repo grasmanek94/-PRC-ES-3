@@ -19,7 +19,6 @@ void ControllerOutput::sendData(const std::vector<unsigned char>& data)
 
 void ControllerOutput::SetRumble(unsigned char speedB, unsigned char speedL) 
 {
-
 	sendData(std::vector<unsigned char>({ 0x00, 0x08, 0x00, speedB, speedL, 0x00, 0x00, 0x00 }));
 }
 
