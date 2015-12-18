@@ -219,6 +219,10 @@ void output_current_keys()
 }" << std::endl;
 }
 
+//SetLed: /cgi-bin/x360_cgi?l=LED_ACTION eg l=1
+//SetRumble: /cgi-bin/x360_cgi?r=L:B eg r=10:10
+//GetKeys: /cgi-bin/x360_cgi?g
+
 int main()
 {			
 	std::cout																
