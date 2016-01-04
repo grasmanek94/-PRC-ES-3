@@ -1,8 +1,9 @@
 #ifndef SLUICETCPHANDLER_H
 #define SLUICETCPHANDLER_H
 #include <QString>
-#include <QTcpSocket>
-#include <QNetworkSession>
+#include <QObject>
+#include <QtWebSockets/QWebSocket>
+#include "sychronouswebsocketsresponder.h"
 
 #include "bimap.h"
 using codeproject::bimap;
@@ -47,13 +48,13 @@ enum GetDoorState
 
 extern bimap<QString, GetDoorState> GetDoorStateMaps;
 
-enum LightState
+enum LightColor
 {
-    LightStateRed,
-    LightStateGreen
+    LightColorRed,
+    LightColorGreen
 };
 
-extern bimap<QString, LightState> LightStateMaps;
+extern bimap<QString, LightColor> LightColorMaps;
 
 enum WaterLevel
 {
@@ -74,24 +75,26 @@ enum DoorLockState
 
 extern bimap<QString, DoorLockState> DoorLockStateMaps;
 
-class SluiceTCPHandler
+class SluiceTCPHandler : public QObject
 {
+    Q_OBJECT
 private:
+    QWebSocket webSocket;
+    SychronousWebSocketsResponder fetcher;
+//private Q_SLOTS:
+//    void Connected();
+//    void Disconnected();
 
-    QTcpSocket *tcpSocket;
-    QNetworkSession *networkSession;
-
-    void connected();
 public:
-    SluiceTCPHandler(unsigned short sluisnumber);
+    SluiceTCPHandler(unsigned short sluisnumber, QObject *parent = Q_NULLPTR);
     ~SluiceTCPHandler();
 
     void SetDoor(Door which_door, DoorState which_state);
     GetDoorState GetDoor(Door which_door);
     void SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state);
     ValveState GetDoorValve(Door which_door, unsigned int which_valve);
-    void SetTrafficLight(unsigned int which_light, LightState which_state);
-    LightState GetTrafficLight(unsigned int which_light);
+    void SetTrafficLight(unsigned int which_light, LightColor which_color, bool on);
+    bool GetTrafficLight(unsigned int which_light, LightColor which_color);
     WaterLevel GetWaterLevel();
     void SetDoorLock(Door which_door, bool on);
     DoorLockState GetDoorLockState(Door which_door);

@@ -195,6 +195,7 @@ Makefile: ../QT/QT.pro ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/win32-g+
 		D:/Development/Libraries/QT/5.5/mingw492_32/lib/qtmaind.prl \
 		D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Widgets.prl \
 		D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Gui.prl \
+		D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5WebSockets.prl \
 		D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Network.prl \
 		D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Core.prl
 	$(QMAKE) -spec win32-g++ CONFIG+=debug -o Makefile ../QT/QT.pro
@@ -334,6 +335,7 @@ Makefile: ../QT/QT.pro ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/win32-g+
 D:/Development/Libraries/QT/5.5/mingw492_32/lib/qtmaind.prl:
 D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Widgets.prl:
 D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Gui.prl:
+D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5WebSockets.prl:
 D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Network.prl:
 D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Core.prl:
 qmake: FORCE

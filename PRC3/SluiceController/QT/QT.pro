@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,9 +13,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    sluicetcphandler.cpp
+    sluicetcphandler.cpp \
+    sychronouswebsocketsresponder.cpp
 
 HEADERS  += mainwindow.h \
-    sluicetcphandler.h
+    sluicetcphandler.h \
+    sychronouswebsocketsresponder.h
 
 FORMS    += mainwindow.ui
