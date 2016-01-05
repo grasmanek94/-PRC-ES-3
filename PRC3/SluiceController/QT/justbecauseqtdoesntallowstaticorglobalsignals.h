@@ -5,14 +5,17 @@
 #include <QtCore>
 #include <QtWebSockets/QWebSocket>
 #include <QObject>
+#include <QThread>
 #include <iostream>
 
 class JustBecauseQtDoesntAllowStaticOrGlobalSignals : public QObject
 {
 private:
     Q_OBJECT
+    bool got;
     QString result;
 private Q_SLOTS:
+    void Connected();
     void UpdateResult(QString message);
 public:
     JustBecauseQtDoesntAllowStaticOrGlobalSignals();

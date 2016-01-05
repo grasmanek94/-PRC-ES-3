@@ -3,7 +3,6 @@
 #include <QString>
 #include <QObject>
 #include <QtWebSockets/QWebSocket>
-#include "sychronouswebsocketsresponder.h"
 
 #include "bimap.h"
 using codeproject::bimap;
@@ -80,7 +79,6 @@ class SluiceTCPHandler : public QObject
     Q_OBJECT
 private:
     QWebSocket webSocket;
-    SychronousWebSocketsResponder fetcher;
 //private Q_SLOTS:
 //    void Connected();
 //    void Disconnected();

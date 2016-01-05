@@ -56,9 +56,10 @@ void InitMaps()
 }
 
 SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)
-    : QObject(parent), fetcher(SLUIS_BASE_PORT+sluisnumber)
+    : QObject(parent)
 {
     InitMaps();
+    //, fetcher(SLUIS_BASE_PORT+sluisnumber)
 }
 
 SluiceTCPHandler::~SluiceTCPHandler()

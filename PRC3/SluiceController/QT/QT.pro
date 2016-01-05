@@ -16,13 +16,11 @@ CONFIG += c++11
 HEADERS += bimap.h \
            mainwindow.h \
            sluicetcphandler.h \
-           sychronouswebsocketsresponder.h \
            ui_mainwindow.h \
-    justbecauseqtdoesntallowstaticorglobalsignals.h
+    websocketclient.h
 FORMS += mainwindow.ui
 SOURCES += main.cpp \
            mainwindow.cpp \
            sluicetcphandler.cpp \
-           sychronouswebsocketsresponder.cpp \
-    justbecauseqtdoesntallowstaticorglobalsignals.cpp
+    websocketclient.cpp
 
