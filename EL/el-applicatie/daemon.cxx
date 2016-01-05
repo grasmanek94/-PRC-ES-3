@@ -113,7 +113,7 @@ int main()
 		if (controls->Update())//new controller data?
 		{
 			*report = controls->GetButtonStates();
-			std::cout << "U" << std::flush;
+			//std::cout << "U" << std::flush;
 		}
 		int result = mq_receive(queue, (char*)message, message_size, NULL);
 		if (result > -1)
