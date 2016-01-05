@@ -39,8 +39,10 @@ int main()
 |    ,-'   `-.__   _         |        ,    __,-'   `-.    |
 |   /          /\_  `   .    |    ,      _/\          \   |
 \  |           \ \`-.___ \   |   / ___,-'/ /           |  /                                                                                                                                                          */
-     daemon    (     0       ,       0    );                                                                                                                                                                         /*
- \  \           | `._   `\\  |  //'   _,' |           /  /
+
+     /*     daemon    (     0       ,       0    );        */                                                                                                                                                                 /*
+
+  \  \           | `._   `\\  |  //'   _,' |           /  /
   `-.\         /'  _ `---'' , . ``---' _  `\         /,-'
      ``       /     \    ,='/ \`=.    /     \       ''
              |__   /|\_,--.,-.--,--._/|\   __|
@@ -65,8 +67,9 @@ int main()
 	queue = cgi_mq_create(O_NONBLOCK, message_amount, message_size);
 	if (queue == -1)
 	{
+		int error = errno;
 		close(shm_fd);
-		std::cout << "Failed to create QUEUE" << std::endl;
+		std::cout << "Failed to create QUEUE: " << error << std::endl;
 		return 1;
 	}
 
@@ -110,9 +113,10 @@ int main()
 		if (controls->Update())//new controller data?
 		{
 			*report = controls->GetButtonStates();
+			std::cout << "U" << std::flush;
 		}
-
-		if (mq_receive(queue, (char*)message, message_size, NULL) != -1)
+		int result = mq_receive(queue, (char*)message, message_size, NULL);
+		if (result > -1)
 		{
 			switch (message[0])
 			{
@@ -127,7 +131,7 @@ int main()
 
 			default://anything else, quit daemon
 				monitor = false;
-				std::cout << "Closing..." << std::endl;
+				std::cout << "Closing..." << std::endl << result << std::endl;
 				break;
 
 			}

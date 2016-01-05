@@ -38,8 +38,8 @@ mqd_t cgi_mq_create(int mq_flags, int mq_maxmsg, int mq_msgsize)
 	obuf.mq_msgsize = mq_msgsize;
 	obuf.mq_curmsgs = 0;
 
-	mq_unlink("xbox_web_controller_app");
-	mqd = mq_open("xbox_web_controller_app", O_CREAT | O_EXCL | O_RDWR, 0777, &obuf);
+	mq_unlink("/xbox_web_controller_app");
+	mqd = mq_open("/xbox_web_controller_app", O_NONBLOCK | O_CREAT | O_EXCL | O_RDWR, 0777, &obuf);
 
 	return mqd;
 }
@@ -49,7 +49,7 @@ mqd_t cgi_mq_open(mq_attr* obuf)
 {
 	mqd_t mqd;           /* queue descriptor */
 
-	mqd = mq_open("xbox_web_controller_app", O_RDONLY);
+	mqd = mq_open("/xbox_web_controller_app", O_RDWR);
 	if (-1 != mqd)
 	{
 		if (!mq_getattr(mqd, obuf))

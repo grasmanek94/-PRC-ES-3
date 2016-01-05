@@ -48,7 +48,7 @@ mqd_t queue = -1;
 
 bool prepare_key_access()
 {
-	InputReport* report = cgi_shm_open(report_fd);
+	report = cgi_shm_open(report_fd);
 	if (report)
 	{
 		return true;

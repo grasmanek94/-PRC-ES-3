@@ -5,6 +5,7 @@
 
 static void handler(int sig, siginfo_t *si, void *unused)
 {
+	std::cout << "Iets doet het niet maar oke we gaan wel door!2" << std::endl;
 	exit(0);
 }
 
