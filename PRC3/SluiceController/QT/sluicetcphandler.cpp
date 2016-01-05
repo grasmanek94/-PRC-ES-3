@@ -70,11 +70,9 @@ void SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
 {
     QString query("SetDoor" + DoorMaps[which_door] + ":" + DoorStateMaps[which_state]);
 
-    fetcher.SendData(query);
-
     QMessageBox msgBox;
     msgBox.setText("RET OF: " + query);
-    msgBox.setInformativeText(fetcher.GetData(10000));
+    msgBox.setInformativeText(fetcher.SendDataAndGetReply(query));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();

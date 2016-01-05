@@ -14,17 +14,14 @@ class SychronousWebSocketsResponder : public QThread
 private:
     bool connected;
     QWebSocket webSocket;
-    QString str;
 
 private Q_SLOTS:
-    void onTextMessageReceived(QString message);
     void Connected();
     void Disconnected();
 public:
     SychronousWebSocketsResponder(unsigned short port);
 
-    qint64 SendData(const QString& str);
-    QString GetData(int timeout = 16);
+    QString SendDataAndGetReply(const QString& str);
 };
 
 #endif // SYCHRONOUSWEBSOCKETSRESPONDER_H

@@ -10,14 +10,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = QT
 TEMPLATE = app
+CONFIG += c++11
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    sluicetcphandler.cpp \
-    sychronouswebsocketsresponder.cpp
+# Input
+HEADERS += bimap.h \
+           mainwindow.h \
+           sluicetcphandler.h \
+           sychronouswebsocketsresponder.h \
+           ui_mainwindow.h \
+    justbecauseqtdoesntallowstaticorglobalsignals.h
+FORMS += mainwindow.ui
+SOURCES += main.cpp \
+           mainwindow.cpp \
+           sluicetcphandler.cpp \
+           sychronouswebsocketsresponder.cpp \
+    justbecauseqtdoesntallowstaticorglobalsignals.cpp
 
-HEADERS  += mainwindow.h \
-    sluicetcphandler.h \
-    sychronouswebsocketsresponder.h
-
-FORMS    += mainwindow.ui
