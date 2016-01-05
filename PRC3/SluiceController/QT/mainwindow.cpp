@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-   SluiceTCPHandler* x = new SluiceTCPHandler(0);
-   x->SetDoor(DoorLeft, DoorStateOpen);
-   delete x;
+    SluiceTCPHandler* x = new SluiceTCPHandler(0, this);
+    x->SetDoor(DoorLeft, DoorStateOpen);
+    delete x;
 }
 
 MainWindow::~MainWindow()

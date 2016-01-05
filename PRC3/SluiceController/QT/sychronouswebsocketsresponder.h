@@ -12,12 +12,14 @@ class SychronousWebSocketsResponder : public QThread
     Q_OBJECT
 
 private:
+    bool connected;
     QWebSocket webSocket;
     QString str;
 
 private Q_SLOTS:
     void onTextMessageReceived(QString message);
-
+    void Connected();
+    void Disconnected();
 public:
     SychronousWebSocketsResponder(unsigned short port);
 

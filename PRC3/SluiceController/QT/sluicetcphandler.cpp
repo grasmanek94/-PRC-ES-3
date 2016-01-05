@@ -59,22 +59,7 @@ SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)
     : QObject(parent), fetcher(SLUIS_BASE_PORT+sluisnumber)
 {
     InitMaps();
-
-    //connect(&webSocket, &QWebSocket::connected, this, &SluiceTCPHandler::Connected);
-    //connect(&webSocket, &QWebSocket::disconnected, this, &SluiceTCPHandler::Disconnected);
-    //webSocket.open(QUrl(QString("ws://localhost:") + SLUIS_BASE_PORT+sluisnumber));
 }
-/*
-void SluiceTCPHandler::Connected()
-{
-
-}
-
-void SluiceTCPHandler::Disconnected()
-{
-    webSocket.open(webSocket.requestUrl());
-}
-*/
 
 SluiceTCPHandler::~SluiceTCPHandler()
 {
@@ -92,7 +77,7 @@ void SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
     msgBox.setInformativeText(fetcher.GetData(10000));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
-    int ret = msgBox.exec();
+    msgBox.exec();
 }
 
 GetDoorState SluiceTCPHandler::GetDoor(Door which_door)
