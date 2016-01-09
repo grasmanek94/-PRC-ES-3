@@ -1,21 +1,44 @@
+#include <iostream>
+
 #include <QTime>
 #include <QTcpSocket>
 #include <QString>
 
 #include "websocketclient.h"
+#include "Base64.h"
 
-QString clientHandshake = "GET %1 HTTP/1.1\nUpgrade: WebSocket\nConnection: Upgrade\nHost: %2\nOrigin: RafalMinhTrietWSC\n";
-QString serverHandshake = "HTTP/1.1 101";
+const QString clientHandshake = "\
+GET / HTTP/1.1\r\n\
+Host: %1:%2\r\n\
+Upgrade: websocket\r\n\
+Connection: Upgrade\r\n\
+Sec-WebSocket-Key: %3\r\n\
+Sec-WebSocket-Version: 13\r\n\r\n\
+";
 
-bool WebSocketClient::connect(unsigned short port, QString host, QString path)
+const QString serverHandshake = "HTTP/1.1 101";
+
+#define PD(a) std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << ":" << (a) << std::endl
+
+bool WebSocketClient::connect(unsigned short port, QString host, int timeout)
 {
+    for(int i = 0; i < 16; ++i)
+    {
+        security_key[i] = rand() % 256;
+    }
+    char buffer[256];
+    base64_encode(buffer,security_key, 16);
+    security_key_str = "";
+    security_key_str.append(buffer);
+
     bool result = false;
 
     _client.connectToHost(host, port);
     if(_client.waitForConnected())
     {
-        sendHandshake(host, path);
-        result = readHandshake();
+        this->port = port;
+        sendHandshake(host);
+        result = readHandshake(timeout);
     }
 
     return result;
@@ -34,64 +57,26 @@ void WebSocketClient::disconnect()
 
 QString WebSocketClient::readMessage(int timeout)
 {
-    return readUntil(-1, timeout);
+    _client.waitForReadyRead(timeout);
+    QString result = _client.readAll();
+    result.remove(0, 2);
+    return result;
 }
 
-QString WebSocketClient::readUntil(char needle, int timeout)
+void WebSocketClient::sendHandshake(QString hostname)
 {
-    QTime Timer;
-    Timer.start();
-
-    QString buffer = "";
-    char c = needle;
-
-    while(
-          _client.read(&c, 1) != 1 &&
-          c != 0 &&
-          Timer.elapsed() < timeout)
-    {
-        c = needle;
-    }
-
-    if(!c)
-    {
-        while(Timer.elapsed() < timeout && c != needle && c != -1)
-            //if needle == -1 @ compile time, compiler will optimize this statement to
-            //while(myTimer.elapsed() < timeout && c != -1)
-        {
-            while(_client.read(&c, 1) == 1 && c != needle && c != -1)
-            {
-                buffer.append((QChar)c);
-            }
-        }
-    }
-
-    return buffer;
-}
-
-void WebSocketClient::sendHandshake(QString hostname, QString path)
-{
-    _client.write(clientHandshake.arg(path).arg(hostname).toLocal8Bit());
+    std::string tosend = clientHandshake.arg(hostname).arg(port).arg(security_key_str).toStdString();
+    _client.write(tosend.c_str(), tosend.size());
 }
 
 bool WebSocketClient::readHandshake(int timeout)
 { 
     bool result = false;
     QString handshake = "";
-    QString line;
-    QTime Timer;
-    Timer.start();
 
-    while(_client.bytesAvailable() == 0 && Timer.elapsed() < timeout)
-    {
+    _client.waitForReadyRead(timeout);
 
-    }
-
-    while((line = readLine()) != "")
-    {
-        handshake += line + '\n';
-    }
-
+    handshake = _client.readAll();
     result = handshake.indexOf(serverHandshake) != -1;
 
     if(!result)
@@ -102,22 +87,50 @@ bool WebSocketClient::readHandshake(int timeout)
     return result;
 }
 
-QString WebSocketClient::readLine(int timeout)
-{
-    QString line = readUntil('\n', timeout);
-    if(line[line.size()-1] == '\r')
-    {
-        line = line.remove(line.size()-1, 1);
-    }
-    return line;
-}
 
 void WebSocketClient::send(QString data)
 {
-    static char ZERO = 0;
-    static char MINONE = 255;
+    // WebSocket protocol constants
+    // First byte
+    static const char WS_FIN            = 0x80;
+    static const char WS_OPCODE_TEXT    = 0x01;
+    static const char WS_OPCODE_BINARY  = 0x02;
+    static const char WS_OPCODE_CLOSE   = 0x08;
+    static const char WS_OPCODE_PING    = 0x09;
+    static const char WS_OPCODE_PONG    = 0x0a;
 
-    _client.write(&ZERO, 1);
-    _client.write(data.toLocal8Bit());
-    _client.write(&MINONE, 1);
+    // Second byte
+    static const char WS_MASK           = 0x80;
+    static const char WS_SIZE16         = 126 ;
+    static const char WS_SIZE64         = 127 ;
+
+    QByteArray arr;
+    arr.append(1 | WS_FIN);
+    unsigned short size = data.size();
+    if (size > 125)
+    {
+        arr.append(WS_SIZE16 | WS_MASK);
+        arr.append((uint8_t) (size >> 8));
+        arr.append((uint8_t) (size & 0xFF));
+    }
+    else
+    {
+        arr.append((uint8_t) size | WS_MASK);
+    }
+
+    unsigned char mask[4] = {rand() % 256, rand() % 256, rand() % 256, rand() % 256};
+    arr.append(mask[0]);
+    arr.append(mask[1]);
+    arr.append(mask[2]);
+    arr.append(mask[3]);
+
+    std::string str = data.toStdString();
+
+    for (unsigned short i = 0; i < size; ++i)
+    {
+        arr.append(str[i] ^ mask[i % 4]);
+    }
+
+    _client.write(arr);
+    _client.flush();
 }

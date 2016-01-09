@@ -86,7 +86,7 @@ bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
     query = query.arg(DoorMaps[which_door]).arg(DoorStateMaps[which_state]);
 
     webSocket.send(query);
-    QString response = webSocket.readMessage();
+    QString response = webSocket.readMessage(9999);
 
     QMessageBox msgBox;
     msgBox.setText("RET OF: " + query + "(Connected? - " + (connected ? "yes" : "no") + ")");

@@ -48,20 +48,18 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		mainwindow.cpp \
 		sluicetcphandler.cpp \
-		sychronouswebsocketsresponder.cpp \
-		justbecauseqtdoesntallowstaticorglobalsignals.cpp moc_mainwindow.cpp \
+		websocketclient.cpp \
+		qwst.cpp moc_mainwindow.cpp \
 		moc_sluicetcphandler.cpp \
-		moc_sychronouswebsocketsresponder.cpp \
-		moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp
+		moc_qwst.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		sluicetcphandler.o \
-		sychronouswebsocketsresponder.o \
-		justbecauseqtdoesntallowstaticorglobalsignals.o \
+		websocketclient.o \
+		qwst.o \
 		moc_mainwindow.o \
 		moc_sluicetcphandler.o \
-		moc_sychronouswebsocketsresponder.o \
-		moc_justbecauseqtdoesntallowstaticorglobalsignals.o
+		moc_qwst.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -121,8 +119,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		QT.pro main.cpp \
 		mainwindow.cpp \
 		sluicetcphandler.cpp \
-		sychronouswebsocketsresponder.cpp \
-		justbecauseqtdoesntallowstaticorglobalsignals.cpp
+		websocketclient.cpp \
+		qwst.cpp
 QMAKE_TARGET  = QT
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = QT
@@ -289,7 +287,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/QT1.0.0 || mkdir -p .tmp/QT1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/QT1.0.0/ && $(COPY_FILE) --parents bimap.h mainwindow.h sluicetcphandler.h sychronouswebsocketsresponder.h ui_mainwindow.h justbecauseqtdoesntallowstaticorglobalsignals.h .tmp/QT1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp sluicetcphandler.cpp sychronouswebsocketsresponder.cpp justbecauseqtdoesntallowstaticorglobalsignals.cpp .tmp/QT1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/QT1.0.0/ && (cd `dirname .tmp/QT1.0.0` && $(TAR) QT1.0.0.tar QT1.0.0 && $(COMPRESS) QT1.0.0.tar) && $(MOVE) `dirname .tmp/QT1.0.0`/QT1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/QT1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/QT1.0.0/ && $(COPY_FILE) --parents bimap.h mainwindow.h sluicetcphandler.h ui_mainwindow.h websocketclient.h qwst.h .tmp/QT1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp sluicetcphandler.cpp websocketclient.cpp qwst.cpp .tmp/QT1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/QT1.0.0/ && (cd `dirname .tmp/QT1.0.0` && $(TAR) QT1.0.0.tar QT1.0.0 && $(COMPRESS) QT1.0.0.tar) && $(MOVE) `dirname .tmp/QT1.0.0`/QT1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/QT1.0.0
 
 
 clean:compiler_clean 
@@ -312,22 +310,19 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sychronouswebsocketsresponder.cpp moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_qwst.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sychronouswebsocketsresponder.cpp moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_qwst.cpp
 moc_mainwindow.cpp: mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
-moc_sluicetcphandler.cpp: sychronouswebsocketsresponder.h \
+moc_sluicetcphandler.cpp: WebSocketClient.h \
 		bimap.h \
 		sluicetcphandler.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include sluicetcphandler.h -o moc_sluicetcphandler.cpp
 
-moc_sychronouswebsocketsresponder.cpp: sychronouswebsocketsresponder.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include sychronouswebsocketsresponder.h -o moc_sychronouswebsocketsresponder.cpp
-
-moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp: justbecauseqtdoesntallowstaticorglobalsignals.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include justbecauseqtdoesntallowstaticorglobalsignals.h -o moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp
+moc_qwst.cpp: qwst.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include qwst.h -o moc_qwst.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -349,27 +344,28 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 main.o: main.cpp mainwindow.h \
 		sluicetcphandler.h \
-		sychronouswebsocketsresponder.h \
+		WebSocketClient.h \
 		bimap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
 		ui_mainwindow.h \
 		sluicetcphandler.h \
-		sychronouswebsocketsresponder.h \
-		bimap.h
+		WebSocketClient.h \
+		bimap.h \
+		qwst.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
-sluicetcphandler.o: sluicetcphandler.cpp sluicetcphandler.h \
-		sychronouswebsocketsresponder.h \
+sluicetcphandler.o: sluicetcphandler.cpp WebSocketClient.h \
+		sluicetcphandler.h \
 		bimap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sluicetcphandler.o sluicetcphandler.cpp
 
-sychronouswebsocketsresponder.o: sychronouswebsocketsresponder.cpp sychronouswebsocketsresponder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sychronouswebsocketsresponder.o sychronouswebsocketsresponder.cpp
+websocketclient.o: websocketclient.cpp websocketclient.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o websocketclient.o websocketclient.cpp
 
-justbecauseqtdoesntallowstaticorglobalsignals.o: justbecauseqtdoesntallowstaticorglobalsignals.cpp justbecauseqtdoesntallowstaticorglobalsignals.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o justbecauseqtdoesntallowstaticorglobalsignals.o justbecauseqtdoesntallowstaticorglobalsignals.cpp
+qwst.o: qwst.cpp qwst.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qwst.o qwst.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
@@ -377,11 +373,8 @@ moc_mainwindow.o: moc_mainwindow.cpp
 moc_sluicetcphandler.o: moc_sluicetcphandler.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sluicetcphandler.o moc_sluicetcphandler.cpp
 
-moc_sychronouswebsocketsresponder.o: moc_sychronouswebsocketsresponder.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sychronouswebsocketsresponder.o moc_sychronouswebsocketsresponder.cpp
-
-moc_justbecauseqtdoesntallowstaticorglobalsignals.o: moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_justbecauseqtdoesntallowstaticorglobalsignals.o moc_justbecauseqtdoesntallowstaticorglobalsignals.cpp
+moc_qwst.o: moc_qwst.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qwst.o moc_qwst.cpp
 
 ####### Install
 

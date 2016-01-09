@@ -7,17 +7,18 @@
 class WebSocketClient
 {
     public:
-        bool connect(unsigned short port, QString host = "localhost", QString path = "/");
+        bool connect(unsigned short port, QString host = "192.168.137.128", int timeout = 3000);
         bool connected();
         void disconnect();
         QString readMessage(int timeout = 16);
         void send(QString data);
     private:
-        QString readUntil(char needle = -1, int timeout = 16);
-        QString readLine(int timeout = 16);
-        void sendHandshake(QString hostname = "localhost", QString path = "/");
-        bool readHandshake(int timeout = 16);
+        void sendHandshake(QString hostname);
+        bool readHandshake(int timeout = 9999);
 
+        unsigned short port;
+        char security_key[16];
+        QString security_key_str;
         QTcpSocket _client;
 };
 
