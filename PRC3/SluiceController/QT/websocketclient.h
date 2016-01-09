@@ -3,7 +3,6 @@
 
 #include <QTcpSocket>
 #include <QString>
-#include <QTime>
 
 class WebSocketClient
 {
@@ -11,15 +10,15 @@ class WebSocketClient
         bool connect(unsigned short port, QString host = "localhost", QString path = "/");
         bool connected();
         void disconnect();
-        QString read(size_t minimum_readamount = 0, int timeout = 16);
-        QString readUntil(QString needle, int timeout = 16);
-        void send(String data);
+        QString readMessage(int timeout = 16);
+        void send(QString data);
     private:
-        QString getStringTableItem(int index);
-        void sendHandshake(QString host = "localhost", QString path = "/");
+        QString readUntil(char needle = -1, int timeout = 16);
+        QString readLine(int timeout = 16);
+        void sendHandshake(QString hostname = "localhost", QString path = "/");
+        bool readHandshake(int timeout = 16);
+
         QTcpSocket _client;
-        bool readHandshake();
-        QString readLine();
 };
 
 #endif // WEBSOCKETCLIENT_H

@@ -2,7 +2,11 @@
 #define SLUICETCPHANDLER_H
 #include <QString>
 #include <QObject>
-#include <QtWebSockets/QWebSocket>
+
+//fuck QT
+//#include <QtWebSockets/QWebSocket>
+//Use our own WebSockets impl.:
+#include "WebSocketClient.h"
 
 #include "bimap.h"
 using codeproject::bimap;
@@ -68,34 +72,44 @@ extern bimap<QString, WaterLevel> WaterLevelMaps;
 
 enum DoorLockState
 {
-    DoorLockStateWorking,
-    DoorLockStateDamaged
+    SetDoorLockStateOn,
+    SetDoorLockStateOff,
+
+    GetDoorLockStateWorking,
+    GetDoorLockStateDamaged
 };
 
 extern bimap<QString, DoorLockState> DoorLockStateMaps;
+
+enum LightColorState
+{
+    LightColorStateOn,
+    LightColorStateOff
+};
+
+extern bimap<QString, LightColorState> LightColorStateMaps;
 
 class SluiceTCPHandler : public QObject
 {
     Q_OBJECT
 private:
-    QWebSocket webSocket;
-//private Q_SLOTS:
-//    void Connected();
-//    void Disconnected();
-
+    WebSocketClient webSocket;
+    bool connected;
+    unsigned short port;
 public:
     SluiceTCPHandler(unsigned short sluisnumber, QObject *parent = Q_NULLPTR);
     ~SluiceTCPHandler();
 
-    void SetDoor(Door which_door, DoorState which_state);
+    bool SetDoor(Door which_door, DoorState which_state);
     GetDoorState GetDoor(Door which_door);
-    void SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state);
+    bool SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state);
     ValveState GetDoorValve(Door which_door, unsigned int which_valve);
-    void SetTrafficLight(unsigned int which_light, LightColor which_color, bool on);
-    bool GetTrafficLight(unsigned int which_light, LightColor which_color);
+    bool SetTrafficLight(unsigned int which_light, LightColor which_color, LightColorState on);
+    LightColorState GetTrafficLight(unsigned int which_light, LightColor which_color);
     WaterLevel GetWaterLevel();
-    void SetDoorLock(Door which_door, bool on);
+    bool SetDoorLock(Door which_door, DoorLockState lock_state);
     DoorLockState GetDoorLockState(Door which_door);
+    bool Connect();
 };
 
 #endif // SLUICETCPHANDLER_H

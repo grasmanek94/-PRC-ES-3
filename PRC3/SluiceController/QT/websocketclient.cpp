@@ -1,3 +1,7 @@
+#include <QTime>
+#include <QTcpSocket>
+#include <QString>
+
 #include "websocketclient.h"
 
 QString clientHandshake = "GET %1 HTTP/1.1\nUpgrade: WebSocket\nConnection: Upgrade\nHost: %2\nOrigin: RafalMinhTrietWSC\n";
@@ -7,7 +11,8 @@ bool WebSocketClient::connect(unsigned short port, QString host, QString path)
 {
     bool result = false;
 
-    if (_client.connectToHost(host, port))
+    _client.connectToHost(host, port);
+    if(_client.waitForConnected())
     {
         sendHandshake(host, path);
         result = readHandshake();
@@ -29,73 +34,90 @@ void WebSocketClient::disconnect()
 
 QString WebSocketClient::readMessage(int timeout)
 {
-    QTime Timer;
-    Timer.start();
-    while (_client.bytesAvailable() < minimum_readamount && myTimer.elapsed() < timeout)
-    { }
-
-    if(_client.bytesAvailable() >= minimum_readamount)
-    {
-        return QString(_client.read(minimum_readamount));
-    }
-    return "";
+    return readUntil(-1, timeout);
 }
 
-QString WebSocketClient::readUntil(QString needle, int timeout)
+QString WebSocketClient::readUntil(char needle, int timeout)
 {
     QTime Timer;
     Timer.start();
-    while (_client.bytesAvailable() < minimum_readamount && myTimer.elapsed() < timeout)
-    { }
 
-    if(_client.bytesAvailable() >= minimum_readamount)
+    QString buffer = "";
+    char c = needle;
+
+    while(
+          _client.read(&c, 1) != 1 &&
+          c != 0 &&
+          Timer.elapsed() < timeout)
     {
-        return QString(_client.read(minimum_readamount));
+        c = needle;
     }
-    return "";
+
+    if(!c)
+    {
+        while(Timer.elapsed() < timeout && c != needle && c != -1)
+            //if needle == -1 @ compile time, compiler will optimize this statement to
+            //while(myTimer.elapsed() < timeout && c != -1)
+        {
+            while(_client.read(&c, 1) == 1 && c != needle && c != -1)
+            {
+                buffer.append((QChar)c);
+            }
+        }
+    }
+
+    return buffer;
 }
 
 void WebSocketClient::sendHandshake(QString hostname, QString path)
 {
-    _client.write(clientHandshake.arg(path).arg(hostname));
+    _client.write(clientHandshake.arg(path).arg(hostname).toLocal8Bit());
 }
 
-bool WebSocketClient::readHandshake()
-{
+bool WebSocketClient::readHandshake(int timeout)
+{ 
     bool result = false;
-    char character;
-    String handshake = "", line;
-    int maxAttempts = 300, attempts = 0;
+    QString handshake = "";
+    QString line;
+    QTime Timer;
+    Timer.start();
 
-    while(_client.available() == 0 && attempts < maxAttempts)
+    while(_client.bytesAvailable() == 0 && Timer.elapsed() < timeout)
     {
-        delay(100);
-        attempts++;
+
     }
 
-    while((line = readLine()) != "") {
+    while((line = readLine()) != "")
+    {
         handshake += line + '\n';
     }
 
-    String response = getStringTableItem(6);
-    result = handshake.indexOf(response) != -1;
+    result = handshake.indexOf(serverHandshake) != -1;
 
-    if(!result) {
-        _client.stop();
+    if(!result)
+    {
+        _client.disconnectFromHost();
     }
 
     return result;
 }
 
-QString WebSocketClient::readLine()
+QString WebSocketClient::readLine(int timeout)
 {
-    return _client.readLine();
+    QString line = readUntil('\n', timeout);
+    if(line[line.size()-1] == '\r')
+    {
+        line = line.remove(line.size()-1, 1);
+    }
+    return line;
 }
 
-void WebSocketClient::send (QString data)
+void WebSocketClient::send(QString data)
 {
-    _client.write((char)0);
-    _client.write(data);
-    _client.write((char)255);
-}
+    static char ZERO = 0;
+    static char MINONE = 255;
 
+    _client.write(&ZERO, 1);
+    _client.write(data.toLocal8Bit());
+    _client.write(&MINONE, 1);
+}

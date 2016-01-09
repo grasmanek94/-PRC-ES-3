@@ -1,8 +1,8 @@
-#include "sluicetcphandler.h"
-
 #include <QMessageBox>
-#include <QThread>
 #include <QTime>
+
+#include "WebSocketClient.h"
+#include "sluicetcphandler.h"
 
 bimap<QString, Door> DoorMaps;
 bimap<QString, DoorState> DoorStateMaps;
@@ -11,17 +11,18 @@ bimap<QString, GetDoorState> GetDoorStateMaps;
 bimap<QString, LightColor> LightColorMaps;
 bimap<QString, WaterLevel> WaterLevelMaps;
 bimap<QString, DoorLockState> DoorLockStateMaps;
-
-int maps_initialized = 0;
-
+bimap<QString, LightColorState> LightColorStateMaps;
+//if we may not make our life convienient with C++11
+//then this way it be.
 void InitMaps()
 {
+    static int maps_initialized = 0;
     if(maps_initialized)
     {
         return;
     }
 
-    maps_initialized = 1;
+    maps_initialized = 1337;
 
     DoorMaps["Left"] = DoorLeft;
     DoorMaps["Right"] = DoorRight;
@@ -51,15 +52,27 @@ void InitMaps()
     WaterLevelMaps["aboveValve3"] = WaterLevelAboveValve3;
     WaterLevelMaps["high"] = WaterLevelHigh;
 
-    DoorLockStateMaps["lockWorking"] = DoorLockStateWorking;
-    DoorLockStateMaps["lockDamaged"] = DoorLockStateDamaged;
+    DoorLockStateMaps["lockWorking"] = GetDoorLockStateWorking;
+    DoorLockStateMaps["lockDamaged"] = GetDoorLockStateDamaged;
+    DoorLockStateMaps["on"] = SetDoorLockStateOn;
+    DoorLockStateMaps["off"] = SetDoorLockStateOff;
+
+    LightColorStateMaps["on"] = LightColorStateOn;
+    LightColorStateMaps["off"] = LightColorStateOff;
 }
 
 SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)
     : QObject(parent)
 {
     InitMaps();
-    //, fetcher(SLUIS_BASE_PORT+sluisnumber)
+    port = SLUIS_BASE_PORT+sluisnumber;
+    Connect();
+}
+
+bool SluiceTCPHandler::Connect()
+{
+    connected = webSocket.connect(port);
+    return connected;
 }
 
 SluiceTCPHandler::~SluiceTCPHandler()
@@ -67,54 +80,123 @@ SluiceTCPHandler::~SluiceTCPHandler()
 
 }
 
-void SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
+bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
 {
-    QString query("SetDoor" + DoorMaps[which_door] + ":" + DoorStateMaps[which_state]);
+    QString query("SetDoor%1:%2");
+    query = query.arg(DoorMaps[which_door]).arg(DoorStateMaps[which_state]);
+
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
 
     QMessageBox msgBox;
-    msgBox.setText("RET OF: " + query);
-    msgBox.setInformativeText(fetcher.SendDataAndGetReply(query));
+    msgBox.setText("RET OF: " + query + "(Connected? - " + (connected ? "yes" : "no") + ")");
+    msgBox.setInformativeText(response);
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
+
+    if(response.compare("ack") == 0)
+    {
+        return true;
+    }
+    return false;
 }
 
 GetDoorState SluiceTCPHandler::GetDoor(Door which_door)
 {
-    return GetDoorStateClosed;
+    QString query("GetDoor%1");
+    query = query.arg(DoorMaps[which_door]);
+
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    return GetDoorStateMaps[response];
 }
 
-void SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state)
+bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state)
 {
+    QString query("SetDoor%1Valve%2:%3");
+    query = query.arg(DoorMaps[which_door]).arg(which_valve).arg(ValveStateMaps[which_state]);
 
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    if(response.compare("ack") == 0)
+    {
+        return true;
+    }
+    return false;
 }
 
 ValveState SluiceTCPHandler::GetDoorValve(Door which_door, unsigned int which_valve)
 {
-    return ValveStateClosed;
+    QString query("GetDoor%1Valve%2");
+    query = query.arg(DoorMaps[which_door]).arg(which_valve);
+
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    return ValveStateMaps[response];
 }
 
-void SluiceTCPHandler::SetTrafficLight(unsigned int which_light, LightColor which_color, bool on)
+bool SluiceTCPHandler::SetTrafficLight(unsigned int which_light, LightColor which_color, LightColorState light_state)
 {
+    QString query("SetTrafficLight%1%2:%3");
+    query = query.arg(which_light).arg(LightColorMaps[which_color]).arg(LightColorStateMaps[light_state]);
 
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    if(response.compare("ack") == 0)
+    {
+        return true;
+    }
+    return false;
 }
 
-bool SluiceTCPHandler::GetTrafficLight(unsigned int which_light, LightColor which_color)
+LightColorState SluiceTCPHandler::GetTrafficLight(unsigned int which_light, LightColor which_color)
 {
+    QString query("GetTrafficLight%1%2");
+    query = query.arg(which_light).arg(LightColorMaps[which_color]);
 
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    return LightColorStateMaps[response];
 }
 
 WaterLevel SluiceTCPHandler::GetWaterLevel()
 {
-    return WaterLevelLow;
+    QString query("GetWaterLevel");
+
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    return WaterLevelMaps[response];
 }
 
-void SluiceTCPHandler::SetDoorLock(Door which_door, bool on)
+bool SluiceTCPHandler::SetDoorLock(Door which_door, DoorLockState lock_state)
 {
+    QString query("SetDoorLock%1:%2");
+    query = query.arg(DoorMaps[which_door]).arg(DoorLockStateMaps[lock_state]);
 
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    if(response.compare("ack") == 0)
+    {
+        return true;
+    }
+    return false;
 }
 
-DoorLockState GetDoorLockState(Door which_door)
+DoorLockState SluiceTCPHandler::GetDoorLockState(Door which_door)
 {
-    return DoorLockStateDamaged;
+    QString query("GetDoorLockState%1");
+    query = query.arg(DoorMaps[which_door]);
+
+    webSocket.send(query);
+    QString response = webSocket.readMessage();
+
+    return DoorLockStateMaps[response];
 }
