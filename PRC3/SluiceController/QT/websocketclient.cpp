@@ -1,3 +1,5 @@
+//Based on https://tools.ietf.org/html/rfc6455
+//By Rafal Grasman
 #include <iostream>
 
 #include <QTime>
@@ -90,22 +92,16 @@ bool WebSocketClient::readHandshake(int timeout)
 
 void WebSocketClient::send(QString data)
 {
-    // WebSocket protocol constants
     // First byte
     static const char WS_FIN            = 0x80;
     static const char WS_OPCODE_TEXT    = 0x01;
-    static const char WS_OPCODE_BINARY  = 0x02;
-    static const char WS_OPCODE_CLOSE   = 0x08;
-    static const char WS_OPCODE_PING    = 0x09;
-    static const char WS_OPCODE_PONG    = 0x0a;
 
     // Second byte
     static const char WS_MASK           = 0x80;
     static const char WS_SIZE16         = 126 ;
-    static const char WS_SIZE64         = 127 ;
 
     QByteArray arr;
-    arr.append(1 | WS_FIN);
+    arr.append(WS_OPCODE_TEXT | WS_FIN);
     unsigned short size = data.size();
     if (size > 125)
     {
@@ -118,7 +114,14 @@ void WebSocketClient::send(QString data)
         arr.append((uint8_t) size | WS_MASK);
     }
 
-    unsigned char mask[4] = {rand() % 256, rand() % 256, rand() % 256, rand() % 256};
+    unsigned char mask[4] =
+    {
+        (unsigned char)(rand() % 256),
+        (unsigned char)(rand() % 256),
+        (unsigned char)(rand() % 256),
+        (unsigned char)(rand() % 256)
+    };
+
     arr.append(mask[0]);
     arr.append(mask[1]);
     arr.append(mask[2]);
