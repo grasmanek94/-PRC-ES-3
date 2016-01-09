@@ -1,6 +1,7 @@
 //Based on https://tools.ietf.org/html/rfc6455
 //By Rafal Grasman
-#include <iostream>
+//Very basic implementation, does not support ping/pong/binary/etc....
+//Just Enough To Get The Job Done (TM)
 
 #include <QTime>
 #include <QTcpSocket>
@@ -20,7 +21,7 @@ Sec-WebSocket-Version: 13\r\n\r\n\
 
 const QString serverHandshake = "HTTP/1.1 101";
 
-#define PD(a) std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << ":" << (a) << std::endl
+//#define PD(a) std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << ":" << (a) << std::endl
 
 bool WebSocketClient::connect(unsigned short port, QString host, int timeout)
 {
@@ -28,7 +29,7 @@ bool WebSocketClient::connect(unsigned short port, QString host, int timeout)
     {
         security_key[i] = rand() % 256;
     }
-    char buffer[256];
+    char buffer[64];
     base64_encode(buffer,security_key, 16);
     security_key_str = "";
     security_key_str.append(buffer);
@@ -61,7 +62,10 @@ QString WebSocketClient::readMessage(int timeout)
 {
     _client.waitForReadyRead(timeout);
     QString result = _client.readAll();
+    //first two bytes are packet type and size
+    //reply is never bigger than 125 so we are safe
     result.remove(0, 2);
+    //If reply will be bigger anyway ever, just check the second byte for the WS_SIZE16 mask, if true, remove two more bytes
     return result;
 }
 
