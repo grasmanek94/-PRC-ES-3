@@ -1,0 +1,12 @@
+INPUT(
+./release/main.o
+./release/mainwindow.o
+./release/sluicetcphandler.o
+./release/websocketclient.o
+./release/qwst.o
+./release/Base64.o
+./release/sluis.o
+./release/moc_mainwindow.o
+./release/moc_sluicetcphandler.o
+./release/moc_qwst.o
+);

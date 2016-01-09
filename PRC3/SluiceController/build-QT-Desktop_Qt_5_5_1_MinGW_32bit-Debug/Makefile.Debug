@@ -47,32 +47,30 @@ SOURCES       = ../QT/main.cpp \
 		../QT/mainwindow.cpp \
 		../QT/sluicetcphandler.cpp \
 		../QT/websocketclient.cpp \
-		../QT/qwst.cpp \
-		../QT/Base64.cpp debug/moc_mainwindow.cpp \
-		debug/moc_sluicetcphandler.cpp \
-		debug/moc_qwst.cpp
+		../QT/Base64.cpp \
+		../QT/sluis.cpp debug/moc_mainwindow.cpp \
+		debug/moc_sluicetcphandler.cpp
 OBJECTS       = debug/main.o \
 		debug/mainwindow.o \
 		debug/sluicetcphandler.o \
 		debug/websocketclient.o \
-		debug/qwst.o \
 		debug/Base64.o \
+		debug/sluis.o \
 		debug/moc_mainwindow.o \
-		debug/moc_sluicetcphandler.o \
-		debug/moc_qwst.o
+		debug/moc_sluicetcphandler.o
 
 DIST          =  ../QT/bimap.h \
 		../QT/mainwindow.h \
 		../QT/sluicetcphandler.h \
 		../QT/ui_mainwindow.h \
 		../QT/websocketclient.h \
-		../QT/qwst.h \
-		../QT/Base64.h ../QT/main.cpp \
+		../QT/Base64.h \
+		../QT/sluis.h ../QT/main.cpp \
 		../QT/mainwindow.cpp \
 		../QT/sluicetcphandler.cpp \
 		../QT/websocketclient.cpp \
-		../QT/qwst.cpp \
-		../QT/Base64.cpp
+		../QT/Base64.cpp \
+		../QT/sluis.cpp
 QMAKE_TARGET  = QT
 DESTDIR        = debug/ #avoid trailing-slash linebreak
 TARGET         = QT.exe
@@ -111,7 +109,7 @@ dist:
 	$(ZIP) QT.zip $(SOURCES) $(DIST) ../QT/QT.pro ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/spec_pre.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/qdevice.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/device_config.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/qconfig.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dcollision.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dcollision_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dcore.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dcore_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dinput.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dinput_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dlogic.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dlogic_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dquick.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dquick_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dquickrenderer.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3dquickrenderer_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3drenderer.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_3drenderer_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axbase_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axcontainer_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_axserver_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_bluetooth_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_bootstrap_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_clucene_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_concurrent_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_core.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_core_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_dbus_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_declarative.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_declarative_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_designer.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_designer_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_designercomponents_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_enginio_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_gui.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_gui_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_help.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_help_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_location.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_location_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_multimedia_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_network.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_network_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_nfc_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_opengl_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_openglextensions_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_platformsupport_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_positioning.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_positioning_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_printsupport_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qml.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qml_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qmldevtools_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qmltest_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_quick.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_quick_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_quickparticles_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_quickwidgets_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_script.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_script_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_scripttools.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_scripttools_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_sensors_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_serialport_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_sql.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_sql_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_svg.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_svg_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_testlib_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_uiplugin.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_uitools_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webchannel_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webkit_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_webkitwidgets_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_websockets_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_widgets_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_winextras_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_xml.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_xml_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/modules/qt_lib_xmlpatterns_private.pri ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/qt_functions.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/qt_config.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/win32/qt_config.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/win32-g++/qmake.conf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/spec_post.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/exclusive_builds.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/default_pre.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/win32/default_pre.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/resolve_config.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/exclusive_builds_post.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/default_post.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/build_pass.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/c++11.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/win32/rtti.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/precompile_header.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/warn_on.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/qt.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/resources.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/moc.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/win32/opengl.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/uic.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/win32/windows.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/testcase_targets.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/exceptions.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/yacc.prf ../../../../Libraries/QT/5.5/mingw492_32/mkspecs/features/lex.prf ../QT/QT.pro D:/Development/Libraries/QT/5.5/mingw492_32/lib/qtmaind.prl D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Widgetsd.prl D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Guid.prl D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5WebSocketsd.prl D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Networkd.prl D:/Development/Libraries/QT/5.5/mingw492_32/lib/Qt5Cored.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug/main.o debug/mainwindow.o debug/sluicetcphandler.o debug/websocketclient.o debug/qwst.o debug/Base64.o debug/moc_mainwindow.o debug/moc_sluicetcphandler.o debug/moc_qwst.o
+	-$(DEL_FILE) debug/main.o debug/mainwindow.o debug/sluicetcphandler.o debug/websocketclient.o debug/Base64.o debug/sluis.o debug/moc_mainwindow.o debug/moc_sluicetcphandler.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -127,9 +125,9 @@ compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_sluicetcphandler.cpp debug/moc_qwst.cpp
+compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_sluicetcphandler.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug/moc_mainwindow.cpp debug/moc_sluicetcphandler.cpp debug/moc_qwst.cpp
+	-$(DEL_FILE) debug/moc_mainwindow.cpp debug/moc_sluicetcphandler.cpp
 debug/moc_mainwindow.cpp: ../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QMainWindow \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qmainwindow.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qwidget.h \
@@ -312,104 +310,6 @@ debug/moc_sluicetcphandler.cpp: ../../../../Libraries/QT/5.5/mingw492_32/include
 		../QT/bimap.h \
 		../QT/sluicetcphandler.h
 	'D:\Development\Libraries\QT\5.5\mingw492_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -ID:/Development/Libraries/QT/5.5/mingw492_32/mkspecs/win32-g++ -ID:/Development/-PRC-ES-3/PRC3/SluiceController/QT -ID:/Development/Libraries/QT/5.5/mingw492_32/include -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtWidgets -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtGui -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtANGLE -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtWebSockets -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtNetwork -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtCore -I. ../QT/sluicetcphandler.h -o debug/moc_sluicetcphandler.cpp
-
-debug/moc_qwst.cpp: ../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QObject \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobject.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qnamespace.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qglobal.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qconfig.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qfeatures.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qtypetraits.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsysinfo.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qlogging.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qflags.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmutex.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qnumeric.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstring.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qchar.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qbytearray.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qrefcount.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qarraydata.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qlist.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qalgorithms.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qiterator.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstringlist.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qregexp.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcoreevent.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmetatype.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qisenum.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobject_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/QWebSocket \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QUrl \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qpair.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurlquery.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qshareddata.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qhash.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QAbstractSocket \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qabstractsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qiodevice.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qdebug.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmap.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qtextstream.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qlocale.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qvariant.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qvector.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qpoint.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qset.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QNetworkProxy \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qnetworkproxy.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qhostaddress.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qnetworkrequest.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QSharedDataPointer \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QString \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QVariant \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QSslError \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslerror.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslcertificate.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcryptographichash.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qdatetime.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qssl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QFlags \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QSslConfiguration \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslconfiguration.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qtcpsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsockets_global.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsocketprotocol.h \
-		../QT/qwst.h
-	'D:\Development\Libraries\QT\5.5\mingw492_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -ID:/Development/Libraries/QT/5.5/mingw492_32/mkspecs/win32-g++ -ID:/Development/-PRC-ES-3/PRC3/SluiceController/QT -ID:/Development/Libraries/QT/5.5/mingw492_32/include -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtWidgets -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtGui -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtANGLE -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtWebSockets -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtNetwork -ID:/Development/Libraries/QT/5.5/mingw492_32/include/QtCore -I. ../QT/qwst.h -o debug/moc_qwst.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -710,7 +610,6 @@ debug/mainwindow.o: ../QT/mainwindow.cpp ../QT/mainwindow.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qtcpsocket.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qabstractsocket.h \
 		../QT/bimap.h \
-		../QT/qwst.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/QWebSocket \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsocket.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QUrl \
@@ -925,11 +824,14 @@ debug/websocketclient.o: ../QT/websocketclient.cpp ../../../../Libraries/QT/5.5/
 		../QT/Base64.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/websocketclient.o ../QT/websocketclient.cpp
 
-debug/qwst.o: ../QT/qwst.cpp ../QT/qwst.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QObject \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobject.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qnamespace.h \
+debug/Base64.o: ../QT/Base64.cpp ../QT/Base64.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/Base64.o ../QT/Base64.cpp
+
+debug/sluis.o: ../QT/sluis.cpp ../QT/sluis.h \
+		../QT/sluicetcphandler.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QString \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstring.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qchar.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qglobal.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qconfig.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qfeatures.h \
@@ -958,13 +860,15 @@ debug/qwst.o: ../QT/qwst.cpp ../QT/qwst.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmutex.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qnumeric.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstring.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qchar.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qbytearray.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qnamespace.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qarraydata.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QObject \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobject.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qlist.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qalgorithms.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qiterator.h \
@@ -979,61 +883,31 @@ debug/qwst.o: ../QT/qwst.cpp ../QT/qwst.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qisenum.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qobject_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/QWebSocket \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QUrl \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qpair.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurlquery.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qshareddata.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qhash.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QAbstractSocket \
+		../QT/WebSocketClient.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QTcpSocket \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qtcpsocket.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qabstractsocket.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qiodevice.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qdebug.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qhash.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qpair.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmap.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qtextstream.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qlocale.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qvariant.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qshareddata.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qvector.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qpoint.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qset.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QNetworkProxy \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qnetworkproxy.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qhostaddress.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qnetworkrequest.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QSharedDataPointer \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QString \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QVariant \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QSslError \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslerror.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslcertificate.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qcryptographichash.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qdatetime.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qssl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QFlags \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/QSslConfiguration \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslconfiguration.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qsslsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtNetwork/qtcpsocket.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsockets_global.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWebSockets/qwebsocketprotocol.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/qwst.o ../QT/qwst.cpp
-
-debug/Base64.o: ../QT/Base64.cpp ../QT/Base64.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/Base64.o ../QT/Base64.cpp
+		../QT/bimap.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/sluis.o ../QT/sluis.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_mainwindow.o debug/moc_mainwindow.cpp
 
 debug/moc_sluicetcphandler.o: debug/moc_sluicetcphandler.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_sluicetcphandler.o debug/moc_sluicetcphandler.cpp
-
-debug/moc_qwst.o: debug/moc_qwst.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_qwst.o debug/moc_qwst.cpp
 
 ####### Install
 

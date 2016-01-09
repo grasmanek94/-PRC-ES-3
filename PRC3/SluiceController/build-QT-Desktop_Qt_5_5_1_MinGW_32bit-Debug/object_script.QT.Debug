@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/sluicetcphandler.o
+./debug/websocketclient.o
+./debug/qwst.o
+./debug/Base64.o
+./debug/sluis.o
+./debug/moc_mainwindow.o
+./debug/moc_sluicetcphandler.o
+./debug/moc_qwst.o
+);

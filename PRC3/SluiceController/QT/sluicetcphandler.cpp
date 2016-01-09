@@ -61,6 +61,16 @@ void InitMaps()
     LightColorStateMaps["off"] = LightColorStateOff;
 }
 
+void qinfo(QString a, QString b)
+{
+    QMessageBox msgBox;
+    msgBox.setText("RET OF: " + a);
+    msgBox.setInformativeText(b);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+}
+
 SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)
     : QObject(parent)
 {
@@ -87,13 +97,6 @@ bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
 
     webSocket.send(query);
     QString response = webSocket.readMessage(9999);
-
-    QMessageBox msgBox;
-    msgBox.setText("RET OF: " + query + "(Connected? - " + (connected ? "yes" : "no") + ")");
-    msgBox.setInformativeText(response);
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.exec();
 
     if(response.compare("ack") == 0)
     {
@@ -171,6 +174,8 @@ WaterLevel SluiceTCPHandler::GetWaterLevel()
 
     webSocket.send(query);
     QString response = webSocket.readMessage();
+
+    //qinfo(query, response);
 
     return WaterLevelMaps[response];
 }

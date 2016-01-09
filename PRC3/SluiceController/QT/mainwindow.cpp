@@ -1,21 +1,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "sluicetcphandler.h"
-#include "qwst.h"
-#include <QWebSocket>
+#include "sluis.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //qwst* q = new qwst();
-    SluiceTCPHandler* x = new SluiceTCPHandler(0, this);
-    x->SetDoor(DoorLeft, DoorStateOpen);
-    delete x;
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::PushButtonClicked);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::PushButtonClicked()
+{
+    Sluis sluis(0);
+    sluis.VerplaatsBoot();
 }

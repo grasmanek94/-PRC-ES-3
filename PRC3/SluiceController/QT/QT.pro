@@ -18,13 +18,13 @@ HEADERS += bimap.h \
            sluicetcphandler.h \
            ui_mainwindow.h \
     websocketclient.h \
-    qwst.h \
-    Base64.h
+    Base64.h \
+    sluis.h
 FORMS += mainwindow.ui
 SOURCES += main.cpp \
            mainwindow.cpp \
            sluicetcphandler.cpp \
     websocketclient.cpp \
-    qwst.cpp \
-    Base64.cpp
+    Base64.cpp \
+    sluis.cpp
 

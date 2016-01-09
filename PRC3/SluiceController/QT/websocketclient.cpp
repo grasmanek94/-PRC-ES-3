@@ -23,6 +23,8 @@ const QString serverHandshake = "HTTP/1.1 101";
 
 //#define PD(a) std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << ":" << (a) << std::endl
 
+//P.S. It's inefficient as f***...
+//But w.e. goal of this excersize is not to implement websockets... so as long as it works we're okay
 bool WebSocketClient::connect(unsigned short port, QString host, int timeout)
 {
     for(int i = 0; i < 16; ++i)
