@@ -3,10 +3,11 @@
 
 #include "websocketclient.h"
 #include "sluicetcphandler.h"
+#include "bimap.h"
 
 bimap<QString, Door> DoorMaps;
 bimap<QString, DoorState> DoorStateMaps;
-bimap<QString, ValveState> ValveStateMaps;
+bimap<QString, SetValveState> SetValveStateMaps;
 bimap<QString, GetValveState> GetValveStateMaps;
 bimap<QString, GetDoorState> GetDoorStateMaps;
 bimap<QString, LightColor> LightColorMaps;
@@ -35,11 +36,8 @@ void InitMaps()
     GetValveStateMaps["open"] = GetValveStateOpen;
     GetValveStateMaps["closed"] = GetValveStateClosed;
 
-    ValveStateMaps["open"] = ValveStateOpen;
-    ValveStateMaps["close"] = ValveStateClose;
-
-
-    ValveStateMaps["hl3"] = ValveStateMakingHalfLife3;
+    SetValveStateMaps["open"] = SetValveStateOpen;
+    SetValveStateMaps["close"] = SetValveStateClose;
 
     GetDoorStateMaps["doorLocked"] = GetDoorStateLocked;
     GetDoorStateMaps["doorClosed"] = GetDoorStateClosed;
@@ -119,13 +117,20 @@ GetDoorState SluiceTCPHandler::GetDoor(Door which_door)
     webSocket.send(query);
     QString response = webSocket.readMessage();
 
-    return GetDoorStateMaps[response];
+    try
+    {
+        return GetDoorStateMaps[response];
+    }
+    catch(const bimap_base::value_not_found&)
+    {
+        return GetDoorState_UNKNOWN_ERROR;
+    }
 }
 
-bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state)
+bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, SetValveState which_state)
 {
     QString query("SetDoor%1Valve%2:%3");
-    query = query.arg(DoorMaps[which_door]).arg(which_valve).arg(ValveStateMaps[which_state]);
+    query = query.arg(DoorMaps[which_door]).arg(which_valve).arg(SetValveStateMaps[which_state]);
 
     webSocket.send(query);
     QString response = webSocket.readMessage();
@@ -137,7 +142,7 @@ bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, V
     return false;
 }
 
-ValveState SluiceTCPHandler::GetDoorValve(Door which_door, unsigned int which_valve)
+GetValveState SluiceTCPHandler::GetDoorValve(Door which_door, unsigned int which_valve)
 {
     QString query("GetDoor%1Valve%2");
     query = query.arg(DoorMaps[which_door]).arg(which_valve);
@@ -145,7 +150,14 @@ ValveState SluiceTCPHandler::GetDoorValve(Door which_door, unsigned int which_va
     webSocket.send(query);
     QString response = webSocket.readMessage();
 
-    return ValveStateMaps[response];
+    try
+    {
+        return GetValveStateMaps[response];
+    }
+    catch(const bimap_base::value_not_found&)
+    {
+        return GetValveState_UNKNOWN_ERROR;
+    }
 }
 
 bool SluiceTCPHandler::SetTrafficLight(unsigned int which_light, LightColor which_color, LightColorState light_state)
@@ -171,7 +183,14 @@ LightColorState SluiceTCPHandler::GetTrafficLight(unsigned int which_light, Ligh
     webSocket.send(query);
     QString response = webSocket.readMessage();
 
-    return LightColorStateMaps[response];
+    try
+    {
+        return LightColorStateMaps[response];
+    }
+    catch(const bimap_base::value_not_found&)
+    {
+        return LightColorState_UNKNOWN_ERROR;
+    }
 }
 
 WaterLevel SluiceTCPHandler::GetWaterLevel()
@@ -183,7 +202,14 @@ WaterLevel SluiceTCPHandler::GetWaterLevel()
 
     //qinfo(query, response);
 
-    return WaterLevelMaps[response];
+    try
+    {
+        return WaterLevelMaps[response];
+    }
+    catch(const bimap_base::value_not_found&)
+    {
+        return WaterLevel_UNKNOWN_ERROR;
+    }
 }
 
 bool SluiceTCPHandler::SetDoorLock(Door which_door, DoorLockState lock_state)
@@ -209,5 +235,12 @@ DoorLockState SluiceTCPHandler::GetDoorLockState(Door which_door)
     webSocket.send(query);
     QString response = webSocket.readMessage();
 
-    return DoorLockStateMaps[response];
+    try
+    {
+        return DoorLockStateMaps[response];
+    }
+    catch(const bimap_base::value_not_found&)
+    {
+        return DoorLockState_UNKNOWN_ERROR;
+    }
 }

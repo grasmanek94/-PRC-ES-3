@@ -26,27 +26,27 @@ void Sluis::Tick()
                 case WaterLevelHigh:
                 case WaterLevelAboveValve3:
                 {
-                    handler.SetDoorValve(DoorLeft, 3, ValveStateOpen);
+                    handler.SetDoorValve(DoorLeft, 3, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelAboveValve2:
                 {
-                    handler.SetDoorValve(DoorLeft, 2, ValveStateOpen);
+                    handler.SetDoorValve(DoorLeft, 2, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelBelowValve2:
                 {
-                    handler.SetDoorValve(DoorLeft, 1, ValveStateOpen);
+                    handler.SetDoorValve(DoorLeft, 1, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelLow:
                 {
-                    handler.SetDoorValve(DoorLeft, 1, ValveStateClose);
-                    handler.SetDoorValve(DoorLeft, 2, ValveStateClose);
-                    handler.SetDoorValve(DoorLeft, 3, ValveStateClose);
+                    handler.SetDoorValve(DoorLeft, 1, SetValveStateClose);
+                    handler.SetDoorValve(DoorLeft, 2, SetValveStateClose);
+                    handler.SetDoorValve(DoorLeft, 3, SetValveStateClose);
                     handler.SetDoor(DoorLeft, DoorStateOpen);
                 }
                 break;
@@ -67,28 +67,28 @@ void Sluis::Tick()
             {
                 case WaterLevelLow:
                 {
-                    handler.SetDoorValve(DoorRight, 1, ValveStateOpen);
+                    handler.SetDoorValve(DoorRight, 1, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelBelowValve2:
                 {
-                    handler.SetDoorValve(DoorRight, 2, ValveStateOpen);
+                    handler.SetDoorValve(DoorRight, 2, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelAboveValve3:
                 case WaterLevelAboveValve2:
                 {
-                    handler.SetDoorValve(DoorRight, 3, ValveStateOpen);
+                    handler.SetDoorValve(DoorRight, 3, SetValveStateOpen);
                 }
                 break;
 
                 case WaterLevelHigh:
                 {
-                    handler.SetDoorValve(DoorRight, 3, ValveStateClose);
-                    handler.SetDoorValve(DoorRight, 2, ValveStateClose);
-                    handler.SetDoorValve(DoorRight, 1, ValveStateClose);
+                    handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
+                    handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
+                    handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
                     handler.SetDoor(DoorRight, DoorStateOpen);
                 }
                 break;
@@ -210,22 +210,22 @@ void Sluis::Schutten()
             handler.SetDoor(DoorLeft, DoorStateClose);
             if (handler.GetDoor(DoorLeft) == GetDoorStateClosed)
             {
-                handler.SetDoorValve(DoorRight, 1, ValveStateOpen);
+                handler.SetDoorValve(DoorRight, 1, SetValveStateOpen);
                 if (level == WaterLevelAboveValve2)
                 {
-                    handler.SetDoorValve(DoorRight, 2, ValveStateOpen);
+                    handler.SetDoorValve(DoorRight, 2, SetValveStateOpen);
                 }
                 if (level == WaterLevelAboveValve3)
                 {
-                    handler.SetDoorValve(DoorRight, 3, ValveStateOpen);
+                    handler.SetDoorValve(DoorRight, 3, SetValveStateOpen);
                 }
             }
         }
         if (level == WaterLevelHigh)
         {
-            handler.SetDoorValve(DoorRight, 1, ValveStateClose);
-            handler.SetDoorValve(DoorRight, 2, ValveStateClose);
-            handler.SetDoorValve(DoorRight, 3, ValveStateClose);
+            handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
+            handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
+            handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
             handler.SetDoor(DoorRight, DoorStateOpen);
         }
     }
@@ -235,19 +235,19 @@ void Sluis::Schutten()
         if (level != WaterLevelLow)
         {
             handler.SetDoor(DoorRight, DoorStateClose);
-            handler.SetDoorValve(DoorRight, 1, ValveStateClose);
-            handler.SetDoorValve(DoorRight, 2, ValveStateClose);
-            handler.SetDoorValve(DoorRight, 3, ValveStateClose);
+            handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
+            handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
+            handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
             if (handler.GetDoor(DoorRight) == GetDoorStateClosed)
             {
-                handler.SetDoorValve(DoorLeft, 1, ValveStateOpen);
+                handler.SetDoorValve(DoorLeft, 1, SetValveStateOpen);
             }
         }
         if (level == WaterLevelLow)
         {
-            handler.SetDoorValve(DoorLeft, 1, ValveStateClose);
-            handler.SetDoorValve(DoorLeft, 2, ValveStateClose);
-            handler.SetDoorValve(DoorLeft, 3, ValveStateClose);
+            handler.SetDoorValve(DoorLeft, 1, SetValveStateClose);
+            handler.SetDoorValve(DoorLeft, 2, SetValveStateClose);
+            handler.SetDoorValve(DoorLeft, 3, SetValveStateClose);
             handler.SetDoor(DoorLeft, DoorStateOpen);
         }
     }
@@ -390,9 +390,9 @@ void Sluis::alarmDoors(Door which)
 {
     if (handler.GetDoor(which) == GetDoorStateClosed)
     {
-        handler.SetDoorValve(which, 1, ValveStateClose);
-        handler.SetDoorValve(which, 2, ValveStateClose);
-        handler.SetDoorValve(which, 3, ValveStateClose);
+        handler.SetDoorValve(which, 1, SetValveStateClose);
+        handler.SetDoorValve(which, 2, SetValveStateClose);
+        handler.SetDoorValve(which, 3, SetValveStateClose);
     }
     else
     {

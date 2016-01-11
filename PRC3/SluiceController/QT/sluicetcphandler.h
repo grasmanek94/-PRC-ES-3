@@ -10,42 +10,46 @@
 
 #include "bimap.h"
 using codeproject::bimap;
+using codeproject::bimap_base;
 
 const unsigned short SLUIS_BASE_PORT = 5555;
 
 enum Door
 {
+    Door_UNKNOWN_ERROR,
     DoorLeft,
     DoorRight
 };
-
 extern bimap<QString, Door> DoorMaps;
+
 enum DoorState
 {
+    DoorState_UNKNOWN_ERROR,
     DoorStateOpen,
     DoorStateClose,
-    DoorStateStop
+    DoorStateStop,
 };
-
 extern bimap<QString, DoorState> DoorStateMaps;
 
 enum SetValveState
 {
-    ValveStateOpen,
-    ValveStateClose,
-    ValveStateMakingHalfLife3//should never happen
+    SetValveState_UNKNOWN_ERROR,
+    SetValveStateOpen,
+    SetValveStateClose
 };
+extern bimap<QString, SetValveState> SetValveStateMaps;
 
 enum GetValveState
 {
+    GetValveState_UNKNOWN_ERROR,
     GetValveStateOpen,
     GetValveStateClosed
 };
-
-extern bimap<QString, ValveState> ValveStateMaps;
+extern bimap<QString, GetValveState> GetValveStateMaps;
 
 enum GetDoorState
 {
+    GetDoorState_UNKNOWN_ERROR,
     GetDoorStateLocked,
     GetDoorStateClosed,
     GetDoorStateOpen,
@@ -54,45 +58,44 @@ enum GetDoorState
     GetDoorStateStopped,
     GetDoorStateDamaged
 };
-
 extern bimap<QString, GetDoorState> GetDoorStateMaps;
 
 enum LightColor
 {
+    LightColor_UNKNOWN_ERROR,
     LightColorRed,
     LightColorGreen
 };
-
 extern bimap<QString, LightColor> LightColorMaps;
 
 enum WaterLevel
 {
+    WaterLevel_UNKNOWN_ERROR,
     WaterLevelLow,
     WaterLevelBelowValve2,
     WaterLevelAboveValve2,
     WaterLevelAboveValve3,
     WaterLevelHigh
 };
-
 extern bimap<QString, WaterLevel> WaterLevelMaps;
 
 enum DoorLockState
 {
+    DoorLockState_UNKNOWN_ERROR,
     SetDoorLockStateOn,
     SetDoorLockStateOff,
 
     GetDoorLockStateWorking,
     GetDoorLockStateDamaged
 };
-
 extern bimap<QString, DoorLockState> DoorLockStateMaps;
 
 enum LightColorState
 {
+    LightColorState_UNKNOWN_ERROR,
     LightColorStateOn,
     LightColorStateOff
 };
-
 extern bimap<QString, LightColorState> LightColorStateMaps;
 
 class SluiceTCPHandler : public QObject
@@ -108,8 +111,8 @@ public:
 
     bool SetDoor(Door which_door, DoorState which_state);
     GetDoorState GetDoor(Door which_door);
-    bool SetDoorValve(Door which_door, unsigned int which_valve, ValveState which_state);
-    ValveState GetDoorValve(Door which_door, unsigned int which_valve);
+    bool SetDoorValve(Door which_door, unsigned int which_valve, SetValveState which_state);
+    GetValveState GetDoorValve(Door which_door, unsigned int which_valve);
     bool SetTrafficLight(unsigned int which_light, LightColor which_color, LightColorState on);
     LightColorState GetTrafficLight(unsigned int which_light, LightColor which_color);
     WaterLevel GetWaterLevel();
