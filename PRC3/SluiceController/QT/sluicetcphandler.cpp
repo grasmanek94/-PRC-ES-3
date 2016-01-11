@@ -7,6 +7,7 @@
 bimap<QString, Door> DoorMaps;
 bimap<QString, DoorState> DoorStateMaps;
 bimap<QString, ValveState> ValveStateMaps;
+bimap<QString, GetValveState> GetValveStateMaps;
 bimap<QString, GetDoorState> GetDoorStateMaps;
 bimap<QString, LightColor> LightColorMaps;
 bimap<QString, WaterLevel> WaterLevelMaps;

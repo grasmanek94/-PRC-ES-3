@@ -54,7 +54,8 @@ SOURCES       = ../QT/main.cpp \
 		../QT/websocketclient.cpp \
 		../QT/Base64.cpp \
 		../QT/sluis.cpp moc_mainwindow.cpp \
-		moc_sluicetcphandler.cpp
+		moc_sluicetcphandler.cpp \
+		moc_sluis.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		sluicetcphandler.o \
@@ -62,7 +63,8 @@ OBJECTS       = main.o \
 		Base64.o \
 		sluis.o \
 		moc_mainwindow.o \
-		moc_sluicetcphandler.o
+		moc_sluicetcphandler.o \
+		moc_sluis.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -331,16 +333,26 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sluis.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp
-moc_mainwindow.cpp: ../QT/mainwindow.h
+	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sluis.cpp
+moc_mainwindow.cpp: ../QT/sluis.h \
+		../QT/sluicetcphandler.h \
+		../QT/websocketclient.h \
+		../QT/bimap.h \
+		../QT/mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mt/git/PRC3_ES3_Rafal/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QT/mainwindow.h -o moc_mainwindow.cpp
 
 moc_sluicetcphandler.cpp: ../QT/websocketclient.h \
 		../QT/bimap.h \
 		../QT/sluicetcphandler.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mt/git/PRC3_ES3_Rafal/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QT/sluicetcphandler.h -o moc_sluicetcphandler.cpp
+
+moc_sluis.cpp: ../QT/sluicetcphandler.h \
+		../QT/websocketclient.h \
+		../QT/bimap.h \
+		../QT/sluis.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mt/git/PRC3_ES3_Rafal/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QT/sluis.h -o moc_sluis.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -361,17 +373,18 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 ####### Compile
 
 main.o: ../QT/main.cpp ../QT/mainwindow.h \
+		../QT/sluis.h \
 		../QT/sluicetcphandler.h \
 		../QT/websocketclient.h \
 		../QT/bimap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QT/main.cpp
 
 mainwindow.o: ../QT/mainwindow.cpp ../QT/mainwindow.h \
-		ui_mainwindow.h \
 		../QT/sluis.h \
 		../QT/sluicetcphandler.h \
 		../QT/websocketclient.h \
-		../QT/bimap.h
+		../QT/bimap.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../QT/mainwindow.cpp
 
 sluicetcphandler.o: ../QT/sluicetcphandler.cpp ../QT/websocketclient.h \
@@ -397,6 +410,9 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_sluicetcphandler.o: moc_sluicetcphandler.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sluicetcphandler.o moc_sluicetcphandler.cpp
+
+moc_sluis.o: moc_sluis.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sluis.o moc_sluis.cpp
 
 ####### Install
 

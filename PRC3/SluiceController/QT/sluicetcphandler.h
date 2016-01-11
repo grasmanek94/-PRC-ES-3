@@ -29,7 +29,7 @@ enum DoorState
 
 extern bimap<QString, DoorState> DoorStateMaps;
 
-enum ValveState
+enum SetValveState
 {
     ValveStateOpen,
     ValveStateClose,
