@@ -1,4 +1,3 @@
-#include <QMessageBox>
 #include <QTime>
 
 #include "websocketclient.h"
@@ -63,16 +62,6 @@ void InitMaps()
 
     LightColorStateMaps["on"] = LightColorStateOn;
     LightColorStateMaps["off"] = LightColorStateOff;
-}
-
-void qinfo(QString a, QString b)
-{
-    QMessageBox msgBox;
-    msgBox.setText("RET OF: " + a);
-    msgBox.setInformativeText(b);
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.exec();
 }
 
 SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)

@@ -24,7 +24,7 @@ private:
 private Q_SLOTS:
     void Tick();
 public:
-    Sluis(int nummer);
+    Sluis(int nummer, QObject *parent = NULL);
     //QString VerplaatsBoot();
     void Schutten();
     bool Vrijgeven_Uit();

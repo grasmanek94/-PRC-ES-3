@@ -2,18 +2,28 @@
 #include "sluicetcphandler.h"
 
 #include <QMessageBox>
+void qinfo(QString a, QString b)
+{
+    QMessageBox msgBox;
+    msgBox.setText("RET OF: " + a);
+    msgBox.setInformativeText(b);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+}
 
-
-Sluis::Sluis(int nummer)
-    : handler(nummer), ticker(this)
+Sluis::Sluis(int nummer, QObject *parent)
+    : QObject(parent), handler(nummer), ticker(this)
 {
     currentState = StateIdle;
     connect(&ticker, &QTimer::timeout, this, &Sluis::Tick);
     ticker.setInterval(100);
+    ticker.start();
 }
 
 void Sluis::Tick()
 {
+    //qinfo("tick", "lol");
     static WaterLevel previous_waterlevel;
 
     if(currentState == StateSchuttenOmlaag)

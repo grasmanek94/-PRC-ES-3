@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    sluis = new Sluis(0);
+    sluis = new Sluis(0, this);
     ui->setupUi(this);
     connect(ui->b_Schutten, &QPushButton::clicked, this, &MainWindow::Schutten);
     connect(ui->b_Vrijgeven_In, &QPushButton::clicked, this, &MainWindow::Vrijgeven_In);
