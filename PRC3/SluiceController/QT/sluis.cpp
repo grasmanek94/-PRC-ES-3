@@ -2,11 +2,101 @@
 #include "sluicetcphandler.h"
 
 Sluis::Sluis(int nummer)
-    : handler(nummer)
+    : handler(nummer), ticker(this)
 {
     currentState = StateIdle;
+    connect(&ticker, &QTimer::timeout, this, &Sluis::Tick);
+    ticker.setInterval(100);
 }
 
+void Sluis::Tick()
+{
+    static WaterLevel previous_waterlevel;
+
+    if(currentState == StateSchuttenOmlaag)
+    {
+        WaterLevel level = handler.GetWaterLevel();
+        if(previous_waterlevel != level)
+        {
+            switch(level)
+            {
+                case WaterLevelHigh:
+                case WaterLevelAboveValve3:
+                {
+                    handler.SetDoorValve(DoorLeft, 3, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelAboveValve2:
+                {
+                    handler.SetDoorValve(DoorLeft, 2, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelBelowValve2:
+                {
+                    handler.SetDoorValve(DoorLeft, 1, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelLow:
+                {
+                    handler.SetDoorValve(DoorLeft, 1, ValveStateClosed);
+                    handler.SetDoorValve(DoorLeft, 2, ValveStateClosed);
+                    handler.SetDoorValve(DoorLeft, 3, ValveStateClosed);
+                    handler.SetDoor(DoorLeft, DoorStateOpen);
+                }
+                break;
+
+                default:
+                    level = previous_waterlevel;
+                break;
+            }
+            previous_waterlevel = level;
+        }
+    }
+    else if(currentState == StateSchuttenOmhoog)
+    {
+        WaterLevel level = handler.GetWaterLevel();
+        if(previous_waterlevel != level)
+        {
+            switch(level)
+            {
+                case WaterLevelLow:
+                {
+                    handler.SetDoorValve(DoorRight, 1, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelBelowValve2:
+                {
+                    handler.SetDoorValve(DoorRight, 2, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelAboveValve3:
+                case WaterLevelAboveValve2:
+                {
+                    handler.SetDoorValve(DoorRight, 3, ValveStateOpen);
+                }
+                break;
+
+                case WaterLevelHigh:
+                {
+                    handler.SetDoorValve(DoorRight, 3, ValveStateClosed);
+                    handler.SetDoorValve(DoorRight, 2, ValveStateClosed);
+                    handler.SetDoorValve(DoorRight, 1, ValveStateClosed);
+                    handler.SetDoor(DoorRight, DoorStateOpen);
+                }
+                break;
+                default:
+                    level = previous_waterlevel;
+                break;
+            }
+            previous_waterlevel = level;
+        }
+    }
+}
 
 bool Sluis::Vrijgeven_In()
 {

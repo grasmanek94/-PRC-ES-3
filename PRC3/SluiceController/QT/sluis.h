@@ -1,6 +1,8 @@
 #ifndef SLUIS_H
 #define SLUIS_H
 
+#include <QObject>
+#include <QTimer>
 #include "sluicetcphandler.h"
 
 enum State {
@@ -13,9 +15,14 @@ enum State {
     StateUitvarenLaag
 };
 
-class Sluis
+class Sluis : public QObject
 {
+    Q_OBJECT
+private:
     SluiceTCPHandler handler;
+    QTimer ticker;
+private Q_SLOTS:
+    void Tick();
 public:
     Sluis(int nummer);
     //QString VerplaatsBoot();
