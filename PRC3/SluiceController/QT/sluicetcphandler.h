@@ -6,7 +6,7 @@
 //fuck QT
 //#include <QtWebSockets/QWebSocket>
 //Use our own WebSockets impl.:
-#include "WebSocketClient.h"
+#include "websocketclient.h"
 
 #include "bimap.h"
 using codeproject::bimap;

@@ -7,7 +7,7 @@
 class WebSocketClient
 {
     public:
-        bool connect(unsigned short port, QString host = "192.168.137.128", int timeout = 3000);
+        bool connect(unsigned short port, QString host = "localhost", int timeout = 3000);
         bool connected();
         void disconnect();
         QString readMessage(int timeout = 16);

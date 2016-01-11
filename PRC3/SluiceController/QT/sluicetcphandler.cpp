@@ -1,7 +1,7 @@
 #include <QMessageBox>
 #include <QTime>
 
-#include "WebSocketClient.h"
+#include "websocketclient.h"
 #include "sluicetcphandler.h"
 
 bimap<QString, Door> DoorMaps;
@@ -32,7 +32,7 @@ void InitMaps()
     DoorStateMaps["stop"] = DoorStateStop;
 
     ValveStateMaps["open"] = ValveStateOpen;
-    ValveStateMaps["close"] = ValveStateClosed;
+    ValveStateMaps["closed"] = ValveStateClosed;
     ValveStateMaps["hl3"] = ValveStateMakingHalfLife3;
 
     GetDoorStateMaps["doorLocked"] = GetDoorStateLocked;
@@ -96,7 +96,7 @@ bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
     query = query.arg(DoorMaps[which_door]).arg(DoorStateMaps[which_state]);
 
     webSocket.send(query);
-    QString response = webSocket.readMessage(9999);
+    QString response = webSocket.readMessage();
 
     if(response.compare("ack") == 0)
     {

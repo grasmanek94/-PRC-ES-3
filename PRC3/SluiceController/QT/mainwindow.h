@@ -14,7 +14,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void PushButtonClicked();
+    void Schutten();
+    void Vrijgeven_In();
+    void Vrijgeven_Uit();
+    void Alarm();
+    void Herstel();
+
 private:
     Ui::MainWindow *ui;
 };
