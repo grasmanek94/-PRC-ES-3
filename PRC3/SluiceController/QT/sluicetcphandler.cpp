@@ -31,8 +31,13 @@ void InitMaps()
     DoorStateMaps["close"] = DoorStateClose;
     DoorStateMaps["stop"] = DoorStateStop;
 
+    GetValveStateMaps["open"] = GetValveStateOpen;
+    GetValveStateMaps["closed"] = GetValveStateClosed;
+
     ValveStateMaps["open"] = ValveStateOpen;
-    ValveStateMaps["closed"] = ValveStateClosed;
+    ValveStateMaps["close"] = ValveStateClose;
+
+
     ValveStateMaps["hl3"] = ValveStateMakingHalfLife3;
 
     GetDoorStateMaps["doorLocked"] = GetDoorStateLocked;

@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    sluis = new Sluis(0);
     ui->setupUi(this);
     connect(ui->b_Schutten, &QPushButton::clicked, this, &MainWindow::Schutten);
     connect(ui->b_Vrijgeven_In, &QPushButton::clicked, this, &MainWindow::Vrijgeven_In);
@@ -16,25 +17,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete sluis;
     delete ui;
 }
 
 void MainWindow::Schutten()
 {
-    Sluis sluis(0);
-    sluis.Schutten();
+    sluis->Schutten();
 }
 
 void MainWindow::Vrijgeven_Uit()
 {
-    Sluis sluis(0);
-    sluis.Vrijgeven_Uit();
+    sluis->Vrijgeven_Uit();
 }
 
 void MainWindow::Vrijgeven_In()
 {
-    Sluis sluis(0);
-    sluis.Vrijgeven_In();
+    sluis->Vrijgeven_In();
 }
 
 void MainWindow::Alarm()

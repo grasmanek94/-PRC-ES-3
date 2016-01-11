@@ -1,6 +1,9 @@
 #include "sluis.h"
 #include "sluicetcphandler.h"
 
+#include <QMessageBox>
+
+
 Sluis::Sluis(int nummer)
     : handler(nummer)
 {
@@ -13,7 +16,7 @@ bool Sluis::Vrijgeven_In()
     WaterLevel level = handler.GetWaterLevel();
     GetDoorState leftDoorState = handler.GetDoor(DoorLeft);
     GetDoorState rightDoorState = handler.GetDoor(DoorRight);
-    ValveState valveState[6] =
+    /*ValveState valveState[6] =
     {
         handler.GetDoorValve(DoorLeft, 1),
         handler.GetDoorValve(DoorLeft, 2),
@@ -28,7 +31,17 @@ bool Sluis::Vrijgeven_In()
         {
             return false;
         }
+    }*/
+
+    if (level == WaterLevelLow && leftDoorState == GetDoorStateClosed)
+    {
+        handler.SetDoor(DoorLeft, DoorStateOpen);
     }
+    if (level == WaterLevelHigh && rightDoorState == GetDoorStateOpen)
+    {
+        handler.SetDoor(DoorLeft, DoorStateOpen);
+    }
+
 
     if (level == WaterLevelLow && leftDoorState == GetDoorStateOpen)
     {
@@ -58,7 +71,7 @@ bool Sluis::Vrijgeven_Uit()
     WaterLevel level = handler.GetWaterLevel();
     GetDoorState leftDoorState = handler.GetDoor(DoorLeft);
     GetDoorState rightDoorState = handler.GetDoor(DoorRight);
-    ValveState valveState[6] = {
+    /*ValveState valveState[6] = {
         handler.GetDoorValve(DoorLeft, 1),
         handler.GetDoorValve(DoorLeft, 2),
         handler.GetDoorValve(DoorLeft, 3),
@@ -70,7 +83,7 @@ bool Sluis::Vrijgeven_Uit()
         if (valveState[i] != ValveStateClosed) {
             return false;
         }
-    }
+    }*/
 
     if (level == WaterLevelLow && leftDoorState == GetDoorStateOpen)
     {
@@ -83,7 +96,7 @@ bool Sluis::Vrijgeven_Uit()
     }
     if (level == WaterLevelHigh && rightDoorState == GetDoorStateOpen)
     {
-        currentState = StateInvarenLaag;
+        currentState = StateUitvarenHoog;
         handler.SetTrafficLight(3, LightColorGreen, LightColorStateOff);
         handler.SetTrafficLight(3, LightColorRed, LightColorStateOn);
         handler.SetTrafficLight(4, LightColorGreen, LightColorStateOn);
@@ -99,7 +112,7 @@ void Sluis::Schutten()
     bool changeLights = false;
     WaterLevel level = handler.GetWaterLevel();
 
-    if (currentState == StateSchuttenOmhoog)
+    if (currentState == StateInvarenLaag || currentState == StateUitvarenLaag)
     {
         changeLights = true;
         if (level != WaterLevelHigh)
@@ -126,12 +139,15 @@ void Sluis::Schutten()
             handler.SetDoor(DoorRight, DoorStateOpen);
         }
     }
-    if (currentState == StateSchuttenOmlaag)
+    if (currentState == StateInvarenHoog || currentState == StateUitvarenHoog)
     {
         changeLights = true;
         if (level != WaterLevelLow)
         {
             handler.SetDoor(DoorRight, DoorStateClose);
+            handler.SetDoorValve(DoorRight, 1, ValveStateClosed);
+            handler.SetDoorValve(DoorRight, 2, ValveStateClosed);
+            handler.SetDoorValve(DoorRight, 3, ValveStateClosed);
             if (handler.GetDoor(DoorRight) == GetDoorStateClosed)
             {
                 handler.SetDoorValve(DoorLeft, 1, ValveStateOpen);

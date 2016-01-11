@@ -32,8 +32,14 @@ extern bimap<QString, DoorState> DoorStateMaps;
 enum ValveState
 {
     ValveStateOpen,
-    ValveStateClosed,
+    ValveStateClose,
     ValveStateMakingHalfLife3//should never happen
+};
+
+enum GetValveState
+{
+    GetValveStateOpen,
+    GetValveStateClosed
 };
 
 extern bimap<QString, ValveState> ValveStateMaps;
