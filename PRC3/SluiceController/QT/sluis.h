@@ -34,6 +34,7 @@ public:
 private:
     State currentState;
     void alarmDoors(Door which);
+    void redAll();
 
 };
 

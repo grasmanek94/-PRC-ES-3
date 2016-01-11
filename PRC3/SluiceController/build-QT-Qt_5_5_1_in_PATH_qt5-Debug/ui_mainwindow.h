@@ -97,13 +97,13 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         b_Schutten->setText(QApplication::translate("MainWindow", "Schutten", 0));
         b_Vrijgeven_In->setText(QApplication::translate("MainWindow", "Vrijgeven In", 0));
-        b_Alarm->setText(QApplication::translate("MainWindow", "PushButton", 0));
-        b_Herstel->setText(QApplication::translate("MainWindow", "PushButton", 0));
+        b_Alarm->setText(QApplication::translate("MainWindow", "Alarm", 0));
+        b_Herstel->setText(QApplication::translate("MainWindow", "Herstel", 0));
         b_Vrijgeven_Uit->setText(QApplication::translate("MainWindow", "Vrijgeven Uit", 0));
-        rb_1->setText(QApplication::translate("MainWindow", "RadioButton", 0));
-        rb_2->setText(QApplication::translate("MainWindow", "RadioButton", 0));
-        rb_3->setText(QApplication::translate("MainWindow", "RadioButton", 0));
-        rb_4->setText(QApplication::translate("MainWindow", "RadioButton", 0));
+        rb_1->setText(QApplication::translate("MainWindow", "Sluis 1", 0));
+        rb_2->setText(QApplication::translate("MainWindow", "Sluis 2", 0));
+        rb_3->setText(QApplication::translate("MainWindow", "Sluis 3", 0));
+        rb_4->setText(QApplication::translate("MainWindow", "Sluis 4", 0));
     } // retranslateUi
 
 };
