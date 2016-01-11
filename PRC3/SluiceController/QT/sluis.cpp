@@ -106,34 +106,39 @@ bool Sluis::Vrijgeven_In()
     GetDoorState leftDoorState = handler.GetDoor(DoorLeft);
     GetDoorState rightDoorState = handler.GetDoor(DoorRight);
 
-    if (level == WaterLevelLow)// && leftDoorState == GetDoorStateClosed)
+    if (currentState == StateUitvarenLaag && level == WaterLevelLow)
     {
-        handler.SetDoor(DoorLeft, DoorStateOpen);
-    }
-    if (level == WaterLevelHigh)// && rightDoorState == GetDoorStateOpen)
-    {
-        handler.SetDoor(DoorRight, DoorStateOpen);
+        if (!checkValvesOpen(DoorRight))// && leftDoorState == GetDoorStateClosed)
+        {
+            handler.SetDoor(DoorLeft, DoorStateOpen);
+        }
+        if (leftDoorState == GetDoorStateOpen)
+        {
+            currentState = StateInvarenLaag;
+            handler.SetTrafficLight(1, LightColorGreen, LightColorStateOn);
+            handler.SetTrafficLight(1, LightColorRed, LightColorStateOff);
+            handler.SetTrafficLight(2, LightColorGreen, LightColorStateOff);
+            handler.SetTrafficLight(2, LightColorRed, LightColorStateOn);
+            return true;
+        }
     }
 
-
-    if (level == WaterLevelLow && leftDoorState == GetDoorStateOpen)
+    if (currentState == StateUitvarenHoog && level == WaterLevelHigh)
     {
-        currentState = StateInvarenLaag;
-        handler.SetTrafficLight(1, LightColorGreen, LightColorStateOn);
-        handler.SetTrafficLight(1, LightColorRed, LightColorStateOff);
-        handler.SetTrafficLight(2, LightColorGreen, LightColorStateOff);
-        handler.SetTrafficLight(2, LightColorRed, LightColorStateOn);
-        return true;
+        if (!checkValvesOpen(DoorLeft))// && rightDoorState == GetDoorStateOpen)
+        {
+            handler.SetDoor(DoorRight, DoorStateOpen);
+        }
+        if (rightDoorState == GetDoorStateOpen)
+        {
+            currentState = StateInvarenHoog;
+            handler.SetTrafficLight(3, LightColorGreen, LightColorStateOff);
+            handler.SetTrafficLight(3, LightColorRed, LightColorStateOn);
+            handler.SetTrafficLight(4, LightColorGreen, LightColorStateOn);
+            handler.SetTrafficLight(4, LightColorRed, LightColorStateOff);
+            return true;
+        }
 
-    }
-    if (level == WaterLevelHigh && rightDoorState == GetDoorStateOpen)
-    {
-        currentState = StateInvarenHoog;
-        handler.SetTrafficLight(3, LightColorGreen, LightColorStateOff);
-        handler.SetTrafficLight(3, LightColorRed, LightColorStateOn);
-        handler.SetTrafficLight(4, LightColorGreen, LightColorStateOn);
-        handler.SetTrafficLight(4, LightColorRed, LightColorStateOff);
-        return true;
     }
 
     return false;
@@ -260,16 +265,22 @@ void Sluis::Alarm()
 
 void Sluis::alarmDoors(Door which)
 {
-    if (handler.GetDoor(which) == GetDoorStateClosed)
-    {
         handler.SetDoorValve(which, 1, SetValveStateClose);
         handler.SetDoorValve(which, 2, SetValveStateClose);
         handler.SetDoorValve(which, 3, SetValveStateClose);
-    }
-    else
-    {
         handler.SetDoor(which, DoorStateStop);
+}
+
+bool Sluis::checkValvesOpen(Door door)
+{
+    for (int i=0; i < 3; i++)
+    {
+        if (GetValveState(door) == GetValveStateOpen)
+        {
+            return true;
+        }
     }
+    return false
 }
 
 void Sluis::Herstel()
