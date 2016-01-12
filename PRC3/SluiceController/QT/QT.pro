@@ -23,7 +23,8 @@ HEADERS += bimap.h \
     valve.h \
     door.h \
     sluislogic.h \
-    sluis.h
+    sluis.h \
+    ui_mainwindow.h
 FORMS += mainwindow.ui
 SOURCES += main.cpp \
            mainwindow.cpp \

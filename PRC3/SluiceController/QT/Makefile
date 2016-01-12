@@ -49,17 +49,27 @@ SOURCES       = main.cpp \
 		mainwindow.cpp \
 		sluicetcphandler.cpp \
 		websocketclient.cpp \
-		qwst.cpp moc_mainwindow.cpp \
+		Base64.cpp \
+		trafficlight.cpp \
+		valve.cpp \
+		door.cpp \
+		sluislogic.cpp \
+		sluis.cpp moc_mainwindow.cpp \
 		moc_sluicetcphandler.cpp \
-		moc_qwst.cpp
+		moc_sluislogic.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		sluicetcphandler.o \
 		websocketclient.o \
-		qwst.o \
+		Base64.o \
+		trafficlight.o \
+		valve.o \
+		door.o \
+		sluislogic.o \
+		sluis.o \
 		moc_mainwindow.o \
 		moc_sluicetcphandler.o \
-		moc_qwst.o
+		moc_sluislogic.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -120,7 +130,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		mainwindow.cpp \
 		sluicetcphandler.cpp \
 		websocketclient.cpp \
-		qwst.cpp
+		Base64.cpp \
+		trafficlight.cpp \
+		valve.cpp \
+		door.cpp \
+		sluislogic.cpp \
+		sluis.cpp
 QMAKE_TARGET  = QT
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = QT
@@ -287,7 +302,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/QT1.0.0 || mkdir -p .tmp/QT1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/QT1.0.0/ && $(COPY_FILE) --parents bimap.h mainwindow.h sluicetcphandler.h ui_mainwindow.h websocketclient.h qwst.h .tmp/QT1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp sluicetcphandler.cpp websocketclient.cpp qwst.cpp .tmp/QT1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/QT1.0.0/ && (cd `dirname .tmp/QT1.0.0` && $(TAR) QT1.0.0.tar QT1.0.0 && $(COMPRESS) QT1.0.0.tar) && $(MOVE) `dirname .tmp/QT1.0.0`/QT1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/QT1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/QT1.0.0/ && $(COPY_FILE) --parents bimap.h mainwindow.h sluicetcphandler.h ui_mainwindow.h websocketclient.h Base64.h trafficlight.h valve.h door.h sluislogic.h sluis.h .tmp/QT1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp sluicetcphandler.cpp websocketclient.cpp Base64.cpp trafficlight.cpp valve.cpp door.cpp sluislogic.cpp sluis.cpp .tmp/QT1.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/QT1.0.0/ && (cd `dirname .tmp/QT1.0.0` && $(TAR) QT1.0.0.tar QT1.0.0 && $(COMPRESS) QT1.0.0.tar) && $(MOVE) `dirname .tmp/QT1.0.0`/QT1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/QT1.0.0
 
 
 clean:compiler_clean 
@@ -310,19 +325,34 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_qwst.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sluislogic.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_qwst.cpp
-moc_mainwindow.cpp: mainwindow.h
+	-$(DEL_FILE) moc_mainwindow.cpp moc_sluicetcphandler.cpp moc_sluislogic.cpp
+moc_mainwindow.cpp: sluislogic.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h \
+		sluis.h \
+		door.h \
+		trafficlight.h \
+		valve.h \
+		mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
-moc_sluicetcphandler.cpp: WebSocketClient.h \
+moc_sluicetcphandler.cpp: websocketclient.h \
 		bimap.h \
 		sluicetcphandler.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include sluicetcphandler.h -o moc_sluicetcphandler.cpp
 
-moc_qwst.cpp: qwst.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include qwst.h -o moc_qwst.cpp
+moc_sluislogic.cpp: sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h \
+		sluis.h \
+		door.h \
+		trafficlight.h \
+		valve.h \
+		sluislogic.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/mnt/hgfs/PRCES3/PRC3/SluiceController/QT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include sluislogic.h -o moc_sluislogic.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -343,29 +373,78 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 ####### Compile
 
 main.o: main.cpp mainwindow.h \
+		sluislogic.h \
 		sluicetcphandler.h \
-		WebSocketClient.h \
-		bimap.h
+		websocketclient.h \
+		bimap.h \
+		sluis.h \
+		door.h \
+		trafficlight.h \
+		valve.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
-		ui_mainwindow.h \
+		sluislogic.h \
 		sluicetcphandler.h \
-		WebSocketClient.h \
+		websocketclient.h \
 		bimap.h \
-		qwst.h
+		sluis.h \
+		door.h \
+		trafficlight.h \
+		valve.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
-sluicetcphandler.o: sluicetcphandler.cpp WebSocketClient.h \
+sluicetcphandler.o: sluicetcphandler.cpp websocketclient.h \
 		sluicetcphandler.h \
 		bimap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sluicetcphandler.o sluicetcphandler.cpp
 
-websocketclient.o: websocketclient.cpp websocketclient.h
+websocketclient.o: websocketclient.cpp websocketclient.h \
+		Base64.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o websocketclient.o websocketclient.cpp
 
-qwst.o: qwst.cpp qwst.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qwst.o qwst.cpp
+Base64.o: Base64.cpp Base64.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Base64.o Base64.cpp
+
+trafficlight.o: trafficlight.cpp trafficlight.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o trafficlight.o trafficlight.cpp
+
+valve.o: valve.cpp valve.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o valve.o valve.cpp
+
+door.o: door.cpp door.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h \
+		trafficlight.h \
+		valve.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o door.o door.cpp
+
+sluislogic.o: sluislogic.cpp sluislogic.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h \
+		sluis.h \
+		door.h \
+		trafficlight.h \
+		valve.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sluislogic.o sluislogic.cpp
+
+sluis.o: sluis.cpp sluis.h \
+		sluicetcphandler.h \
+		websocketclient.h \
+		bimap.h \
+		door.h \
+		trafficlight.h \
+		valve.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sluis.o sluis.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
@@ -373,8 +452,8 @@ moc_mainwindow.o: moc_mainwindow.cpp
 moc_sluicetcphandler.o: moc_sluicetcphandler.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sluicetcphandler.o moc_sluicetcphandler.cpp
 
-moc_qwst.o: moc_qwst.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qwst.o moc_qwst.cpp
+moc_sluislogic.o: moc_sluislogic.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sluislogic.o moc_sluislogic.cpp
 
 ####### Install
 
