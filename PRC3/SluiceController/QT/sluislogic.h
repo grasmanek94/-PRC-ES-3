@@ -6,14 +6,23 @@
 #include "sluicetcphandler.h"
 #include "sluis.h"
 
-enum State {
-    StateIdle,
-    StateInvarenLaag,
-    StateSchuttenOmhoog,
-    StateUitvarenHoog,
-    StateInvarenHoog,
-    StateSchuttenOmlaag,
-    StateUitvarenLaag
+//chronological order
+enum State
+{
+/* V */StateIdle,
+/* V */StateWaitingForVrijgeven,
+/* V */StateVrijgegeven,//<-----<-----<------<------<-----<---+
+/* V */StateSchuttenUp,  //either this one or the one below   |
+/* V */StateSchuttenDown,//either this one or the one above   ^
+/* V */StateWaitingForUitvarenVrijgeven,//                    |
+/* > */StateVrijgegevenForUitvaren,//->------>------>----->---+
+};
+
+enum AlarmLevel
+{
+    AlarmLevelDisabled,
+    AlarmLevelDispatched,
+    AlarmLevelSafetyEnsured
 };
 
 class SluisLogic : public QObject
@@ -23,22 +32,22 @@ private:
     SluiceTCPHandler handler;
     QTimer ticker;
     Sluis* sluis;
+    int alarm_level;
+
+    void TickIdle();
+    void TickSchutten();
+    void TickAlarm();
 private Q_SLOTS:
     void Tick();
 public:
     SluisLogic(int nummer, QObject *parent = NULL);
     ~SluisLogic();
-    //QString VerplaatsBoot();
-    void Schutten();
-    bool Vrijgeven_Uit();
-    bool Vrijgeven_In();
+    bool Schutten();
+    bool Vrijgeven();
     void Alarm();
-    void Herstel();
+    bool Herstel();
 private:
     State currentState;
-    void alarmDoors(EDoor which);
-    void redAll();
-    bool checkValvesOpen(EDoor door);
 };
 
 #endif // SLUISLOGIC_H

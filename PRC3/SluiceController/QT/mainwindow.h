@@ -16,14 +16,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void Schutten();
-    void Vrijgeven_In();
-    void Vrijgeven_Uit();
+    void Vrijgeven();
     void Alarm();
     void Herstel();
 
 private:
+    SluisLogic* GetSelectedSluis();
     Ui::MainWindow *ui;
-    SluisLogic *sluis;
+    SluisLogic *sluis[3];
 };
 
 #endif // MAINWINDOW_H

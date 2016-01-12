@@ -6,42 +6,62 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    sluis = new SluisLogic(0, this);
+    sluis[0] = new SluisLogic(0, this);
+    sluis[1] = new SluisLogic(1, this);
+    sluis[2] = new SluisLogic(3, this);//TODO new SluisLogicOneSecondDoor(3, this);
+
     ui->setupUi(this);
     connect(ui->b_Schutten, &QPushButton::clicked, this, &MainWindow::Schutten);
-    connect(ui->b_Vrijgeven_In, &QPushButton::clicked, this, &MainWindow::Vrijgeven_In);
-    connect(ui->b_Vrijgeven_Uit, &QPushButton::clicked, this, &MainWindow::Vrijgeven_Uit);
+    connect(ui->b_Vrijgeven, &QPushButton::clicked, this, &MainWindow::Vrijgeven);
     connect(ui->b_Alarm, &QPushButton::clicked, this, &MainWindow::Alarm);
     connect(ui->b_Herstel, &QPushButton::clicked, this, &MainWindow::Herstel);
  }
 
+SluisLogic* MainWindow::GetSelectedSluis()
+{
+    if(ui->rb_1->isChecked())
+    {
+        return sluis[0];
+    }
+    else if(ui->rb_2->isChecked())
+    {
+        return sluis[1];
+    }
+    else if(ui->rb_3->isChecked())
+    {
+        return sluis[2];
+    }
+    //should not happen
+    return NULL;
+}
+
 MainWindow::~MainWindow()
 {
-    delete sluis;
+    for(int i = 0; i < 3; ++i)
+    {
+        delete sluis[i];
+        sluis[i] = NULL;
+    }
     delete ui;
+    ui = NULL;
 }
 
 void MainWindow::Schutten()
 {
-    sluis->Schutten();
+    GetSelectedSluis()->Schutten();
 }
 
-void MainWindow::Vrijgeven_Uit()
+void MainWindow::Vrijgeven()
 {
-    sluis->Vrijgeven_Uit();
-}
-
-void MainWindow::Vrijgeven_In()
-{
-    sluis->Vrijgeven_In();
+    GetSelectedSluis()->Vrijgeven();
 }
 
 void MainWindow::Alarm()
 {
-
+    GetSelectedSluis()->Alarm();
 }
 
 void MainWindow::Herstel()
 {
-
+    GetSelectedSluis()->Herstel();
 }

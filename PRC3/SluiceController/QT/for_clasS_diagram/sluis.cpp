@@ -1,20 +1,19 @@
 #include "sluis.h"
 
 Sluis::Sluis(SluiceTCPHandler& handler)
-    : low(DoorLeft, handler), high(DoorRight, handler), handler(&handler)
 { }
 
 WaterLevel Sluis::GetWaterLevel()
 {
-    return handler->GetWaterLevel();
+	return false;
 }
 
 Door* Sluis::DoorLow()
 {
-    return &low;
+	return false;
 }
 
 Door* Sluis::DoorHigh()
 {
-    return &high;
+	return false;
 }

@@ -15,7 +15,6 @@ private:
     Valve mid;
     Valve high;
     SluiceTCPHandler* handler;
-    WaterLevel needed_level_to_open;
 public:
     Door(EDoor door, SluiceTCPHandler& handler);
 
@@ -29,6 +28,7 @@ public:
     bool Open();
     bool Close();
     bool Stop();
+    bool Alarm();
     GetDoorState GetState();
 };
 

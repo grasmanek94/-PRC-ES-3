@@ -14,12 +14,13 @@ Traffic lights, doors and valves:
 
 Door::Door(EDoor door, SluiceTCPHandler& handler)
     : door(door),
-      outside(door == DoorLeft ? 1 : /*DoorRight*/ 4, handler),
-      inside (door == DoorLeft ? 2 : /*DoorRight*/ 3, handler),
+      outside(door == DoorLeft ? 1 : /*DoorRight*/ 4, handler),//1V  ^4
+      inside (door == DoorLeft ? 2 : /*DoorRight*/ 3, handler),//2V>>^3
       low(door, 1, handler),
       mid(door, 2, handler),
       high(door, 3, handler),
-      handler(&handler)
+      handler(&handler),
+      needed_level_to_open(door == DoorLeft ? WaterLevelLow : WaterLevelHigh)
 { }
 
 TrafficLight* Door::LightInside()
@@ -49,7 +50,11 @@ Valve* Door::ValveHigh()
 
 bool Door::Open()
 {
-    return handler->SetDoor(door, DoorStateOpen);
+    if(handler->GetWaterLevel() == needed_level_to_open)
+    {
+        return handler->SetDoor(door, DoorStateOpen);
+    }
+    return false;
 }
 
 bool Door::Close()
@@ -65,16 +70,4 @@ bool Door::Stop()
 GetDoorState Door::GetState()
 {
     return handler->GetDoor(door);
-}
-
-bool Door::Alarm()
-{
-    bool s[4] =
-    {
-        ValveLow()->Close(),
-        ValveMid()->Close(),
-        ValveHigh()->Close(),
-        Stop()
-    };
-    return s[0] && s[1] && s[2] && s[3];
 }

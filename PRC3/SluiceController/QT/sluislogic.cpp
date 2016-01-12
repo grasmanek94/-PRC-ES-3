@@ -13,7 +13,7 @@ void qinfo(QString a, QString b)
 }
 
 SluisLogic::SluisLogic(int nummer, QObject *parent)
-    : QObject(parent), handler(nummer), ticker(this), sluis(new Sluis(handler))
+    : QObject(parent), handler(nummer), ticker(this), sluis(new Sluis(handler)), alarm_level(AlarmLevelDisabled)
 {
     currentState = StateIdle;
     connect(&ticker, &QTimer::timeout, this, &SluisLogic::Tick);
@@ -27,265 +27,280 @@ SluisLogic::~SluisLogic()
     sluis = NULL;
 }
 
+/*
+1)	Knop Start -> shutten
+2)	If water levels eq, close doors
+3)	If eq water levels high, lower water, else higher water
+4)	If doors open & vrijgegeven -> lights on green ( knop “vrijgeven voor uitvaren”)
+5)	Door only open if water levels e.q.
+6)	Only one level higher valve may open, else water goes too fast
+7)	If water needs to go down, only lowest valve is opened.
+8)	Alarm button. if both doors closed, close all valves. If doors opening or closing, immideately stop.
+9)	Knop herstel after noodsituatie
+10)	Left and right door may never be open at same time.
+11)	Er zijn 3 sluizen in het complex, sommigen hebben aparte eigenschappen:
+    Sluis op poort 5555 en 5556 (1 & 2): normale sluis, zoals hierboven beschreven
+    Sluis op poort 5558 (4): deze sluis heeft andere motoren, deze blijven maar 1 seconde aan en moeten dus telkens opnieuw aangezet worden.
+-> inherit form SluisLogic, eigenlijk zouden we van Deur moeten inheriten en de deur logica veranderen, MAAR, de hele werking/logica/alle gebeuren
+is in SluisLogic dus daarvan moeten we inheriten en veranderen, wat ook perfect zal werken en helemaal goed is. Niet dat wat we willen maar wel een goede oplossing.
+Alle logica is opgesplitst in kleine functies die makkelijk aan te passen zijn - PERFECT? Yeah!
+*/
 void SluisLogic::Tick()
 {
-    //qinfo("tick", "lol");
-    static WaterLevel previous_waterlevel = WaterLevel_UNKNOWN_ERROR;
-
-    if(currentState == StateSchuttenOmlaag)
+    if(alarm_level == AlarmLevelDisabled)
     {
-        WaterLevel level = handler.GetWaterLevel();
-        //if(previous_waterlevel != level)
-        //{
-            switch(level)
-            {
-                case WaterLevelHigh:
-                case WaterLevelAboveValve3:
-                case WaterLevelAboveValve2:
-                case WaterLevelBelowValve2:
-                {
-                    handler.SetDoorValve(DoorLeft, 1, SetValveStateOpen);
-                    break;
-                }
-                case WaterLevelLow:
-                {
-                    handler.SetDoorValve(DoorLeft, 1, SetValveStateClose);
-                    handler.SetDoorValve(DoorLeft, 2, SetValveStateClose);
-                    handler.SetDoorValve(DoorLeft, 3, SetValveStateClose);
-                    handler.SetDoor(DoorLeft, DoorStateOpen);
-                }
-                break;
-
-                default:
-                    level = previous_waterlevel;
-                break;
-            }
-        //    previous_waterlevel = level;
-        //}
+        switch(currentState)
+        {
+        case StateIdle:
+            return TickIdle();
+        case StateSchuttenDown:
+        case StateSchuttenUp:
+            return TickSchutten();
+        default:
+            break;
+        }
     }
-    else if(currentState == StateSchuttenOmhoog)
+    else
     {
-        WaterLevel level = handler.GetWaterLevel();
-        //if(previous_waterlevel != level)
-        //{
-            switch(level)
-            {
-                case WaterLevelLow:
-                {
-                    handler.SetDoorValve(DoorRight, 1, SetValveStateOpen);
-                }
-                break;
-
-                case WaterLevelBelowValve2:
-                {
-                    handler.SetDoorValve(DoorRight, 2, SetValveStateOpen);
-                }
-                break;
-
-                case WaterLevelAboveValve3:
-                case WaterLevelAboveValve2:
-                {
-                    handler.SetDoorValve(DoorRight, 3, SetValveStateOpen);
-                }
-                break;
-
-                case WaterLevelHigh:
-                {
-                    handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
-                    handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
-                    handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
-                    handler.SetDoor(DoorRight, DoorStateOpen);
-                }
-                break;
-                default:
-                    level = previous_waterlevel;
-                break;
-            }
-            //previous_waterlevel = level;
-        //}
+        TickAlarm();
     }
 }
 
-bool SluisLogic::Vrijgeven_In()
+void SluisLogic::TickAlarm()
 {
-    WaterLevel level = handler.GetWaterLevel();
-    GetDoorState leftDoorState = handler.GetDoor(DoorLeft);
-    GetDoorState rightDoorState = handler.GetDoor(DoorRight);
-
-    if (currentState == StateUitvarenLaag && level == WaterLevelLow)
+    if(alarm_level == AlarmLevelDispatched)
     {
-        if (!checkValvesOpen(DoorRight))// && leftDoorState == GetDoorStateClosed)
+        GetDoorState ls = sluis->DoorLow()->GetState();
+        GetDoorState rs = sluis->DoorHigh()->GetState();
+        if(ls == GetDoorStateClosed && rs == GetDoorStateClosed)
         {
-            handler.SetDoor(DoorLeft, DoorStateOpen);
+            bool s[6] =
+            {
+                sluis->DoorLow()->ValveLow()->Close(),
+                sluis->DoorLow()->ValveMid()->Close(),
+                sluis->DoorLow()->ValveHigh()->Close(),
+                sluis->DoorHigh()->ValveLow()->Close(),
+                sluis->DoorHigh()->ValveMid()->Close(),
+                sluis->DoorHigh()->ValveHigh()->Close()
+            };
+            if(s[0] && s[1] && s[2] && s[3] && s[4] && s[5])
+            {
+                alarm_level = AlarmLevelSafetyEnsured;
+            }
         }
-        if (leftDoorState == GetDoorStateOpen)
+        else
         {
-            currentState = StateInvarenLaag;
-            handler.SetTrafficLight(1, LightColorGreen, LightColorStateOn);
-            handler.SetTrafficLight(1, LightColorRed, LightColorStateOff);
-            handler.SetTrafficLight(2, LightColorGreen, LightColorStateOff);
-            handler.SetTrafficLight(2, LightColorRed, LightColorStateOn);
-            return true;
+            //only in state ShuttenUp/Down
+            bool s[2];
+            if(ls == GetDoorStateClosing || ls == GetDoorStateOpening)
+            {
+                s[0] = sluis->DoorLow()->Stop();
+            }
+            else
+            {
+                s[0] = true;
+            }
+
+            if(rs == GetDoorStateClosing || rs == GetDoorStateOpening)
+            {
+                s[1] = sluis->DoorHigh()->Stop();
+            }
+            else
+            {
+                s[1] = true;
+            }
+
+            if(s[0] && s[1])
+            {
+                alarm_level = AlarmLevelSafetyEnsured;
+            }
         }
     }
+}
 
-    if (currentState == StateUitvarenHoog && level == WaterLevelHigh)
+void SluisLogic::TickSchutten()
+{
+    if(currentState == StateSchuttenDown)
     {
-        if (!checkValvesOpen(DoorLeft))// && rightDoorState == GetDoorStateOpen)
+        if(     sluis->GetWaterLevel() == WaterLevelLow &&
+                sluis->DoorLow()->ValveLow()->Close() &&
+                sluis->DoorLow()->Open())
         {
-            handler.SetDoor(DoorRight, DoorStateOpen);
+            currentState = StateWaitingForUitvarenVrijgeven;
         }
-        if (rightDoorState == GetDoorStateOpen)
-        {
-            currentState = StateInvarenHoog;
-            handler.SetTrafficLight(3, LightColorGreen, LightColorStateOff);
-            handler.SetTrafficLight(3, LightColorRed, LightColorStateOn);
-            handler.SetTrafficLight(4, LightColorGreen, LightColorStateOn);
-            handler.SetTrafficLight(4, LightColorRed, LightColorStateOff);
-            return true;
-        }
-
     }
+    else if(currentState == StateSchuttenUp)
+    {
+        static WaterLevel old_level = WaterLevel_UNKNOWN_ERROR;
+        WaterLevel level = sluis->GetWaterLevel();
+        if(old_level != level)
+        {
+            switch(level)
+            {
+            case WaterLevelLow:
+                if(sluis->DoorHigh()->ValveLow()->Open())
+                {
+                     old_level = level;
+                }
+                break;
 
+            case WaterLevelBelowValve2:
+                if(sluis->DoorHigh()->ValveMid()->Open())
+                {
+                     old_level = level;
+                }
+                break;
+
+            case WaterLevelAboveValve2:
+            case WaterLevelAboveValve3:
+                if(sluis->DoorHigh()->ValveHigh()->Open())
+                {
+                     old_level = level;
+                }
+                break;
+
+            case WaterLevelHigh:
+                if(     sluis->DoorHigh()->ValveLow()->Close() &&
+                        sluis->DoorHigh()->ValveMid()->Close() &&
+                        sluis->DoorHigh()->ValveHigh()->Close() &&
+                        sluis->DoorHigh()->Open())
+                {
+                    currentState = StateWaitingForUitvarenVrijgeven;
+                }
+                break;
+
+            default:
+                break;
+            }
+
+
+        }
+    }
+}
+
+void SluisLogic::TickIdle()
+{
+    WaterLevel level = sluis->GetWaterLevel();
+    if(level == WaterLevelLow)
+    {
+        if(sluis->DoorLow()->Open())
+        {
+            currentState = StateWaitingForVrijgeven;
+        }
+    }
+    else if(level == WaterLevelHigh)
+    {
+        if(sluis->DoorHigh()->Open())
+        {
+            currentState = StateWaitingForVrijgeven;
+        }
+    }
+}
+
+bool SluisLogic::Vrijgeven()
+{
+    if(currentState == StateWaitingForVrijgeven || currentState == StateVrijgegevenForUitvaren)
+    {
+        WaterLevel level = sluis->GetWaterLevel();
+
+        if(
+            (level == WaterLevelLow && sluis->DoorLow()->LightOutside()->Green()) ||
+            (level == WaterLevelHigh && sluis->DoorHigh()->LightOutside()->Green())
+          )
+        {
+            if((currentState != StateVrijgegevenForUitvaren) ||
+                (
+                 (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Red()) ||
+                 (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Red())
+                ))
+            {
+                currentState = StateVrijgegeven;
+                return true;
+            }
+        }
+    }
+    else if(currentState == StateWaitingForUitvarenVrijgeven)
+    {
+         WaterLevel level = sluis->GetWaterLevel();
+         if(
+             (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Green() && sluis->DoorHigh()->Open()) ||
+             (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Green() && sluis->DoorLow()->Open())
+           )
+         {
+            currentState = StateVrijgegevenForUitvaren;
+            return true;
+         }
+    }
     return false;
 }
 
-bool SluisLogic::Vrijgeven_Uit()
+bool SluisLogic::Schutten()
 {
-    WaterLevel level = handler.GetWaterLevel();
-    GetDoorState leftDoorState = handler.GetDoor(DoorLeft);
-    GetDoorState rightDoorState = handler.GetDoor(DoorRight);
+    WaterLevel level = sluis->GetWaterLevel();
 
-
-    if (level == WaterLevelLow)// && leftDoorState == GetDoorStateClosed)
+    if(currentState == StateVrijgegeven)
     {
-        handler.SetDoor(DoorLeft, DoorStateOpen);
-    }
-    if (level == WaterLevelHigh)// && rightDoorState == GetDoorStateOpen)
-    {
-        handler.SetDoor(DoorRight, DoorStateOpen);
-    }
-
-    if (level == WaterLevelLow && leftDoorState == GetDoorStateOpen)
-    {
-        currentState = StateUitvarenLaag;
-        handler.SetTrafficLight(1, LightColorGreen, LightColorStateOff);
-        handler.SetTrafficLight(1, LightColorRed, LightColorStateOn);
-        handler.SetTrafficLight(2, LightColorGreen, LightColorStateOn);
-        handler.SetTrafficLight(2, LightColorRed, LightColorStateOff);
-        return true;
-    }
-    if (level == WaterLevelHigh && rightDoorState == GetDoorStateOpen)
-    {
-        currentState = StateUitvarenHoog;
-        handler.SetTrafficLight(3, LightColorGreen, LightColorStateOn);
-        handler.SetTrafficLight(3, LightColorRed, LightColorStateOff);
-        handler.SetTrafficLight(4, LightColorGreen, LightColorStateOff);
-        handler.SetTrafficLight(4, LightColorRed, LightColorStateOn);
-        return true;
+        if(level == WaterLevelLow)
+        {
+            if(     sluis->DoorLow()->Close() &&
+                    sluis->DoorLow()->LightOutside()->Red() &&
+                    sluis->DoorHigh()->ValveLow()->Open())
+            {
+                currentState = StateSchuttenUp;
+                return true;
+            }
+        }
+        else if(level == WaterLevelHigh)
+        {
+            if(     sluis->DoorHigh()->Close() &&
+                    sluis->DoorHigh()->LightOutside()->Red() &&
+                    sluis->DoorLow()->ValveLow()->Open())
+            {
+                currentState = StateSchuttenDown;
+                return true;
+            }
+        }
     }
     return false;
-}
-
-
-void SluisLogic::Schutten() //todo: deuren
-{
-    WaterLevel level = handler.GetWaterLevel();
-
-    // Water omhoog
-    if (level == WaterLevelLow)
-    {
-        redAll();
-        handler.SetDoor(DoorLeft, DoorStateClose);
-        currentState = StateSchuttenOmhoog;
-        /*if (level != WaterLevelHigh)
-        {
-            handler.SetDoor(DoorLeft, DoorStateClose);
-            if (handler.GetDoor(DoorLeft) == GetDoorStateClosed)
-            {
-                handler.SetDoorValve(DoorRight, 1, SetValveStateOpen);
-                if (level == WaterLevelAboveValve2)
-                {
-                    handler.SetDoorValve(DoorRight, 2, SetValveStateOpen);
-                }
-                if (level == WaterLevelAboveValve3)
-                {
-                    handler.SetDoorValve(DoorRight, 3, SetValveStateOpen);
-                }
-            }
-        }
-        if (level == WaterLevelHigh)
-        {
-            handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
-            handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
-            handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
-            handler.SetDoor(DoorRight, DoorStateOpen);
-        }*/
-    }
-
-    // Water omlaag
-    if (level == WaterLevelHigh)
-    {
-        redAll();
-        handler.SetDoor(DoorRight, DoorStateClose);
-        currentState = StateSchuttenOmlaag;
-        /*if (level != WaterLevelLow)
-        {
-            handler.SetDoor(DoorRight, DoorStateClose);
-            handler.SetDoorValve(DoorRight, 1, SetValveStateClose);
-            handler.SetDoorValve(DoorRight, 2, SetValveStateClose);
-            handler.SetDoorValve(DoorRight, 3, SetValveStateClose);
-            if (handler.GetDoor(DoorRight) == GetDoorStateClosed)
-            {
-                handler.SetDoorValve(DoorLeft, 1, SetValveStateOpen);
-            }
-        }
-        if (level == WaterLevelLow)
-        {
-            handler.SetDoorValve(DoorLeft, 1, SetValveStateClose);
-            handler.SetDoorValve(DoorLeft, 2, SetValveStateClose);
-            handler.SetDoorValve(DoorLeft, 3, SetValveStateClose);
-            handler.SetDoor(DoorLeft, DoorStateOpen);
-        }*/
-    }
-}
-
-void SluisLogic::redAll()
-{
-    sluis->DoorHigh()->LightInside()->Red();
-    sluis->DoorHigh()->LightOutside()->Red();
-    sluis->DoorLow()->LightInside()->Red();
-    sluis->DoorLow()->LightOutside()->Red();
 }
 
 void SluisLogic::Alarm()
 {
-    redAll();
-    alarmDoors(DoorLeft);
-    alarmDoors(DoorRight);
-}
-
-void SluisLogic::alarmDoors(EDoor which)
-{
-    handler.SetDoorValve(which, 1, SetValveStateClose);
-    handler.SetDoorValve(which, 2, SetValveStateClose);
-    handler.SetDoorValve(which, 3, SetValveStateClose);
-    handler.SetDoor(which, DoorStateStop);
-}
-
-bool SluisLogic::checkValvesOpen(EDoor door)
-{
-    for (int i=0; i < 3; i++)
+    if(alarm_level == AlarmLevelDisabled)
     {
-        if (handler.GetValveState(door) == GetValveStateOpen)
+        alarm_level = AlarmLevelDispatched;
+    }
+}
+
+bool SluisLogic::Herstel()
+{
+    if(alarm_level != AlarmLevelDisabled)
+    {
+        if(currentState == StateWaitingForUitvarenVrijgeven)
         {
-            return true;
+            WaterLevel level = sluis->GetWaterLevel();
+            if(level == WaterLevelLow)
+            {
+                if(     sluis->GetWaterLevel() == WaterLevelLow &&
+                        sluis->DoorLow()->ValveLow()->Close() &&
+                        sluis->DoorLow()->Open())
+                {
+                    alarm_level = AlarmLevelDisabled;
+                    return true;
+                }
+            }
+            else if(level == WaterLevelHigh)
+            {
+                if(     sluis->DoorHigh()->ValveLow()->Close() &&
+                        sluis->DoorHigh()->ValveMid()->Close() &&
+                        sluis->DoorHigh()->ValveHigh()->Close() &&
+                        sluis->DoorHigh()->Open())
+                {
+                    alarm_level = AlarmLevelDisabled;
+                    return true;
+                }
+            }
         }
     }
     return false;
-}
-
-void SluisLogic::Herstel()
-{
-
 }
