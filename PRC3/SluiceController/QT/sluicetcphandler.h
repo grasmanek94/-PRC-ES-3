@@ -14,13 +14,13 @@ using codeproject::bimap_base;
 
 const unsigned short SLUIS_BASE_PORT = 5555;
 
-enum Door
+enum EDoor
 {
     Door_UNKNOWN_ERROR,
     DoorLeft,
     DoorRight
 };
-extern bimap<QString, Door> DoorMaps;
+extern bimap<QString, EDoor> DoorMaps;
 
 enum DoorState
 {
@@ -64,7 +64,8 @@ enum LightColor
 {
     LightColor_UNKNOWN_ERROR,
     LightColorRed,
-    LightColorGreen
+    LightColorGreen,
+    LightColorOff
 };
 extern bimap<QString, LightColor> LightColorMaps;
 
@@ -109,15 +110,15 @@ public:
     SluiceTCPHandler(unsigned short sluisnumber, QObject *parent = Q_NULLPTR);
     ~SluiceTCPHandler();
 
-    bool SetDoor(Door which_door, DoorState which_state);
-    GetDoorState GetDoor(Door which_door);
-    bool SetDoorValve(Door which_door, unsigned int which_valve, SetValveState which_state);
-    GetValveState GetDoorValve(Door which_door, unsigned int which_valve);
+    bool SetDoor(EDoor which_door, DoorState which_state);
+    GetDoorState GetDoor(EDoor which_door);
+    bool SetDoorValve(EDoor which_door, unsigned int which_valve, SetValveState which_state);
+    GetValveState GetDoorValve(EDoor which_door, unsigned int which_valve);
     bool SetTrafficLight(unsigned int which_light, LightColor which_color, LightColorState on);
     LightColorState GetTrafficLight(unsigned int which_light, LightColor which_color);
     WaterLevel GetWaterLevel();
-    bool SetDoorLock(Door which_door, DoorLockState lock_state);
-    DoorLockState GetDoorLockState(Door which_door);
+    bool SetDoorLock(EDoor which_door, DoorLockState lock_state);
+    DoorLockState GetDoorLockState(EDoor which_door);
     bool Connect();
 };
 

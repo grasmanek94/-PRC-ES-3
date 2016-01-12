@@ -19,6 +19,10 @@ HEADERS += bimap.h \
            ui_mainwindow.h \
     websocketclient.h \
     Base64.h \
+    trafficlight.h \
+    valve.h \
+    door.h \
+    sluislogic.h \
     sluis.h
 FORMS += mainwindow.ui
 SOURCES += main.cpp \
@@ -26,5 +30,9 @@ SOURCES += main.cpp \
            sluicetcphandler.cpp \
     websocketclient.cpp \
     Base64.cpp \
+    trafficlight.cpp \
+    valve.cpp \
+    door.cpp \
+    sluislogic.cpp \
     sluis.cpp
 

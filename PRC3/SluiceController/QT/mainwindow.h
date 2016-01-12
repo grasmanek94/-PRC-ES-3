@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sluis.h"
+#include "sluislogic.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +23,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Sluis *sluis;
+    SluisLogic *sluis;
 };
 
 #endif // MAINWINDOW_H

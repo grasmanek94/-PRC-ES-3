@@ -3,10 +3,13 @@ INPUT(
 ./debug/mainwindow.o
 ./debug/sluicetcphandler.o
 ./debug/websocketclient.o
-./debug/qwst.o
 ./debug/Base64.o
+./debug/trafficlight.o
+./debug/valve.o
+./debug/door.o
+./debug/sluislogic.o
 ./debug/sluis.o
 ./debug/moc_mainwindow.o
 ./debug/moc_sluicetcphandler.o
-./debug/moc_qwst.o
+./debug/moc_sluislogic.o
 );

@@ -4,7 +4,7 @@
 #include "sluicetcphandler.h"
 #include "bimap.h"
 
-bimap<QString, Door> DoorMaps;
+bimap<QString, EDoor> DoorMaps;
 bimap<QString, DoorState> DoorStateMaps;
 bimap<QString, SetValveState> SetValveStateMaps;
 bimap<QString, GetValveState> GetValveStateMaps;
@@ -48,6 +48,7 @@ void InitMaps()
 
     LightColorMaps["Red"] = LightColorRed;
     LightColorMaps["Green"] = LightColorGreen;
+    LightColorMaps["Off"] = LightColorOff;
 
     WaterLevelMaps["low"] = WaterLevelLow;
     WaterLevelMaps["belowValve2"] = WaterLevelBelowValve2;
@@ -79,11 +80,9 @@ bool SluiceTCPHandler::Connect()
 }
 
 SluiceTCPHandler::~SluiceTCPHandler()
-{
+{ }
 
-}
-
-bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
+bool SluiceTCPHandler::SetDoor(EDoor which_door, DoorState which_state)
 {
     QString query("SetDoor%1:%2");
     query = query.arg(DoorMaps[which_door]).arg(DoorStateMaps[which_state]);
@@ -98,7 +97,7 @@ bool SluiceTCPHandler::SetDoor(Door which_door, DoorState which_state)
     return false;
 }
 
-GetDoorState SluiceTCPHandler::GetDoor(Door which_door)
+GetDoorState SluiceTCPHandler::GetDoor(EDoor which_door)
 {
     QString query("GetDoor%1");
     query = query.arg(DoorMaps[which_door]);
@@ -116,7 +115,7 @@ GetDoorState SluiceTCPHandler::GetDoor(Door which_door)
     }
 }
 
-bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, SetValveState which_state)
+bool SluiceTCPHandler::SetDoorValve(EDoor which_door, unsigned int which_valve, SetValveState which_state)
 {
     QString query("SetDoor%1Valve%2:%3");
     query = query.arg(DoorMaps[which_door]).arg(which_valve).arg(SetValveStateMaps[which_state]);
@@ -131,7 +130,7 @@ bool SluiceTCPHandler::SetDoorValve(Door which_door, unsigned int which_valve, S
     return false;
 }
 
-GetValveState SluiceTCPHandler::GetDoorValve(Door which_door, unsigned int which_valve)
+GetValveState SluiceTCPHandler::GetDoorValve(EDoor which_door, unsigned int which_valve)
 {
     QString query("GetDoor%1Valve%2");
     query = query.arg(DoorMaps[which_door]).arg(which_valve);
@@ -201,7 +200,7 @@ WaterLevel SluiceTCPHandler::GetWaterLevel()
     }
 }
 
-bool SluiceTCPHandler::SetDoorLock(Door which_door, DoorLockState lock_state)
+bool SluiceTCPHandler::SetDoorLock(EDoor which_door, DoorLockState lock_state)
 {
     QString query("SetDoorLock%1:%2");
     query = query.arg(DoorMaps[which_door]).arg(DoorLockStateMaps[lock_state]);
@@ -216,7 +215,7 @@ bool SluiceTCPHandler::SetDoorLock(Door which_door, DoorLockState lock_state)
     return false;
 }
 
-DoorLockState SluiceTCPHandler::GetDoorLockState(Door which_door)
+DoorLockState SluiceTCPHandler::GetDoorLockState(EDoor which_door)
 {
     QString query("GetDoorLockState%1");
     query = query.arg(DoorMaps[which_door]);

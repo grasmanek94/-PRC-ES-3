@@ -1,41 +1,21 @@
 #ifndef SLUIS_H
 #define SLUIS_H
 
-#include <QObject>
-#include <QTimer>
 #include "sluicetcphandler.h"
+#include "door.h"
 
-enum State {
-    StateIdle,
-    StateInvarenLaag,
-    StateSchuttenOmhoog,
-    StateUitvarenHoog,
-    StateInvarenHoog,
-    StateSchuttenOmlaag,
-    StateUitvarenLaag
-};
-
-class Sluis : public QObject
+class Sluis
 {
-    Q_OBJECT
 private:
-    SluiceTCPHandler handler;
-    QTimer ticker;
-private Q_SLOTS:
-    void Tick();
+    Door low;
+    Door high;
+    SluiceTCPHandler* handler;
 public:
-    Sluis(int nummer, QObject *parent = NULL);
-    //QString VerplaatsBoot();
-    void Schutten();
-    bool Vrijgeven_Uit();
-    bool Vrijgeven_In();
-    void Alarm();
-    void Herstel();
-private:
-    State currentState;
-    void alarmDoors(Door which);
-    void redAll();
+    Sluis(SluiceTCPHandler& handler);
 
+    WaterLevel GetWaterLevel();
+    Door* DoorLow();
+    Door* DoorHigh();
 };
 
 #endif // SLUIS_H
