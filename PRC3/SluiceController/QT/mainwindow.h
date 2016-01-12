@@ -24,6 +24,7 @@ private:
     SluisLogic* GetSelectedSluis();
     Ui::MainWindow *ui;
     SluisLogic *sluis[3];
+    void qinfo(QString a, QString b);
 };
 
 #endif // MAINWINDOW_H

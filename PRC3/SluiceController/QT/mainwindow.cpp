@@ -2,6 +2,17 @@
 #include "ui_mainwindow.h"
 #include "sluislogic.h"
 
+/*#include <QMessageBox>
+void qinfo(QString a, QString b)
+{
+    QMessageBox msgBox;
+    msgBox.setText(a);
+    msgBox.setInformativeText(b);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+}*/
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->b_Alarm, &QPushButton::clicked, this, &MainWindow::Alarm);
     connect(ui->b_Herstel, &QPushButton::clicked, this, &MainWindow::Herstel);
  }
+
+void MainWindow::qinfo(QString a, QString b)
+{
+    ui->txt_info_box->setText(a + "\r\n" + b);
+}
 
 SluisLogic* MainWindow::GetSelectedSluis()
 {
@@ -48,20 +64,48 @@ MainWindow::~MainWindow()
 
 void MainWindow::Schutten()
 {
-    GetSelectedSluis()->Schutten();
+    if(GetSelectedSluis()->Schutten())
+    {
+        qinfo("Informatie", "Schutten gelukt");
+    }
+    else
+    {
+        qinfo("Fout", "Schutten niet gelukt, wacht, probeer opnieuw, of probeer eerst Vrijgeven");
+    }
 }
 
 void MainWindow::Vrijgeven()
 {
-    GetSelectedSluis()->Vrijgeven();
+    if(GetSelectedSluis()->Vrijgeven())
+    {
+        qinfo("Informatie", "Vrijgeven gelukt");
+    }
+    else
+    {
+        qinfo("Fout", "Vrijgeven niet gelukt, probeer opnieuw of probeer Schutten uit");
+    }
 }
 
 void MainWindow::Alarm()
 {
-    GetSelectedSluis()->Alarm();
+    if(GetSelectedSluis()->Alarm())
+    {
+        qinfo("Informatie", "Alarm procedure is nu bezig");
+    }
+    else
+    {
+        qinfo("Fout", "Niet verbonden");
+    }
 }
 
 void MainWindow::Herstel()
 {
-    GetSelectedSluis()->Herstel();
+    if(GetSelectedSluis()->Herstel())
+    {
+        qinfo("Informatie", "Herstel gelukt");
+    }
+    else
+    {
+        qinfo("Fout", "Herstel niet gelukt, probeer opnieuw");
+    }
 }

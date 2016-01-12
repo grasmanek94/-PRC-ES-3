@@ -39,7 +39,7 @@ bool WebSocketClient::connect(unsigned short port, QString host, int timeout)
     bool result = false;
 
     _client.connectToHost(host, port);
-    if(_client.waitForConnected())
+    if(_client.waitForConnected(timeout))
     {
         this->port = port;
         sendHandshake(host);

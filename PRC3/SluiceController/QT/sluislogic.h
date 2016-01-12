@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QTime>
 #include "sluicetcphandler.h"
 #include "sluis.h"
 
@@ -33,6 +34,8 @@ private:
     QTimer ticker;
     Sluis* sluis;
     int alarm_level;
+    bool measuring_disconnection;
+    QTime disconnectedTimer;
 
     void TickIdle();
     void TickSchutten();
@@ -44,7 +47,7 @@ public:
     ~SluisLogic();
     bool Schutten();
     bool Vrijgeven();
-    void Alarm();
+    bool Alarm();
     bool Herstel();
 private:
     State currentState;

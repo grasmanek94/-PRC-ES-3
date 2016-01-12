@@ -744,7 +744,10 @@ release/mainwindow.o: ../QT/mainwindow.cpp ../QT/mainwindow.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qstatusbar.h \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QToolBar \
 		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qtoolbar.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QWidget
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QWidget \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QMessageBox \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qmessagebox.h \
+		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/mainwindow.o ../QT/mainwindow.cpp
 
 release/sluicetcphandler.o: ../QT/sluicetcphandler.cpp ../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/QTime \
@@ -1212,46 +1215,7 @@ release/sluislogic.o: ../QT/sluislogic.cpp ../QT/sluislogic.h \
 		../QT/sluis.h \
 		../QT/door.h \
 		../QT/trafficlight.h \
-		../QT/valve.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/QMessageBox \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qmessagebox.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qdialog.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qwidget.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qmargins.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qrect.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsize.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpalette.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qcolor.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qrgb.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qbrush.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qmatrix.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpolygon.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qregion.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qdatastream.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qline.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qtransform.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpainterpath.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qimage.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpixelformat.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qpixmap.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qfont.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qfontinfo.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qcursor.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qkeysequence.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qevent.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurl.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qurlquery.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qfile.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtCore/qfiledevice.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qvector2d.h \
-		../../../../Libraries/QT/5.5/mingw492_32/include/QtGui/qtouchdevice.h
+		../QT/valve.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/sluislogic.o ../QT/sluislogic.cpp
 
 release/sluis.o: ../QT/sluis.cpp ../QT/sluis.h \

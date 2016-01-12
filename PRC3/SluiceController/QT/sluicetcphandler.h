@@ -119,7 +119,8 @@ public:
     WaterLevel GetWaterLevel();
     bool SetDoorLock(EDoor which_door, DoorLockState lock_state);
     DoorLockState GetDoorLockState(EDoor which_door);
-    bool Connect();
+    bool Connect(int timeout = 3000);
+    bool Connected();
 };
 
 #endif // SLUICETCPHANDLER_H

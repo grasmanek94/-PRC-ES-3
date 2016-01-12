@@ -19,6 +19,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -35,6 +36,7 @@ public:
     QRadioButton *rb_1;
     QRadioButton *rb_2;
     QRadioButton *rb_3;
+    QTextEdit *txt_info_box;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -43,7 +45,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(257, 124);
+        MainWindow->resize(283, 240);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         b_Schutten = new QPushButton(centralWidget);
@@ -68,10 +70,14 @@ public:
         rb_3 = new QRadioButton(centralWidget);
         rb_3->setObjectName(QStringLiteral("rb_3"));
         rb_3->setGeometry(QRect(200, 50, 102, 20));
+        txt_info_box = new QTextEdit(centralWidget);
+        txt_info_box->setObjectName(QStringLiteral("txt_info_box"));
+        txt_info_box->setGeometry(QRect(10, 70, 261, 111));
+        txt_info_box->setReadOnly(true);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 257, 21));
+        menuBar->setGeometry(QRect(0, 0, 283, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

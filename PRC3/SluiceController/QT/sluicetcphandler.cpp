@@ -73,9 +73,9 @@ SluiceTCPHandler::SluiceTCPHandler(unsigned short sluisnumber, QObject *parent)
     Connect();
 }
 
-bool SluiceTCPHandler::Connect()
+bool SluiceTCPHandler::Connect(int timeout)
 {
-    connected = webSocket.connect(port);
+    connected = webSocket.connect(port, "localhost", timeout);
     return connected;
 }
 
@@ -231,4 +231,9 @@ DoorLockState SluiceTCPHandler::GetDoorLockState(EDoor which_door)
     {
         return DoorLockState_UNKNOWN_ERROR;
     }
+}
+
+bool SluiceTCPHandler::Connected()
+{
+    return connected;
 }

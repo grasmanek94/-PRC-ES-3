@@ -1,19 +1,8 @@
 #include "sluislogic.h"
 #include "sluicetcphandler.h"
 
-#include <QMessageBox>
-void qinfo(QString a, QString b)
-{
-    QMessageBox msgBox;
-    msgBox.setText("RET OF: " + a);
-    msgBox.setInformativeText(b);
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.exec();
-}
-
 SluisLogic::SluisLogic(int nummer, QObject *parent)
-    : QObject(parent), handler(nummer), ticker(this), sluis(new Sluis(handler)), alarm_level(AlarmLevelDisabled)
+    : QObject(parent), handler(nummer), ticker(this), sluis(new Sluis(handler)), alarm_level(AlarmLevelDisabled), measuring_disconnection(false)
 {
     currentState = StateIdle;
     connect(&ticker, &QTimer::timeout, this, &SluisLogic::Tick);
@@ -47,22 +36,41 @@ Alle logica is opgesplitst in kleine functies die makkelijk aan te passen zijn -
 */
 void SluisLogic::Tick()
 {
-    if(alarm_level == AlarmLevelDisabled)
+    if(handler.Connected())
     {
-        switch(currentState)
+        if(alarm_level == AlarmLevelDisabled)
         {
-        case StateIdle:
-            return TickIdle();
-        case StateSchuttenDown:
-        case StateSchuttenUp:
-            return TickSchutten();
-        default:
-            break;
+            switch(currentState)
+            {
+            case StateIdle:
+                return TickIdle();
+            case StateSchuttenDown:
+            case StateSchuttenUp:
+                return TickSchutten();
+            default:
+                break;
+            }
+        }
+        else
+        {
+            TickAlarm();
         }
     }
     else
     {
-        TickAlarm();
+        if(!measuring_disconnection)
+        {
+            measuring_disconnection = true;
+            disconnectedTimer.restart();
+        }
+        else if(disconnectedTimer.elapsed() > 5000)
+        {
+            disconnectedTimer.restart();
+            if(handler.Connect(16))
+            {
+                measuring_disconnection = false;
+            }
+        }
     }
 }
 
@@ -172,8 +180,6 @@ void SluisLogic::TickSchutten()
             default:
                 break;
             }
-
-
         }
     }
 }
@@ -199,37 +205,40 @@ void SluisLogic::TickIdle()
 
 bool SluisLogic::Vrijgeven()
 {
-    if(currentState == StateWaitingForVrijgeven || currentState == StateVrijgegevenForUitvaren)
+    if(handler.Connected())
     {
-        WaterLevel level = sluis->GetWaterLevel();
-
-        if(
-            (level == WaterLevelLow && sluis->DoorLow()->LightOutside()->Green()) ||
-            (level == WaterLevelHigh && sluis->DoorHigh()->LightOutside()->Green())
-          )
+        if(currentState == StateWaitingForVrijgeven || currentState == StateVrijgegevenForUitvaren)
         {
-            if((currentState != StateVrijgegevenForUitvaren) ||
-                (
-                 (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Red()) ||
-                 (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Red())
-                ))
+            WaterLevel level = sluis->GetWaterLevel();
+
+            if(
+                (level == WaterLevelLow && sluis->DoorLow()->LightOutside()->Green()) ||
+                (level == WaterLevelHigh && sluis->DoorHigh()->LightOutside()->Green())
+              )
             {
-                currentState = StateVrijgegeven;
-                return true;
+                if((currentState != StateVrijgegevenForUitvaren) ||
+                    (
+                     (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Red()) ||
+                     (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Red())
+                    ))
+                {
+                    currentState = StateVrijgegeven;
+                    return true;
+                }
             }
         }
-    }
-    else if(currentState == StateWaitingForUitvarenVrijgeven)
-    {
-         WaterLevel level = sluis->GetWaterLevel();
-         if(
-             (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Green() && sluis->DoorHigh()->Open()) ||
-             (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Green() && sluis->DoorLow()->Open())
-           )
-         {
-            currentState = StateVrijgegevenForUitvaren;
-            return true;
-         }
+        else if(currentState == StateWaitingForUitvarenVrijgeven)
+        {
+             WaterLevel level = sluis->GetWaterLevel();
+             if(
+                 (level == WaterLevelHigh && sluis->DoorHigh()->LightInside()->Green() && sluis->DoorHigh()->Open()) ||
+                 (level == WaterLevelLow && sluis->DoorLow()->LightInside()->Green() && sluis->DoorLow()->Open())
+               )
+             {
+                currentState = StateVrijgegevenForUitvaren;
+                return true;
+             }
+        }
     }
     return false;
 }
@@ -238,7 +247,7 @@ bool SluisLogic::Schutten()
 {
     WaterLevel level = sluis->GetWaterLevel();
 
-    if(currentState == StateVrijgegeven)
+    if(handler.Connected() && currentState == StateVrijgegeven)
     {
         if(level == WaterLevelLow)
         {
@@ -264,17 +273,19 @@ bool SluisLogic::Schutten()
     return false;
 }
 
-void SluisLogic::Alarm()
+bool SluisLogic::Alarm()
 {
-    if(alarm_level == AlarmLevelDisabled)
+    if(handler.Connected() && alarm_level == AlarmLevelDisabled)
     {
         alarm_level = AlarmLevelDispatched;
+        return true;
     }
+    return false;
 }
 
 bool SluisLogic::Herstel()
 {
-    if(alarm_level != AlarmLevelDisabled)
+    if(handler.Connected() && alarm_level != AlarmLevelDisabled)
     {
         if(currentState == StateWaitingForUitvarenVrijgeven)
         {
